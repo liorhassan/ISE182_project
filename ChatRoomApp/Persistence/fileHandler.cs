@@ -10,10 +10,8 @@ namespace Persistence
     {
         private string binPath;
 
-        public fileHandler(string path)
-        {
-            binPath = path;
-        }
+
+        
         public void save(object o)
         {
 
