@@ -8,17 +8,20 @@ namespace BusinessLogic
 {
     public class Chatroom
     {
-        User loggedinUser;
-        Dictionary<Message> recievedMessages;
-        Dictionary<User> registeredUsers;
-        String URL;
-        messagesHandler messHandler;
-        usersHandler usersHandler;
-        xmlHandler xmlHandler;
-        Logger log;
+        private User loggedinUser;
+        private Dictionary<Message> recievedMessages;
+        private Dictionary<User> registeredUsers;
+        private String URL;
+        private messagesHandler messHandler;
+        private usersHandler usersHandler;
+        private xmlHandler xmlHandler;
+        private Logger log;
 
         public Chatroom {
-                
-        }
+            this.loggedinUser = null;
+            this.recievedMessages = new Dictionary<Message>;
+
+
+    }
     }
 }
