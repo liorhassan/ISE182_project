@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,11 @@ namespace Persistence
             xmlPath = path;
         }
 
-        public List<string> load()
+        public XDocument load()
         {
-            return null;
+            XDocument doc = XDocument.Load(xmlPath);
+            
+            return doc;
         }
     }
 }
