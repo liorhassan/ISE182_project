@@ -21,8 +21,9 @@ namespace BusinessLogic
             this.nickname = nickname;
         }
         
-        public Message (String message, String url)
+        public Message writeMessage (String message, String url)
         {
+
 
         }
     }
