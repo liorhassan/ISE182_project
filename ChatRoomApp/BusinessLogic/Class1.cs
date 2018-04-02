@@ -16,5 +16,9 @@ namespace BusinessLogic
         usersHandler usersHandler;
         xmlHandler xmlHandler;
         Logger log;
+
+        public Chatroom {
+                
+        }
     }
 }
