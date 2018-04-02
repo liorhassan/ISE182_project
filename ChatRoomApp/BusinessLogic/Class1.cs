@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Class1
+    public class Chatroom
     {
-        asdasd
+        User loggedinUser;
+        Dictionary<Message> recievedMessages;
+        Dictionary<User> registeredUsers;
+        String URL;
+        messagesHandler messHandler;
+        usersHandler usersHandler;
+        xmlHandler xmlHandler;
+        Logger log;
     }
 }
