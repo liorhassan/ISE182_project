@@ -19,7 +19,6 @@ namespace Persistence
         public XDocument load()
         {
             XDocument doc = XDocument.Load(xmlPath);
-            
             return doc;
         }
     }
