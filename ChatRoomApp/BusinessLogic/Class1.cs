@@ -17,11 +17,18 @@ namespace BusinessLogic
         private xmlHandler xmlHandler;
         private Logger log;
 
-        public Chatroom {
+        public Chatroom() {
             this.loggedinUser = null;
-            this.recievedMessages = new Dictionary<Message>;
+            this.recievedMessages = new Dictionary<Message>();
+            this.registeredUsers = new Dictionary<User>();
+            this.URL = "url";
+            this.messHandler = new messagesHandler();
+            this.usersHandler = new usersHandler();
+            this.xmlHandler = new xmlHandler();
+            this.log = new Logger();
+        }
 
 
-    }
+    
     }
 }
