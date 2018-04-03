@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Communication\Communication.csproj">
-      <Project>{a8402e55-126a-46cc-8a13-d0caf9c56579}</Project>
-      <Name>Communication</Name>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{752ee4b0-e98e-4212-9f8f-bd8254b2749c}</Project>
+      <Name>Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
