@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using 
 
 namespace Presentation
 {
@@ -10,7 +11,7 @@ namespace Presentation
     {
         private Boolean running;
         private ChatRoom myChatRoom;
-        private List<menuItem> menuItems;
+        private List<MenuItem> menuItems;
 
         public void showMenu()
         {
