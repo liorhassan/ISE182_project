@@ -33,14 +33,14 @@ namespace BusinessLogic
 
         public String getFunction(char key)
         {
-            var items = from item in menuItems where item.LoginRequierd == _login && item.OptionKey == key select item.ItemFunction;
+            var items = from item in menuItems where (item.LoginRequierd == _login || item.LoginRequierd == false) && item.OptionKey == key select item.ItemFunction;
             return items.ToString();
         }
 
         public String toString()
         {
             var itemList = from item in menuItems
-                           where item.LoginRequierd==_login
+                           where item.LoginRequierd == _login || item.LoginRequierd == false
                            orderby item.Order descending
                            select item;
             String output = "";
