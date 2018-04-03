@@ -40,20 +40,26 @@ namespace BusinessLogic
                 Console.WriteLine("User already exists");
                 return false;
             }
-            var userTwo =
-               from u in registeredUsers
-               where u.nickname == nickname
-               select u;
-            if (user != null)
-            {
-                Console.WriteLine("Nickname already exists, choose another one");
-                String nickname = Console.ReadLine();
-            }
+
             int loop = -1;
             while (loop == -1)
             {
-                
+                var userTwo =
+                   from u in registeredUsers
+                   where u.nickname == nickname
+                   select u;
+                if (user != null)
+                {
+                    Console.WriteLine("Nickname already exists, choose another one");
+                    nickname = Console.ReadLine();
+                }
+                else
+                {
+                    loop = 0;
+                }  
             }
+            userOne newUser = new User()
+            registeredUsers.Add()
             return true;
         }
 
