@@ -8,11 +8,20 @@ namespace BusinessLogic
 {
     public class Message : IMessage
     {
-        private Guid Id { get; }
-        private User UserName { get; }
-        private DateTime Date { get; }
-        private String MessageContent { get; }
-        private String GroupID { get; }
+        private Guid _Id;
+        public Guid Id { get => _Id; }
+
+        private User _UserName;
+        public User UserName { get => _UserName; }
+
+        private DateTime _Date;
+        public DateTime Date { get => _Date; }
+
+        private String _MessageContent;
+        public String MessageContent { get => _MessageContent; }
+
+        private String _GroupID;
+        public String GroupID { get => _GroupID; }
 
         public Message (User user, String MessageContent)
         {
