@@ -9,8 +9,8 @@ namespace BusinessLogic
     public class Chatroom
     {
         private User loggedinUser;
-        private Dictionary<Message> recievedMessages;
-        private Dictionary<User> registeredUsers;
+        private Dictionary<Message, Guid> recievedMessages;
+        private Dictionary<User, String> registeredUsers;
         private String URL;
         private messagesHandler messHandler;
         private usersHandler usersHandler;
@@ -29,7 +29,7 @@ namespace BusinessLogic
             this.log = new Logger();
         }
 
-        public boolean register(String nickname, int groupID)
+        public Boolean register(String nickname, int groupID)
         {
             var userOne =
                 from u in registeredUsers
@@ -77,7 +77,7 @@ namespace BusinessLogic
             return false;
         }
 
-        public Bollean Logout()
+        public Boolean Logout()
         {
             if (this.loggedinUser != null)
             {
@@ -87,6 +87,33 @@ namespace BusinessLogic
             return false;
         }
 
+        public int retrieve10Messages()
+        {
+            return
+        }
 
+        public String retrieve20Messages()
+        {
+            return
+        }
+
+        public String retrieve20Messages()
+        {
+            return
+        }
+
+        public String retrieveAllByUser(String nickname)
+        {
+            return
+        }
+
+        private User findUser(String nickname)
+        {
+            var user =
+                from u in registeredUsers
+                where u.nickname == nickname && u.groupID == groupID
+                select u;
+            return user;
+        }
     }
 }
