@@ -44,10 +44,7 @@ namespace BusinessLogic
             int loop = -1;
             while (loop == -1)
             {
-                var userTwo =
-                   from u in registeredUsers
-                   where u.nickname == nickname
-                   select u;
+                User userTwo = findUser(nickname);
                 if (user != null)
                 {
                     Console.WriteLine("Nickname already exists, choose another one");
@@ -65,10 +62,8 @@ namespace BusinessLogic
 
         public Boolean Login(String nickname)
         {
-            var user =
-                from u in registeredUsers
-                where u.nickname == nickname
-                select u;
+            User user = findUser(nickname);
+
             if (user.nickname==nickname)
             {
                 this.loggedinUser = user;
@@ -89,29 +84,36 @@ namespace BusinessLogic
 
         public int retrieve10Messages()
         {
-            return
+            return;
         }
 
         public String retrieve20Messages()
         {
-            return
+            return;
         }
 
         public String retrieve20Messages()
         {
-            return
+            return;
         }
 
         public String retrieveAllByUser(String nickname)
         {
-            return
+            User user = findUser(nickname);
+            if (user==null)
+            {
+                throw new System.ArgumentException("No such user");
+            }
+            var messages = 
+                from m in recievedMessages
+                where m.
         }
 
         private User findUser(String nickname)
         {
             var user =
                 from u in registeredUsers
-                where u.nickname == nickname && u.groupID == groupID
+                where u.nickname == nickname
                 select u;
             return user;
         }

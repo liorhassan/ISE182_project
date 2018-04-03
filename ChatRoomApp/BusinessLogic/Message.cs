@@ -11,8 +11,11 @@ namespace BusinessLogic
         private Guid _Id;
         public Guid Id { get => _Id; }
 
-        private User _UserName;
-        public User UserName { get => _UserName; }
+        private String _UserName;
+        public String UserName { get => _UserName; }
+
+        private User _User;
+        public User User { get => _User; }
 
         private DateTime _Date;
         public DateTime Date { get => _Date; }
@@ -29,11 +32,12 @@ namespace BusinessLogic
             {
                 throw new System.ArgumentException("Message is too long");
             }
-            this.user = user;
-            this.GroupID = user.getID();
-            this.date = DateTime.Now;
-            this.Id = Guid.NewGuid();
-            this.MessageContent = MessageContent;
+            _User = user;
+            _UserName = user.getNane();
+            _GroupID = user.getID();
+            _Date = DateTime.Now;
+            _Id = Guid.NewGuid();
+            _MessageContent = MessageContent;
         }
 
         private Boolean checkValidity(String content)
