@@ -58,8 +58,8 @@ namespace BusinessLogic
                     loop = 0;
                 }  
             }
-            User newUser = new User(nickname, groupID);
-            registeredUsers.Add(User);
+            userOne newUser = new User()
+            registeredUsers.Add()
             return true;
         }
 
