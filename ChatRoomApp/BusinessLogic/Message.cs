@@ -8,11 +8,11 @@ namespace BusinessLogic
 {
     public class Message : IMessage
     {
-        private int guid;
-        private User user;
-        private DateTime date;
-        private String MessageContent;
-        private String GroupID;
+        private Guid Id { get; }
+        private User UserName { get; }
+        private DateTime Date { get; }
+        private String MessageContent { get; }
+        private String GroupID { get; }
 
         public Message (User user, String MessageContent)
         {
@@ -23,9 +23,10 @@ namespace BusinessLogic
             this.user = user;
             this.GroupID = user.getID();
             this.date = DateTime.Now;
-            this.guid = 1;
+            this.Id = Guid.NewGuid();
             this.MessageContent = MessageContent;
         }
+
         private Boolean checkValidity(String content)
         {
             if (content.Length > 150)
@@ -34,11 +35,10 @@ namespace BusinessLogic
             }
             return true;
         }
-        Guid Id { get; }
-        string UserName { get; }
-        DateTime Date { get; }
-        string MessageContent { get; }
-        string GroupID { get; }
-        string ToString();
+
+        public String ToString()
+        {
+            return this.MessageContent;
+        }
     }
 }
