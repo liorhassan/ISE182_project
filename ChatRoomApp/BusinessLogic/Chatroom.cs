@@ -63,6 +63,10 @@ namespace BusinessLogic
             return true;
         }
 
+        public Boolean Login(User user)
+        {
+            this.loggedinUser = user; 
+        }
 
     
     }
