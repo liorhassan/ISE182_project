@@ -104,9 +104,11 @@ namespace BusinessLogic
             {
                 throw new System.ArgumentException("No such user");
             }
-            var messages = 
+            var messages =
                 from m in recievedMessages
-                where m.
+                where m.user == user
+                select m;
+            return messages;
         }
 
         private User findUser(String nickname)
