@@ -10,7 +10,6 @@ namespace MainProg
     {
         static void Main(string[] args)
         {
-            Chatroom chatroom = new Chatroom();
         }
     }
 }
