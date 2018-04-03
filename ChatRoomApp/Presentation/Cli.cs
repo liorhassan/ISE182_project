@@ -84,6 +84,7 @@ namespace Presentation
 
         private void retrive10Messages()
         {
+            Console.Clear();
             int numOfMsg = myChatRoom.retrive10Messages();
             Console.WriteLine("Received " + numOfMsg + " messages from the server");
             Console.WriteLine("Press ENTER to go back to the menu");
@@ -92,6 +93,7 @@ namespace Presentation
 
         private void display20Messages()
         {
+            Console.Clear();
             List<Message> messages = myChatRoom.display20Messages();
             foreach(Message msg in messages)
             {
@@ -107,7 +109,7 @@ namespace Presentation
             Console.WriteLine("Enter username");
             string username = Console.ReadLine();
             Console.WriteLine("Enter groupID");
-            int groupID = Console.ReadLine();
+            string groupID = Console.ReadLine();
             List<Message> messages = myChatRoom.diplayAllByUser(username, groupID);
             if (messages.Count == 0)
             {
