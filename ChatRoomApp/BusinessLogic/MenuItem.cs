@@ -20,6 +20,9 @@ namespace BusinessLogic
         private string _itemFunction;
         public string ItemFunction { get => _itemFunction; }
 
+        private int _order;
+        public int Order { get => _order; }
+
         public MenuItem(char optionKey,string message,string itemFunction,bool loginRequierd)
         {
             _optionKey = optionKey;

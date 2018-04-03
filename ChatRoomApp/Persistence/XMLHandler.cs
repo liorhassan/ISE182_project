@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    class XMLHandler
+    public class XMLHandler
     {
         private string xmlPath;
 
