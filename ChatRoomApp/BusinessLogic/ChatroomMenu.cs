@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BusinessLogic
 {
-    class ChatroomMenu
+    public class ChatroomMenu
     {
         private List<MenuItem> menuItems;
         private XMLHandler xmlHandler;
