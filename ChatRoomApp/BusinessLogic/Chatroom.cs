@@ -63,9 +63,18 @@ namespace BusinessLogic
             return true;
         }
 
-        public void Login(User user)
+        public Boolean Login(String nickname)
         {
-            this.loggedinUser = user;
+            var user =
+                from u in registeredUsers
+                where u.nickname == nickname
+                select u;
+            if (user.nickname==nickname)
+            {
+                this.loggedinUser = user;
+                return true;
+            }
+            return false;
         }
 
         public Bollean Logout()
