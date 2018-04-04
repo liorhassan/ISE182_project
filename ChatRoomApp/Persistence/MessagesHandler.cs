@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainProg
+namespace Persistence
 {
-    class Program
+    class MessagesHandler : fileHandler
     {
-        static void Main(string[] args)
-        {
-            
-        }
+        public MessagesHandler() : base("") { }
     }
 }
