@@ -41,7 +41,7 @@ namespace BusinessLogic
             _MessageContent = MessageContent;
         }
 
-        private Boolean CheckValidity(String content)
+        public static Boolean CheckValidity(String content)
         {
             if (content.Length > 150)
             {

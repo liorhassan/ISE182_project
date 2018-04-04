@@ -13,7 +13,7 @@ namespace BusinessLogic
         private Dictionary<Message, Guid> recievedMessages;
         private Dictionary<User, String> registeredUsers;
         private String URL;
-        private messagesHandler messHandler;
+        private MessagesHandler messHandler;
         private usersHandler usersHandler;
         private xmlHandler xmlHandler;
         private Logger log;
@@ -22,34 +22,24 @@ namespace BusinessLogic
 
         public Chatroom()
         {
-            this.loggedinUser = null;
+            this._loggedinUser = null;
             this.recievedMessages = new Dictionary<Message, Guid>();
             this.registeredUsers = new Dictionary<User, String>();
             this.URL = "url";
-            this.messHandler = new messagesHandler();
+            this.messHandler = new MessagesHandler();
             this.usersHandler = new usersHandler();
             this.xmlHandler = new xmlHandler();
             this.log = new Logger();
             this._ChatroomMenu = new ChatroomMenu();
         }
 
-        public Boolean Register(String nickname, int groupID)
+        public Boolean Register(String nickname)
         {
-            var userOne =
-                from u in registeredUsers
-                where u.nickname == nickname && u.groupID == groupID
-                select u;
-            if (userOne != null)
-            {
-                Console.WriteLine("User already exists");
-                return false;
-            }
-
             int loop = -1;
             while (loop == -1)
             {
-                User userTwo = findUser(nickname);
-                if (user != null)
+                User userOne = FindUser(nickname);
+                if (userOne != null)
                 {
                     Console.WriteLine("Nickname already exists, choose another one");
                     nickname = Console.ReadLine();
@@ -59,8 +49,8 @@ namespace BusinessLogic
                     loop = 0;
                 }  
             }
-            User newUser = new User(nickname, groupID);
-            registeredUsers.Add(User);
+            User newUser = new User(nickname);
+            registeredUsers.Add(newUser, newUser.Nickname);
             return true;
         }
 
@@ -68,9 +58,9 @@ namespace BusinessLogic
         {
             User user = FindUser(nickname);
 
-            if (user.nickname==nickname)
+            if (user.Nickname==nickname)
             {
-                this.loggedinUser = user;
+                this._loggedinUser = user;
                 ChatroomMenu.Login = true;
                 return true;
             }
@@ -81,7 +71,7 @@ namespace BusinessLogic
         {
             if (this.loggedinUser != null)
             {
-                this.loggedinUser = null;
+                this._loggedinUser = null;
                 ChatroomMenu.Login = false;
                 return true;
             }
@@ -90,7 +80,7 @@ namespace BusinessLogic
 
         public int Retrieve10Messages()
         {
-            return _loggedinUser.get.retrieve10Messages();
+            return _loggedinUser.retrive10Messages(this.URL);
         }
 
         public List<String> Retrieve20Messages()
@@ -123,8 +113,8 @@ namespace BusinessLogic
             List<String> msg;
             var messages =
                 from m in recievedMessages
-                where m.Key.user == user
-                orderby m.Date
+                where m.Key.User == user
+                orderby m.Key.Date
                 select m.Key.MessageContent;
             msg = (List<String>)messages;
             return msg;
@@ -132,7 +122,7 @@ namespace BusinessLogic
 
         public Boolean WriteMessage(String msg, String url)
         {
-            return _loggedinUser.get.WriteMessage(msg, this.URL);
+            return _loggedinUser.writeMessage(msg, this.URL);
         }
 
         public ChatroomMenu GetMenu()
@@ -144,9 +134,9 @@ namespace BusinessLogic
         {
             var user =
                 from u in registeredUsers
-                where u.Key.nickname == nickname
-                select u;
-            return user;
+                where u.Key.Nickname == nickname
+                select u.Key;
+            return (User)user;
         }
     }
 }
