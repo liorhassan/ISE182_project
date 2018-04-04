@@ -20,8 +20,8 @@ namespace BusinessLogic
         public Chatroom()
         {
             this.loggedinUser = null;
-            this.recievedMessages = new Dictionary<Message>();
-            this.registeredUsers = new Dictionary<User>();
+            this.recievedMessages = new Dictionary<Message, Guid>();
+            this.registeredUsers = new Dictionary<User, String>();
             this.URL = "url";
             this.messHandler = new messagesHandler();
             this.usersHandler = new usersHandler();
