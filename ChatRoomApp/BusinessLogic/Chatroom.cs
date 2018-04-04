@@ -93,32 +93,41 @@ namespace BusinessLogic
             return _loggedinUser.get.retrieve10Messages();
         }
 
-        public String Retrieve20Messages()
+        public List<String> Retrieve20Messages()
         {
-            return;
-        }
-
-        public String Retrieve20Messages()
-        {
+            List<String> msg;
             var messages =
                 from m in recievedMessages
-                where m.Key.user == user
-                select m;
+                orderby m.Key.Date
+                select m.Key.MessageContent;
+            if (messages.Count() > 20)
+            {
+                msg = (List<String>)messages.Take(20);
+                return msg;
+            }
+            else
+            {
+                msg = (List<String>)messages;
+                return msg;
+            }
+            
         }
 
-        public String RetrieveAllByUser(String nickname)
+        public List<String> RetrieveAllByUser(String nickname)
         {
             User user = FindUser(nickname);
             if (user==null)
             {
                 throw new System.ArgumentException("No such user");
             }
+            List<String> msg;
             var messages =
                 from m in recievedMessages
                 where m.Key.user == user
-                select m;
-            var newMessages = messages.OrderBy(m => m.Date).ToList();
-            return newMessages;
+                orderby m.Date
+                select m.Key.MessageContent;
+            msg = (List<String>)messages;
+            return msg;
         }
 
         public Boolean WriteMessage(string msg)
