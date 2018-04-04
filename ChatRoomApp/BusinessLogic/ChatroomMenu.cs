@@ -50,5 +50,10 @@ namespace BusinessLogic
             }
             return output;
         }
+
+        internal ChatroomMenu get()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

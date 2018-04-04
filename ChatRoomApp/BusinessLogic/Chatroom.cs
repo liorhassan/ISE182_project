@@ -17,6 +17,8 @@ namespace BusinessLogic
         private usersHandler usersHandler;
         private xmlHandler xmlHandler;
         private Logger log;
+        private ChatroomMenu _ChatroomMenu;
+        public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
         public Chatroom()
         {
@@ -28,6 +30,7 @@ namespace BusinessLogic
             this.usersHandler = new usersHandler();
             this.xmlHandler = new xmlHandler();
             this.log = new Logger();
+            this._ChatroomMenu = new ChatroomMenu();
         }
 
         public Boolean Register(String nickname, int groupID)
@@ -68,6 +71,7 @@ namespace BusinessLogic
             if (user.nickname==nickname)
             {
                 this.loggedinUser = user;
+                ChatroomMenu.Login = true;
                 return true;
             }
             return false;
@@ -78,6 +82,7 @@ namespace BusinessLogic
             if (this.loggedinUser != null)
             {
                 this.loggedinUser = null;
+                ChatroomMenu.Login = false;
                 return true;
             }
             return false;
@@ -107,15 +112,19 @@ namespace BusinessLogic
             }
             var messages =
                 from m in recievedMessages
-                where m.user == user
+                where m.Key.user == user
                 select m;
             return messages;
         }
 
         public Boolean WriteMessage(string msg)
         {
-            Message message = new Message(loggedinUser.get(), msg);
-            return true;
+            return _loggedinUser.get.WriteMessage(msg);
+        }
+
+        public ChatroomMenu GetMenu()
+        {
+            return ChatroomMenu.get();
         }
 
         private User FindUser(String nickname)
