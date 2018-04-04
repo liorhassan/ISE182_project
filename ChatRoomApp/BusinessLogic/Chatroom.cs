@@ -130,9 +130,9 @@ namespace BusinessLogic
             return msg;
         }
 
-        public Boolean WriteMessage(string msg)
+        public Boolean WriteMessage(String msg, String url)
         {
-            return _loggedinUser.get.WriteMessage(msg);
+            return _loggedinUser.get.WriteMessage(msg, this.URL);
         }
 
         public ChatroomMenu GetMenu()

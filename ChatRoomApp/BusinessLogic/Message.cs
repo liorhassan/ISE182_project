@@ -28,19 +28,20 @@ namespace BusinessLogic
 
         public Message (User user, String MessageContent)
         {
-            if (!checkValidity(MessageContent))
+            if (!CheckValidity(_MessageContent))
             {
                 throw new System.ArgumentException("Message is too long");
             }
             _User = user;
-            _UserName = user.getNane();
+            // username getter
+            _UserName = user.getName();
             _GroupID = user.getID();
             _Date = DateTime.Now;
             _Id = Guid.NewGuid();
             _MessageContent = MessageContent;
         }
 
-        private Boolean checkValidity(String content)
+        private Boolean CheckValidity(String content)
         {
             if (content.Length > 150)
             {
