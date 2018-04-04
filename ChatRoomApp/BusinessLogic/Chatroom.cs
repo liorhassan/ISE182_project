@@ -8,7 +8,8 @@ namespace BusinessLogic
 {
     public class Chatroom
     {
-        private User loggedinUser;
+        private User _loggedinUser;
+        public User loggedinUser { get => _loggedinUser; }
         private Dictionary<Message, Guid> recievedMessages;
         private Dictionary<User, String> registeredUsers;
         private String URL;
@@ -109,6 +110,12 @@ namespace BusinessLogic
                 where m.user == user
                 select m;
             return messages;
+        }
+
+        public Boolean WriteMessage(string msg)
+        {
+            Message message = new Message(loggedinUser.get(), msg);
+            return true;
         }
 
         private User findUser(String nickname)
