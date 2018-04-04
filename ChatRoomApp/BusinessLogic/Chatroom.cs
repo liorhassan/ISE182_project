@@ -100,12 +100,15 @@ namespace BusinessLogic
 
         public String Retrieve20Messages()
         {
-            return;
+            var messages =
+                from m in recievedMessages
+                where m.Key.user == user
+                select m;
         }
 
         public String RetrieveAllByUser(String nickname)
         {
-            User user = findUser(nickname);
+            User user = FindUser(nickname);
             if (user==null)
             {
                 throw new System.ArgumentException("No such user");
@@ -114,7 +117,8 @@ namespace BusinessLogic
                 from m in recievedMessages
                 where m.Key.user == user
                 select m;
-            return messages;
+            var newMessages = messages.OrderBy(m => m.Date).ToList();
+            return newMessages;
         }
 
         public Boolean WriteMessage(string msg)
