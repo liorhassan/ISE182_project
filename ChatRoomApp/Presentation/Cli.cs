@@ -14,6 +14,13 @@ namespace Presentation
         private ChatRoom myChatRoom;
         private ChatroomMenu menu;
 
+        public Cli()
+        {
+            myChatRoom = new ChatRoom();
+            menu = myChatRoom.getMenu();
+            running = true;
+        }
+
         public void showMenu()
         {
             Console.Clear();
@@ -67,7 +74,7 @@ namespace Presentation
                 String nickname = Console.ReadLine();
                 while ((nickname!="")&&(!myChatRoom.Login(nickname)))
                 {
-                    Console.WriteLine("User non-exist, try egain or press ENTER and go back to the menu");
+                    Console.WriteLine("User non-exist, try again or press ENTER and go back to the menu");
                     nickname = Console.ReadLine();
 
                 }
