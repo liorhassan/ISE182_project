@@ -21,8 +21,8 @@ namespace BusinessLogic
         public Chatroom()
         {
             this.loggedinUser = null;
-            this.recievedMessages = new Dictionary<Message>();
-            this.registeredUsers = new Dictionary<User>();
+            this.recievedMessages = new Dictionary<Message, Guid>();
+            this.registeredUsers = new Dictionary<User, String>();
             this.URL = "url";
             this.messHandler = new messagesHandler();
             this.usersHandler = new usersHandler();
@@ -30,7 +30,7 @@ namespace BusinessLogic
             this.log = new Logger();
         }
 
-        public Boolean register(String nickname, int groupID)
+        public Boolean Register(String nickname, int groupID)
         {
             var userOne =
                 from u in registeredUsers
@@ -63,7 +63,7 @@ namespace BusinessLogic
 
         public Boolean Login(String nickname)
         {
-            User user = findUser(nickname);
+            User user = FindUser(nickname);
 
             if (user.nickname==nickname)
             {
@@ -83,22 +83,22 @@ namespace BusinessLogic
             return false;
         }
 
-        public int retrieve10Messages()
+        public int Retrieve10Messages()
+        {
+            return _loggedinUser.get.retrieve10Messages();
+        }
+
+        public String Retrieve20Messages()
         {
             return;
         }
 
-        public String retrieve20Messages()
+        public String Retrieve20Messages()
         {
             return;
         }
 
-        public String retrieve20Messages()
-        {
-            return;
-        }
-
-        public String retrieveAllByUser(String nickname)
+        public String RetrieveAllByUser(String nickname)
         {
             User user = findUser(nickname);
             if (user==null)
@@ -118,11 +118,11 @@ namespace BusinessLogic
             return true;
         }
 
-        private User findUser(String nickname)
+        private User FindUser(String nickname)
         {
             var user =
                 from u in registeredUsers
-                where u.nickname == nickname
+                where u.Key.nickname == nickname
                 select u;
             return user;
         }
