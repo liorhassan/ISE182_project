@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    class UsersHandler : fileHandler
+    public class UsersHandler : fileHandler
     {
 
         public UsersHandler() : base("") { }

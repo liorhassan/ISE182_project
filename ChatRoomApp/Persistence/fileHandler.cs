@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Persistence
 {
-    abstract class fileHandler
+    public abstract class fileHandler
     {
         private string binPath;
 
