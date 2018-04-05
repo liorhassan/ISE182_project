@@ -12,7 +12,8 @@ namespace MainProg
         static void Main(string[] args)
         {
             Chatroom chatroom = new Chatroom();
-            chatroom.register("Ohad", 24);
+            Console.Write(chatroom.login("Ohad"));
+           // chatroom.register("Ohad");
         }
     }
 }
