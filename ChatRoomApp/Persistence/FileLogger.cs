@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Persistence
 {
-    class FileLogger: ILogger
+    public class FileLogger: ILogger
     {
         #region Data
         private string mFileName;

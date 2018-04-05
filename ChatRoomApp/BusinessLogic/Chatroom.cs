@@ -15,7 +15,8 @@ namespace BusinessLogic
         private String URL;
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
-        private Logger logger;
+        private Logger mLogger;
+        private FileLogger mFileLogger;
         private ChatroomMenu _ChatroomMenu;
         public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
@@ -27,7 +28,8 @@ namespace BusinessLogic
             this.URL = "url";
             this.messHandler = new MessagesHandler();
             this.usersHandler = new UsersHandler();
-          //  this.log = new Logger();
+            this.mLogger = Logger.Instance;
+            this.mFileLogger = new FileLogger(@"c:\temp\log.txt");
             this._ChatroomMenu = new ChatroomMenu();
         }
 
