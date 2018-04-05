@@ -14,7 +14,7 @@ namespace BusinessLogic
         private Dictionary<User, String> registeredUsers;
         private String URL;
         private MessagesHandler messHandler;
-        private usersHandler usersHandler;
+        private UsersHandler usersHandler;
         private xmlHandler xmlHandler;
         private Logger log;
         private ChatroomMenu _ChatroomMenu;
