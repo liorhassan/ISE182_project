@@ -10,8 +10,8 @@ namespace BusinessLogic
     public class Chatroom
     {
         private User _loggedinUser;
-        private Dictionary<Message, Guid> recievedMessages;
-        private Dictionary<User, String> registeredUsers;
+        private Dictionary<Guid, Message> recievedMessages;
+        private Dictionary<String, User> registeredUsers;
         private String URL;
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
@@ -23,34 +23,26 @@ namespace BusinessLogic
         public Chatroom()
         {
             this._loggedinUser = null;
-            this.recievedMessages = new Dictionary<Message, Guid>();
-            this.registeredUsers = new Dictionary<User, String>();
+            this.recievedMessages = (Dictionary < Guid, Message >) messHandler.load();
+            this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
             this.URL = "url";
             this.messHandler = new MessagesHandler();
             this.usersHandler = new UsersHandler();
             this.mLogger = Logger.Instance;
-            this.mFileLogger = new FileLogger(@"c:\temp\log.txt");
+            this.mFileLogger = new FileLogger(@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\tmp.txt");
             this._ChatroomMenu = new ChatroomMenu();
         }
 
         public Boolean Register(String nickname)
         {
-            int loop = -1;
-            while (loop == -1)
+            User userOne = FindUser(nickname);
+            if (userOne != null)
             {
-                User userOne = FindUser(nickname);
-                if (userOne != null)
-                {
-                    Console.WriteLine("Nickname already exists, choose another one");
-                    nickname = Console.ReadLine();
-                }
-                else
-                {
-                    loop = 0;
-                }  
+                return false;
             }
             User newUser = new User(nickname);
-            registeredUsers.Add(newUser, newUser.Nickname);
+            registeredUsers.Add(newUser.Nickname, newUser);
+            usersHandler.save(registeredUsers);
             return true;
         }
 
@@ -89,8 +81,8 @@ namespace BusinessLogic
             List<String> msg;
             var messages =
                 from m in recievedMessages
-                orderby m.Key.Date
-                select m.Key.MessageContent;
+                orderby m.Value.Date
+                select m.Value.MessageContent;
             if (messages.Count() > 20)
             {
                 msg = (List<String>)messages.Take(20);
@@ -114,15 +106,16 @@ namespace BusinessLogic
             List<String> msg;
             var messages =
                 from m in recievedMessages
-                where m.Key.User == user
-                orderby m.Key.Date
-                select m.Key.MessageContent;
+                where m.Value.User == user
+                orderby m.Value.Date
+                select m.Value.MessageContent;
             msg = (List<String>)messages;
             return msg;
         }
 
         public Boolean WriteMessage(String msg, String url)
         {
+            usersHandler.save(registeredUsers);
             return true;
             //return _loggedinUser.writeMessage(msg, this.URL);
         }
@@ -136,8 +129,8 @@ namespace BusinessLogic
         {
             var user =
                 from u in registeredUsers
-                where u.Key.Nickname == nickname
-                select u.Key;
+                where u.Value.Nickname == nickname
+                select u.Value;
             return (User)user;
         }
     }

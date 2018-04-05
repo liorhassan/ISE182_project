@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MileStoneClient.CommunicationLayer;
+using BusinessLogic;
 
 namespace BusinessLogic
 {
@@ -26,20 +28,19 @@ namespace BusinessLogic
         private String _GroupID;
         public String GroupID { get => _GroupID; }
 
-        public Message (User user, String MessageContent)
-        {
-            if (!CheckValidity(_MessageContent))
-            {
-                throw new System.ArgumentException("Message is too long");
-            }
-            _User = user;
-            // username getter
-            _UserName = user.getName();
-            _GroupID = user.getID();
-            _Date = DateTime.Now;
-            _Id = Guid.NewGuid();
-            _MessageContent = MessageContent;
-        }
+//        public Message (User user, String MessageContent)
+//        {
+//            if (!CheckValidity(_MessageContent))
+//            {
+//                throw new System.ArgumentException("Message is too long");
+//            }
+//           _User = user;
+//            _UserName = user.Nickname;
+//            _GroupID = user.getID();
+//            _Date = DateTime.Now;
+//            _Id = Guid.NewGuid();
+//            _MessageContent = MessageContent;
+//        }
 
         public static Boolean CheckValidity(String content)
         {
@@ -50,6 +51,7 @@ namespace BusinessLogic
             return true;
         }
 
+        override
         public String ToString()
         {
             return this.MessageContent;
