@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LoggingSample
 {
-    class Logger
+    public class Logger
     {
         #region Data
         private static object mLock = new object();

@@ -27,8 +27,7 @@ namespace BusinessLogic
             this.registeredUsers = new Dictionary<User, String>();
             this.URL = "url";
             this.messHandler = new MessagesHandler();
-            this.usersHandler = new usersHandler();
-            this.xmlHandler = new xmlHandler();
+            this.usersHandler = new UsersHandler();
             this.log = new Logger();
             this._ChatroomMenu = new ChatroomMenu();
         }
