@@ -15,7 +15,7 @@ namespace BusinessLogic
         private String URL;
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
-        private Logger logger;
+       // private Logger logger;
         private ChatroomMenu _ChatroomMenu;
         public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
@@ -27,7 +27,7 @@ namespace BusinessLogic
             this.URL = "url";
             this.messHandler = new MessagesHandler();
             this.usersHandler = new UsersHandler();
-            this.log = new Logger();
+          //  this.log = new Logger();
             this._ChatroomMenu = new ChatroomMenu();
         }
 
@@ -78,7 +78,8 @@ namespace BusinessLogic
 
         public int Retrieve10Messages()
         {
-            return _loggedinUser.retrive10Messages(this.URL);
+            return 10;   
+            // return _loggedinUser.retrive10Messages(this.URL);
         }
 
         public List<String> Retrieve20Messages()
@@ -120,7 +121,8 @@ namespace BusinessLogic
 
         public Boolean WriteMessage(String msg, String url)
         {
-            return _loggedinUser.writeMessage(msg, this.URL);
+            return true;
+            //return _loggedinUser.writeMessage(msg, this.URL);
         }
 
         public ChatroomMenu GetMenu()
