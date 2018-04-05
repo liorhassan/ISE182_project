@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LoggingSample
 {
-    public interface ILogger
+    interface ILogger
     {
         void ProcessLogMessage(string logMessage);
     }
