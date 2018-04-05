@@ -15,7 +15,7 @@ namespace BusinessLogic
         private String URL;
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
-        private Logger log;
+        private Logger logger;
         private ChatroomMenu _ChatroomMenu;
         public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 

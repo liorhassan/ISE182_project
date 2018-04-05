@@ -47,7 +47,7 @@ namespace LoggingSample
         #endregion
 
         #region Constructor
-        private Logger()
+        public Logger()
         {
             mObservers = new List<ILogger>();
         }
