@@ -9,7 +9,6 @@ namespace BusinessLogic
     public class Chatroom
     {
         private User _loggedinUser;
-        public User loggedinUser { get => _loggedinUser; }
         private Dictionary<Message, Guid> recievedMessages;
         private Dictionary<User, String> registeredUsers;
         private String URL;
@@ -69,7 +68,7 @@ namespace BusinessLogic
 
         public Boolean Logout()
         {
-            if (this.loggedinUser != null)
+            if (this._loggedinUser != null)
             {
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
