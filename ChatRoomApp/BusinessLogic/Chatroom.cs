@@ -128,9 +128,14 @@ namespace BusinessLogic
 
         public Boolean WriteMessage(String msg, String url)
         {
+            IMessage message = _loggedinUser.writeMessage(msg, this.URL);
+            if (!message.CheckValidity(message.MessageContent))
+            {
+                return false;
+            }
+            recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
             return true;
-            //return _loggedinUser.writeMessage(msg, this.URL);
         }
 
         public ChatroomMenu GetMenu()
@@ -140,11 +145,18 @@ namespace BusinessLogic
 
         private User FindUser(String nickname)
         {
-            var user =
+            if (registeredUsers.ContainsKey(nickname))
+            {
+                var user =
                 from u in registeredUsers
                 where u.Value.Nickname == nickname
                 select u.Value;
-            return (User)user;
+                return (User)user;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
