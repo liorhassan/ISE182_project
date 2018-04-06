@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MileStoneClient.CommunicationLayer;
 using Persistence;
 
 namespace BusinessLogic
@@ -10,7 +11,7 @@ namespace BusinessLogic
     public class Chatroom
     {
         private User _loggedinUser;
-        private Dictionary<Guid, Message> recievedMessages;
+        private Dictionary<Guid, IMessage> recievedMessages;
         private Dictionary<String, User> registeredUsers;
         private String URL;
         private MessagesHandler messHandler;
@@ -23,7 +24,7 @@ namespace BusinessLogic
         public Chatroom()
         {
             this._loggedinUser = null;
-            this.recievedMessages = (Dictionary < Guid, Message >) messHandler.load();
+            this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
             this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
             this.URL = "url";
             this.messHandler = new MessagesHandler();
@@ -73,8 +74,19 @@ namespace BusinessLogic
 
         public int Retrieve10Messages()
         {
-            _loggedinUser.retrive10Messages(this.URL);
-            return 10;   
+            int c = 0;
+            List<MileStoneClient.CommunicationLayer.IMessage> retrieved = 
+                _loggedinUser.retrive10Messages(URL);
+            foreach (IMessage m in retrieved)
+            {
+                if (!recievedMessages.ContainsKey(m.Id))
+                {
+                    recievedMessages.Add(m.Id, m);
+                    c++;
+                }
+            }
+            messHandler.save(recievedMessages);
+            return c;   
         }
 
         public List<String> Retrieve20Messages()

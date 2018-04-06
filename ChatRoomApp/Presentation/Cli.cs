@@ -101,8 +101,8 @@ namespace Presentation
         private void display20Messages()
         {
             Console.Clear();
-            List<Message> messages = myChatRoom.display20Messages();
-            foreach(Message msg in messages)
+            List<IMessage> messages = myChatRoom.display20Messages();
+            foreach(IMessage msg in messages)
             {
                 Console.WriteLine(msg.ToString());
             }
@@ -117,7 +117,7 @@ namespace Presentation
             string username = Console.ReadLine();
             Console.WriteLine("Enter groupID");
             string groupID = Console.ReadLine();
-            List<Message> messages = myChatRoom.diplayAllByUser(username, groupID);
+            List<IMessage> messages = myChatRoom.diplayAllByUser(username, groupID);
             if (messages.Count == 0)
             {
                 Console.WriteLine("no messages by this user");
@@ -125,7 +125,7 @@ namespace Presentation
                 Console.ReadLine();
 
             }
-            foreach (Message msg in messages)
+            foreach (IMessage msg in messages)
             {
                 Console.WriteLine(msg.ToString());
             }

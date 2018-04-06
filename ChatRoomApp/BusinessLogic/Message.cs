@@ -8,7 +8,7 @@ using BusinessLogic;
 
 namespace BusinessLogic
 {
-    public class Message : IMessage
+    public class IMessage : MileStoneClient.CommunicationLayer.IMessage
     {
         private Guid _Id;
         public Guid Id { get => _Id; }

@@ -22,15 +22,15 @@ namespace BusinessLogic
             this.nickname = nickname;
         }
 
-        public Message writeMessage(String message, String url)
+        public IMessage writeMessage(String message, String url)
         {
-            Message msg = (Message) Communication.Instance.Send(url, groupID, nickname, message);
+            IMessage msg = (IMessage) Communication.Instance.Send(url, groupID, nickname, message);
             return msg;
         }
 
-        public List<IMessage> retrive10Messages(String url)
+        public List<MileStoneClient.CommunicationLayer.IMessage> retrive10Messages(String url)
         {
-            List<IMessage> messages = Communication.Instance.GetTenMessages(url);
+            List<MileStoneClient.CommunicationLayer.IMessage> messages = Communication.Instance.GetTenMessages(url);
             return messages;
         }
     }
