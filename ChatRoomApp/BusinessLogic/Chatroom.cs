@@ -29,7 +29,8 @@ namespace BusinessLogic
             this.messHandler = new MessagesHandler();
             this.usersHandler = new UsersHandler();
             this.mLogger = Logger.Instance;
-            this.mFileLogger = new FileLogger(@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\tmp.txt");
+            this.mFileLogger = new FileLogger
+                (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
             this._ChatroomMenu = new ChatroomMenu();
         }
 
@@ -115,7 +116,7 @@ namespace BusinessLogic
 
         public Boolean WriteMessage(String msg, String url)
         {
-            usersHandler.save(registeredUsers);
+            messHandler.save(recievedMessages);
             return true;
             //return _loggedinUser.writeMessage(msg, this.URL);
         }
