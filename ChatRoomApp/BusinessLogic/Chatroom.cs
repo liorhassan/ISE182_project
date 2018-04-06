@@ -23,12 +23,12 @@ namespace BusinessLogic
 
         public Chatroom()
         {
+            this.messHandler = new MessagesHandler();
+            this.usersHandler = new UsersHandler();
             this._loggedinUser = null;
             this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
             this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
             this.URL = "url";
-            this.messHandler = new MessagesHandler();
-            this.usersHandler = new UsersHandler();
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
                 (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
