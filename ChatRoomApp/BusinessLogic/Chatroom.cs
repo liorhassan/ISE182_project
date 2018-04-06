@@ -45,6 +45,7 @@ namespace BusinessLogic
             User newUser = new User(nickname);
             registeredUsers.Add(newUser.Nickname, newUser);
             usersHandler.save(registeredUsers);
+            mLogger.AddLogMessage("User " + newUser.Nickname + " registered successfully");
             return true;
         }
 
@@ -56,6 +57,7 @@ namespace BusinessLogic
             {
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
+                mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
                 return true;
             }
             return false;
@@ -63,10 +65,12 @@ namespace BusinessLogic
 
         public Boolean Logout()
         {
+            String name = _loggedinUser.Nickname;
             if (this._loggedinUser != null)
             {
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
+                mLogger.AddLogMessage("User " + name + " logged out successfully");
                 return true;
             }
             return false;
@@ -131,10 +135,12 @@ namespace BusinessLogic
             IMessage message = _loggedinUser.writeMessage(msg, this.URL);
             if (!message.CheckValidity(message.MessageContent))
             {
+                mLogger.AddLogMessage("Invalid message was written");
                 return false;
             }
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
+            mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
             return true;
         }
 
