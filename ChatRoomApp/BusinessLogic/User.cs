@@ -24,13 +24,13 @@ namespace BusinessLogic
 
         public Message writeMessage(String message, String url)
         {
-            Message msg = Communication.Instance.Send(url, groupID, nickname, message);
+            Message msg = (Message) Communication.Instance.Send(url, groupID, nickname, message);
             return msg;
         }
 
-        public List<Message> retrive10Messages(String url)
+        public List<IMessage> retrive10Messages(String url)
         {
-            List<Message> messages = Communication.Instance.GetTenMessages(url);
+            List<IMessage> messages = Communication.Instance.GetTenMessages(url);
             return messages;
         }
     }
