@@ -73,8 +73,8 @@ namespace BusinessLogic
 
         public int Retrieve10Messages()
         {
+            _loggedinUser.retrive10Messages(this.URL);
             return 10;   
-            // return _loggedinUser.retrive10Messages(this.URL);
         }
 
         public List<String> Retrieve20Messages()

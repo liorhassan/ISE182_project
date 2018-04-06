@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace MainProg
     {
         static void Main(string[] args)
         {
-            
+            Chatroom chatroom = new Chatroom();
+            Console.Write(chatroom.Login("Ohad"));
         }
     }
 }
