@@ -28,7 +28,7 @@ namespace BusinessLogic
             this._loggedinUser = null;
             this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
             this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
-            this.URL = "url";
+            this.URL = "C:\\Users\\Ohad\\SE-Intro_server-master\\server.py";
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
                 (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
