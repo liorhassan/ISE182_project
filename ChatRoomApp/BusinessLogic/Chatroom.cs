@@ -26,6 +26,7 @@ namespace BusinessLogic
             this.messHandler = new MessagesHandler();
             this.usersHandler = new UsersHandler();
             this._loggedinUser = null;
+            messHandler = new MessagesHandler("dgfgdf");
             this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
             this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
             this.URL = "C:\\Users\\Ohad\\SE-Intro_server-master\\server.py";
