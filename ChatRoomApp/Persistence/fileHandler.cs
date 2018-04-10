@@ -33,11 +33,20 @@ namespace Persistence
                 return null;
                 
             }
-            Stream myOtherFileStream = File.OpenRead(binPath);
-            BinaryFormatter deserializer = new BinaryFormatter();
-            object o = deserializer.Deserialize(myOtherFileStream);
-            myOtherFileStream.Close();
-            return o;
+            try
+            {
+                Stream myOtherFileStream = File.OpenRead(binPath);
+                BinaryFormatter deserializer = new BinaryFormatter();
+                object o = deserializer.Deserialize(myOtherFileStream);
+                myOtherFileStream.Close();
+                return o;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+                return null;
+            }
+
         }
     }
 }

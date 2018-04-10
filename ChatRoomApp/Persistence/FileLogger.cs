@@ -32,7 +32,14 @@ namespace Persistence
         #region Public methods
         public void Init()
         {
-            mLogFile = new StreamWriter(mFileName);
+            try
+            {
+                mLogFile = new StreamWriter(mFileName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+            }
         }
 
         public void Terminate()

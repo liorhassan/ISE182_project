@@ -13,8 +13,16 @@ namespace Persistence
 
         public XDocument load()
         {
-            XDocument doc = XDocument.Load(xmlPath);
-            return doc;
+            try
+            {
+                XDocument doc = XDocument.Load(xmlPath);
+                return doc;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+                return null;
+            }
         }
     }
 }
