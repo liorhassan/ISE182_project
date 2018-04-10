@@ -20,6 +20,11 @@ namespace Persistence
         #region Constructor
         public FileLogger(string fileName)
         {
+            if (!File.Exists(fileName))
+            {
+                FileStream f = File.Create(fileName);
+                f.Close();
+            }
             mFileName = fileName;
         }
         #endregion

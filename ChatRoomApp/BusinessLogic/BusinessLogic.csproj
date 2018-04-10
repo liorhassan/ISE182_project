@@ -58,8 +58,6 @@
       <Project>{e4e0f4ae-bd60-4876-ac8a-f3773c93ed6e}</Project>
       <Name>MileStoneClient.CommunicationLayer</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{752ee4b0-e98e-4212-9f8f-bd8254b2749c}</Project>
       <Name>Persistence</Name>

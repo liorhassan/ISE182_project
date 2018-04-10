@@ -9,7 +9,7 @@ namespace Persistence
 {
     public class XMLHandler
     {
-        private readonly string xmlPath = @"C:\Temp\Chatroom24\menu.xml";
+        private readonly string xmlPath = "menu.xml";
 
         public XDocument load()
         {

@@ -40,7 +40,7 @@ namespace BusinessLogic
             }
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
-                (@"C:\Temp\Chatroom24\log.txt");
+                ("log.txt");
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);

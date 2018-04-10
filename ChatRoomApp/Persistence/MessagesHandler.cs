@@ -8,6 +8,6 @@ namespace Persistence
 {
     public class MessagesHandler : fileHandler
     {
-        public MessagesHandler() : base(@"C:\Temp\Chatroom24\Messages.bin") { }
+        public MessagesHandler() : base("Messages.bin") { }
     }
 }
