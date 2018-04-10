@@ -23,19 +23,17 @@ namespace BusinessLogic
 
         public Chatroom()
         {
+            messHandler = new MessagesHandler();
+            usersHandler = new UsersHandler();
             Console.WriteLine("1");
             Console.ReadLine();
-            //messHandler = new MessagesHandler();
-            //usersHandler = new UsersHandler();
             this._loggedinUser = null;
-            recievedMessages = null;
-            //recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
+            recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
             {
                 recievedMessages = new Dictionary<Guid, Message>();
             }
-            registeredUsers = null;
-            //registeredUsers = (Dictionary<String, User>)usersHandler.load();
+            registeredUsers = (Dictionary<String, User>)usersHandler.load();
             if (registeredUsers == null)
             {
                 registeredUsers = new Dictionary<String, User>();

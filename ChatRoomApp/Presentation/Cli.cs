@@ -16,8 +16,6 @@ namespace Presentation
 
         public Cli()
         {
-            Console.WriteLine("0");
-            Console.ReadLine();
             myChatRoom = new Chatroom();
             menu = myChatRoom.ChatroomMenu;
             running = true;
