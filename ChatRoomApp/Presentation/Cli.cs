@@ -11,13 +11,13 @@ namespace Presentation
     class Cli
     {
         private Boolean running;
-        private ChatRoom myChatRoom;
+        private Chatroom myChatRoom;
         private ChatroomMenu menu;
 
         public Cli()
         {
-            myChatRoom = new ChatRoom();
-            menu = myChatRoom.getMenu();
+            myChatRoom = new Chatroom();
+            menu = myChatRoom.GetMenu();
             running = true;
         }
 
@@ -45,7 +45,7 @@ namespace Presentation
             Console.Clear();
             Console.WriteLine("Enter your nickname");
             String nickname = Console.ReadLine();
-            while ((nickname!="")&&(!myChatRoom.register(nickname)))
+            while ((nickname!="")&&(!myChatRoom.Register(nickname)))
             {
                 Console.WriteLine("Enter another nickname, or press ENTER to go back to the menu");
                 nickname = Console.ReadLine();
@@ -92,7 +92,7 @@ namespace Presentation
         private void retrive10Messages()
         {
             Console.Clear();
-            int numOfMsg = myChatRoom.retrive10Messages();
+            int numOfMsg = myChatRoom.Retrieve10Messages();
             Console.WriteLine("Received " + numOfMsg + " messages from the server");
             Console.WriteLine("Press ENTER to go back to the menu");
             Console.ReadLine();
@@ -101,7 +101,7 @@ namespace Presentation
         private void display20Messages()
         {
             Console.Clear();
-            List<IMessage> messages = myChatRoom.display20Messages();
+            List<IMessage> messages = myChatRoom.Retrieve20Messages();
             foreach(IMessage msg in messages)
             {
                 Console.WriteLine(msg.ToString());
@@ -110,14 +110,14 @@ namespace Presentation
             Console.ReadLine();
         }
 
-        private void diplayAllByUser()
+        private void displayAllByUser()
         {
             Console.Clear();
             Console.WriteLine("Enter username");
             string username = Console.ReadLine();
             Console.WriteLine("Enter groupID");
             string groupID = Console.ReadLine();
-            List<IMessage> messages = myChatRoom.diplayAllByUser(username, groupID);
+            List<IMessage> messages = myChatRoom.RetrieveAllByUser(username, groupID);
             if (messages.Count == 0)
             {
                 Console.WriteLine("no messages by this user");
@@ -140,7 +140,7 @@ namespace Presentation
             Console.Clear();
             Console.WriteLine("Write your message");
             String msg = Console.ReadLine();
-            while((msg!="")&& !myChatRoom.writeMessage(msg))
+            while((msg!="")&& !myChatRoom.WriteMessage(msg))
             {
                 Console.WriteLine("Can't send the message, try again or press ENTER to go back to the menu");
                 msg = Console.ReadLine();
