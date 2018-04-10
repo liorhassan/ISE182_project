@@ -7,6 +7,7 @@ using MileStoneClient.CommunicationLayer;
 
 namespace BusinessLogic
 {
+    [Serializable]
     public class User
     {
         private readonly string groupID = "24";

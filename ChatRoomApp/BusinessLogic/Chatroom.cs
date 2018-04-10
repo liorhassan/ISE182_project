@@ -8,7 +8,7 @@ using Persistence;
 
 namespace BusinessLogic
 {
-    public class Chatroom
+    public class Chatroom : ILogger
     {
         private User _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
@@ -27,10 +27,21 @@ namespace BusinessLogic
             usersHandler = new UsersHandler();
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
+            if (recievedMessages == null)
+            {
+                recievedMessages = new Dictionary<Guid, Message>();
+            }
             registeredUsers = (Dictionary<String, User>)usersHandler.load();
+            if (registeredUsers == null)
+            {
+                registeredUsers = new Dictionary<String, User>();
+            }
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
                 (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
+            mFileLogger.Init();
+            mLogger.RegisterObserver(this);
+            mLogger.RegisterObserver(mFileLogger);
             this._ChatroomMenu = new ChatroomMenu();
         }
 
@@ -45,7 +56,7 @@ namespace BusinessLogic
             User newUser = new User(nickname);
             registeredUsers.Add(newUser.Nickname, newUser);
             usersHandler.save(registeredUsers);
-            mLogger.AddLogMessage("User " + newUser.Nickname + " registered successfully");
+            ProcessLogMessage("User " + newUser.Nickname + " registered successfully");
             return true;
         }
 
@@ -57,7 +68,7 @@ namespace BusinessLogic
             {
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
-                mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
+                ProcessLogMessage("User " + user.Nickname + " logged in successfully");
                 return true;
             }
             return false;
@@ -70,7 +81,7 @@ namespace BusinessLogic
                 String name = _loggedinUser.Nickname;
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
-                mLogger.AddLogMessage("User " + name + " logged out successfully");
+                ProcessLogMessage("User " + name + " logged out successfully");
                 return true;
             }
             return false;
@@ -114,13 +125,13 @@ namespace BusinessLogic
         {
             if (!CheckMessageValidity(msg))
             {
-                mLogger.AddLogMessage("Invalid message was written");
+                ProcessLogMessage("Invalid message was written");
                 return false;
             }
             Message message = (Message)_loggedinUser.writeMessage(msg, URL);
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
-            mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
+            ProcessLogMessage("Message " + message.Id + " was written successfully");
             return true;
         }
 
@@ -131,6 +142,15 @@ namespace BusinessLogic
                 return false;
             }
             return true;
+        }
+
+        public void exit()
+        {
+            mFileLogger.Terminate();
+        }
+        public void ProcessLogMessage(string message)
+        {
+            mLogger.AddLogMessage(message);
         }
 
 

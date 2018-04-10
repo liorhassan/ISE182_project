@@ -17,7 +17,7 @@ namespace Presentation
         public Cli()
         {
             myChatRoom = new Chatroom();
-            menu = myChatRoom.GetMenu();
+            menu = myChatRoom.ChatroomMenu;
             running = true;
         }
 
@@ -101,8 +101,8 @@ namespace Presentation
         private void display20Messages()
         {
             Console.Clear();
-            List<IMessage> messages = myChatRoom.Retrieve20Messages();
-            foreach(IMessage msg in messages)
+            List<Message> messages = myChatRoom.Retrieve20Messages();
+            foreach(Message msg in messages)
             {
                 Console.WriteLine(msg.ToString());
             }
@@ -117,7 +117,7 @@ namespace Presentation
             string username = Console.ReadLine();
             Console.WriteLine("Enter groupID");
             string groupID = Console.ReadLine();
-            List<IMessage> messages = myChatRoom.RetrieveAllByUser(username, groupID);
+            List<Message> messages = myChatRoom.RetrieveAllByUser(username, groupID);
             if (messages.Count == 0)
             {
                 Console.WriteLine("no messages by this user");
@@ -125,7 +125,7 @@ namespace Presentation
                 Console.ReadLine();
 
             }
-            foreach (IMessage msg in messages)
+            foreach (Message msg in messages)
             {
                 Console.WriteLine(msg.ToString());
             }
@@ -156,6 +156,7 @@ namespace Presentation
 
         private void exit()
         {
+            myChatRoom.exit();
             running = false;
         }
 

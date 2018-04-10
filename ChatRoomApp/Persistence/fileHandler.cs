@@ -26,6 +26,11 @@ namespace Persistence
         }
         public object load()
         {
+            if(!File.Exists(binPath))
+            {
+                File.Create(binPath);
+                return null;
+            }
             Stream myOtherFileStream = File.OpenRead(binPath);
             BinaryFormatter deserializer = new BinaryFormatter();
             object o = deserializer.Deserialize(myOtherFileStream);

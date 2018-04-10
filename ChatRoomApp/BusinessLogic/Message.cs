@@ -8,6 +8,7 @@ using BusinessLogic;
 
 namespace BusinessLogic
 {
+    [Serializable]
     public class Message : IMessage
     {
         private Guid _Id;
