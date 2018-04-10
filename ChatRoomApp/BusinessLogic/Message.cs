@@ -9,7 +9,7 @@ using BusinessLogic;
 namespace BusinessLogic
 {
     [Serializable]
-    public class Message : IMessage
+    public class Message 
     {
         private Guid _id;
         public Guid Id { get => _id; }
@@ -22,11 +22,20 @@ namespace BusinessLogic
         private string _groupID;
         public string GroupID { get => _groupID; }
 
+        public Message(IMessage message)
+        {
+            _id = message.Id;
+            _userName = message.UserName;
+            _date = message.Date;
+            _messageContent = message.MessageContent;
+            _groupID = message.GroupID;
+        }
 
         override
         public String ToString()
         {
-            return this.MessageContent;
+            String output = _date.ToString() + " -  " + _userName + " - " + MessageContent;
+            return output;
         }
     }
 }

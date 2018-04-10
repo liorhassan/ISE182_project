@@ -57,7 +57,7 @@ namespace BusinessLogic
             User newUser = new User(nickname);
             registeredUsers.Add(newUser.Nickname, newUser);
             usersHandler.save(registeredUsers);
-            ProcessLogMessage("User " + newUser.Nickname + " registered successfully");
+            mLogger.AddLogMessage("User " + newUser.Nickname + " registered successfully");
             return true;
         }
 
@@ -70,7 +70,7 @@ namespace BusinessLogic
                 User user = registeredUsers[nickname];
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
-                ProcessLogMessage("User " + user.Nickname + " logged in successfully");
+                mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
                 return true;
             }
             return false;
@@ -83,7 +83,7 @@ namespace BusinessLogic
                 String name = _loggedinUser.Nickname;
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
-                ProcessLogMessage("User " + name + " logged out successfully");
+                mLogger.AddLogMessage("User " + name + " logged out successfully");
                 return true;
             }
             return false;
@@ -96,7 +96,7 @@ namespace BusinessLogic
             {
                 if (!recievedMessages.ContainsKey(m.Id))
                 {
-                    recievedMessages.Add(m.Id, (Message)m);
+                    recievedMessages.Add(m.Id, new Message(m));
                     c++;
                 }
             }
@@ -127,13 +127,13 @@ namespace BusinessLogic
         {
             if (!CheckMessageValidity(msg))
             {
-                ProcessLogMessage("Invalid message was written");
+                mLogger.AddLogMessage("Invalid message was written");
                 return false;
             }
-            Message message = (Message)_loggedinUser.writeMessage(msg, URL);
+            Message message = new Message(_loggedinUser.writeMessage(msg, URL));
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
-            ProcessLogMessage("Message " + message.Id + " was written successfully");
+            mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
             return true;
         }
 
@@ -153,7 +153,6 @@ namespace BusinessLogic
         public void ProcessLogMessage(string message)
         {
             return;
-            mLogger.AddLogMessage(message);
         }
 
 
