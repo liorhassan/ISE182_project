@@ -26,13 +26,18 @@ namespace BusinessLogic
             messHandler = new MessagesHandler(@"C:\Users\Ohad\SE-Intro_server-master\mess.txt");
             usersHandler = new UsersHandler(@"C:\Users\Ohad\SE-Intro_server-master\user.txt");
             this._loggedinUser = null;
-            this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
-            this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
+            //NewMethod();
+            registeredUsers = (Dictionary<String, User>)usersHandler.load();
             this.URL = "C:\\Users\\Ohad\\SE-Intro_server-master\\server.py";
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
                 (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
             this._ChatroomMenu = new ChatroomMenu();
+        }
+
+        private void NewMethod()
+        {
+            recievedMessages = (Dictionary<Guid, IMessage>)messHandler.load();
         }
 
         public Boolean Register(String nickname)
