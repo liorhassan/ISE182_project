@@ -13,7 +13,7 @@ namespace BusinessLogic
         private User _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
-        private readonly String URL = "ise172.ise.bgu.ac.il";
+        private readonly String URL = "http://ise172.ise.bgu.ac.il";
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
         private Logger mLogger;
@@ -40,7 +40,7 @@ namespace BusinessLogic
             }
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
-                (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
+                (@"C:\Temp\Chatroom24\log.txt");
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);
@@ -50,8 +50,7 @@ namespace BusinessLogic
 
         public Boolean Register(String nickname)
         {
-            User userOne = registeredUsers[nickname];
-            if (userOne != null)
+            if (registeredUsers.ContainsKey(nickname))
             {
                 return false;
             }
@@ -64,10 +63,11 @@ namespace BusinessLogic
 
         public Boolean Login(String nickname)
         {
-            User user = registeredUsers[nickname];
+            
 
-            if (user!=null)
+            if (registeredUsers.ContainsKey(nickname))
             {
+                User user = registeredUsers[nickname];
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
                 ProcessLogMessage("User " + user.Nickname + " logged in successfully");
@@ -152,6 +152,7 @@ namespace BusinessLogic
         }
         public void ProcessLogMessage(string message)
         {
+            return;
             mLogger.AddLogMessage(message);
         }
 

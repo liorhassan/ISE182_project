@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic;
 using System.Threading;
+using System.Reflection;
 
 namespace Presentation
 {
@@ -23,24 +24,27 @@ namespace Presentation
 
         public void showMenu()
         {
-            Console.Clear();
+            
             while(running)
             {
+                Console.Clear();
                 Console.WriteLine(menu.toString());
                 char key = Console.ReadLine().ToCharArray()[0];
                 string function= menu.getFunction(key);
-                while(function == null)
+                while(function == "")
                 {
                     Console.WriteLine("key not supported, try again");
                     key = Console.ReadLine().ToCharArray()[0];
                     function = menu.getFunction(key);
                 }
-                this.GetType().GetMethod(function).Invoke(this, null);
+                Type thisType = this.GetType();
+                MethodInfo theMethod = thisType.GetMethod(function);
+                theMethod.Invoke(this,null );
             }
 
         }
 
-        private void registration()
+        public void registration()
         {
             Console.Clear();
             Console.WriteLine("Enter your nickname");
@@ -59,7 +63,7 @@ namespace Presentation
 
         }
 
-        private void loginLogout()
+        public void loginLogout()
         {
             Console.Clear();
             if (myChatRoom.Logout())
@@ -89,7 +93,7 @@ namespace Presentation
 
         }
 
-        private void retrive10Messages()
+        public void retrive10Messages()
         {
             Console.Clear();
             int numOfMsg = myChatRoom.Retrieve10Messages();
@@ -98,7 +102,7 @@ namespace Presentation
             Console.ReadLine();
         }
 
-        private void display20Messages()
+        public void display20Messages()
         {
             Console.Clear();
             List<Message> messages = myChatRoom.Retrieve20Messages();
@@ -110,7 +114,7 @@ namespace Presentation
             Console.ReadLine();
         }
 
-        private void displayAllByUser()
+        public void displayAllByUser()
         {
             Console.Clear();
             Console.WriteLine("Enter username");
@@ -135,7 +139,7 @@ namespace Presentation
 
         }
 
-        private void writeMessage()
+        public void writeMessage()
         {
             Console.Clear();
             Console.WriteLine("Write your message");
@@ -154,7 +158,7 @@ namespace Presentation
 
         }
 
-        private void exit()
+        public void exit()
         {
             myChatRoom.exit();
             running = false;

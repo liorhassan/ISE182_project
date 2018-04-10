@@ -11,23 +11,16 @@ namespace BusinessLogic
     [Serializable]
     public class Message : IMessage
     {
-        private Guid _Id;
-        public Guid Id { get => _Id; }
-
-        private String _UserName;
-        public String UserName { get => _UserName; }
-
-        private User _User;
-        public User User { get => _User; }
-
-        private DateTime _Date;
-        public DateTime Date { get => _Date; }
-
-        private String _MessageContent;
-        public String MessageContent { get => _MessageContent; }
-
-        private String _GroupID;
-        public String GroupID { get => _GroupID; }
+        private Guid _id;
+        public Guid Id { get => _id; }
+        private string _userName;
+        public string UserName { get => _userName; }
+        private DateTime _date;
+        public DateTime Date { get => _date; }
+        private string _messageContent;
+        public string MessageContent { get => _messageContent; }
+        private string _groupID;
+        public string GroupID { get => _groupID; }
 
 
         override
