@@ -26,6 +26,7 @@ namespace Persistence
         }
         public object load()
         {
+            Console.WriteLine("asdf");
             if(!File.Exists(binPath))
             {
                 File.Create(binPath);

@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using Presentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +11,8 @@ namespace MainProg
     {
         static void Main(string[] args)
         {
-            Chatroom chatroom = new Chatroom();
-            Console.Write(chatroom.Login("Ohad"));
+            Cli Chatroom = new Cli();
+            Chatroom.showMenu();
         }
     }
 }

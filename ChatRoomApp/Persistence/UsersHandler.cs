@@ -9,7 +9,7 @@ namespace Persistence
     public class UsersHandler : fileHandler
     {
 
-        public UsersHandler() : base("") { }
+        public UsersHandler() : base(@"C:\Temp\Chatroom24\Users.bin") { }
         
     }
 }

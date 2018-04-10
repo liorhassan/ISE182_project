@@ -19,7 +19,7 @@ namespace BusinessLogic
         {
             _login = false;
             menuItems = new List<MenuItem>();
-            xmlHandler = new XMLHandler("C:/temp/menu.xml");
+            xmlHandler = new XMLHandler();
             XDocument doc = xmlHandler.load();
             foreach (var item in doc.Descendants("MenuItem"))
             {

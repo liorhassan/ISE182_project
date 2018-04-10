@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Presentation
 {
-    class Cli
+    public class Cli
     {
         private Boolean running;
         private Chatroom myChatRoom;
@@ -16,6 +16,8 @@ namespace Presentation
 
         public Cli()
         {
+            Console.WriteLine("0");
+            Console.ReadLine();
             myChatRoom = new Chatroom();
             menu = myChatRoom.ChatroomMenu;
             running = true;
