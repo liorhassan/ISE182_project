@@ -1,0 +1,51 @@
+<MenuItems>
+	<MenuItem>
+		<message>register</message>
+		<sort>1</sort>
+		<key>a</key>
+		<function>registration</function>
+		<loginReq>false</loginReq>
+	</MenuItem>
+	<MenuItem>
+		<message>login/logout</message>
+		<sort>2</sort>
+		<key>b</key>
+		<function>loginLogout</function>
+		<loginReq>false</loginReq>
+	</MenuItem>
+	<MenuItem>
+		<message>Retrive 10 Messages</message>
+		<sort>3</sort>
+		<key>c</key>
+		<function>retrive10Messages</function>
+		<loginReq>true</loginReq>
+	</MenuItem>
+	<MenuItem>
+		<message>Display 20 Messages</message>
+		<sort>3</sort>
+		<key>c</key>
+		<function>display20Messages</function>
+		<loginReq>true</loginReq>
+	</MenuItem>
+	<MenuItem>
+		<message>Display All Messages By User</message>
+		<sort>4</sort>
+		<key>d</key>
+		<function>displayAllByUser</function>
+		<loginReq>true</loginReq>
+	</MenuItem>
+	<MenuItem>
+		<message>Write New Message</message>
+		<sort>5</sort>
+		<key>e</key>
+		<function>writeMessage</function>
+		<loginReq>true</loginReq>
+	</MenuItem>
+	<MenuItem>
+		<message>Exit</message>
+		<sort>6</sort>
+		<key>f</key>
+		<function>exit</function>
+		<loginReq>false</loginReq>
+	</MenuItem>
+</MenuItems>
