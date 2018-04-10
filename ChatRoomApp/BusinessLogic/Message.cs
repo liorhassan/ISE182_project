@@ -8,7 +8,7 @@ using BusinessLogic;
 
 namespace BusinessLogic
 {
-    public class IMessage : MileStoneClient.CommunicationLayer.IMessage
+    public class Message : IMessage
     {
         private Guid _Id;
         public Guid Id { get => _Id; }
@@ -28,28 +28,6 @@ namespace BusinessLogic
         private String _GroupID;
         public String GroupID { get => _GroupID; }
 
-//        public Message (User user, String MessageContent)
-//        {
-//            if (!CheckValidity(_MessageContent))
-//            {
-//                throw new System.ArgumentException("Message is too long");
-//            }
-//           _User = user;
-//            _UserName = user.Nickname;
-//            _GroupID = user.getID();
-//            _Date = DateTime.Now;
-//            _Id = Guid.NewGuid();
-//            _MessageContent = MessageContent;
-//        }
-
-        public Boolean CheckValidity(String content)
-        {
-            if (content.Length > 150)
-            {
-                return false;
-            }
-            return true;
-        }
 
         override
         public String ToString()

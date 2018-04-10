@@ -8,6 +8,6 @@ namespace Persistence
 {
     public class MessagesHandler : fileHandler
     {
-        public MessagesHandler(string v) : base("") { }
+        public MessagesHandler() : base("") { }
     }
 }
