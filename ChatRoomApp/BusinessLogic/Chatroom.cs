@@ -23,12 +23,11 @@ namespace BusinessLogic
 
         public Chatroom()
         {
-            this.messHandler = new MessagesHandler("dest1");
-            this.usersHandler = new UsersHandler("dest2");
+            messHandler = new MessagesHandler(@"C:\Users\Ohad\SE-Intro_server-master\mess.txt");
+            usersHandler = new UsersHandler(@"C:\Users\Ohad\SE-Intro_server-master\user.txt");
             this._loggedinUser = null;
-            messHandler = new MessagesHandler("dgfgdf");
-            this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
-            this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
+            recievedMessages = (Dictionary<Guid, IMessage>)messHandler.load();
+            registeredUsers = (Dictionary<String, User>)usersHandler.load();
             this.URL = "C:\\Users\\Ohad\\SE-Intro_server-master\\server.py";
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
