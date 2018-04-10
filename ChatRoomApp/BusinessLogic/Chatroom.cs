@@ -11,9 +11,9 @@ namespace BusinessLogic
     public class Chatroom
     {
         private User _loggedinUser;
-        private Dictionary<Guid, IMessage> recievedMessages;
+        private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
-        private String URL;
+        private readonly String URL = "ise172.ise.bgu.ac.il";
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
         private Logger mLogger;
@@ -23,26 +23,21 @@ namespace BusinessLogic
 
         public Chatroom()
         {
-            messHandler = new MessagesHandler(@"C:\Users\Ohad\SE-Intro_server-master\mess.txt");
-            usersHandler = new UsersHandler(@"C:\Users\Ohad\SE-Intro_server-master\user.txt");
+            messHandler = new MessagesHandler();
+            usersHandler = new UsersHandler();
             this._loggedinUser = null;
-            //NewMethod();
+            recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             registeredUsers = (Dictionary<String, User>)usersHandler.load();
-            this.URL = "C:\\Users\\Ohad\\SE-Intro_server-master\\server.py";
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger
                 (@"C:\Users\Ohad\Documents\GitHub\ChatRoom24\ChatRoomApp\log.txt");
             this._ChatroomMenu = new ChatroomMenu();
         }
 
-        private void NewMethod()
-        {
-            recievedMessages = (Dictionary<Guid, IMessage>)messHandler.load();
-        }
 
         public Boolean Register(String nickname)
         {
-            User userOne = FindUser(nickname);
+            User userOne = registeredUsers[nickname];
             if (userOne != null)
             {
                 return false;
@@ -56,9 +51,9 @@ namespace BusinessLogic
 
         public Boolean Login(String nickname)
         {
-            User user = FindUser(nickname);
+            User user = registeredUsers[nickname];
 
-            if (user.Nickname==nickname)
+            if (user!=null)
             {
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
@@ -69,10 +64,10 @@ namespace BusinessLogic
         }
 
         public Boolean Logout()
-        {
-            String name = _loggedinUser.Nickname;
+        {   
             if (this._loggedinUser != null)
             {
+                String name = _loggedinUser.Nickname;
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
                 mLogger.AddLogMessage("User " + name + " logged out successfully");
@@ -84,13 +79,11 @@ namespace BusinessLogic
         public int Retrieve10Messages()
         {
             int c = 0;
-            List<MileStoneClient.CommunicationLayer.IMessage> retrieved = 
-                _loggedinUser.retrive10Messages(URL);
-            foreach (IMessage m in retrieved)
+            foreach (IMessage m in _loggedinUser.retrive10Messages(URL))
             {
                 if (!recievedMessages.ContainsKey(m.Id))
                 {
-                    recievedMessages.Add(m.Id, m);
+                    recievedMessages.Add(m.Id, (Message)m);
                     c++;
                 }
             }
@@ -98,76 +91,48 @@ namespace BusinessLogic
             return c;   
         }
 
-        public List<String> Retrieve20Messages()
+        public List<Message> Retrieve20Messages()
         {
-            List<String> msg;
             var messages =
-                from m in recievedMessages
+                (from m in recievedMessages
                 orderby m.Value.Date
-                select m.Value.MessageContent;
-            if (messages.Count() > 20)
-            {
-                msg = (List<String>)messages.Take(20);
-                return msg;
-            }
-            else
-            {
-                msg = (List<String>)messages;
-                return msg;
-            }
-            
+                select m.Value).Take(20);
+            return messages.ToList();  
         }
 
-        public List<String> RetrieveAllByUser(String nickname)
+        public List<Message> RetrieveAllByUser(String nickname, String g_id)
         {
-            User user = FindUser(nickname);
-            if (user==null)
-            {
-                throw new System.ArgumentException("No such user");
-            }
-            List<String> msg;
             var messages =
                 from m in recievedMessages
-                where m.Value.User == user
+                where m.Value.UserName == nickname & m.Value.GroupID == g_id
                 orderby m.Value.Date
-                select m.Value.MessageContent;
-            msg = (List<String>)messages;
-            return msg;
+                select m.Value;
+            return messages.ToList();
         }
 
-        public Boolean WriteMessage(String msg, String url)
+        public Boolean WriteMessage(String msg)
         {
-            IMessage message = _loggedinUser.writeMessage(msg, this.URL);
-            if (!message.CheckValidity(message.MessageContent))
+            if (!CheckMessageValidity(msg))
             {
                 mLogger.AddLogMessage("Invalid message was written");
                 return false;
             }
+            Message message = (Message)_loggedinUser.writeMessage(msg, URL);
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
             mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
             return true;
         }
 
-        public ChatroomMenu GetMenu()
+        private Boolean CheckMessageValidity(String content)
         {
-            return ChatroomMenu.get();
+            if (content.Length > 150)
+            {
+                return false;
+            }
+            return true;
         }
 
-        private User FindUser(String nickname)
-        {
-            if (registeredUsers.ContainsKey(nickname))
-            {
-                var user =
-                from u in registeredUsers
-                where u.Value.Nickname == nickname
-                select u.Value;
-                return (User)user;
-            }
-            else
-            {
-                return null;
-            }
-        }
+
     }
 }

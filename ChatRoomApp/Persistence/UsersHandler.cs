@@ -9,7 +9,7 @@ namespace Persistence
     public class UsersHandler : fileHandler
     {
 
-        public UsersHandler(string v) : base("") { }
+        public UsersHandler() : base("") { }
         
     }
 }
