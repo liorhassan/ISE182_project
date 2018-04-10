@@ -23,8 +23,8 @@ namespace BusinessLogic
 
         public Chatroom()
         {
-            messHandler = new MessagesHandler("C:\\Users\\Ohad\\SE-Intro_server-master\\mess.txt");
-            usersHandler = new UsersHandler("C:\\Users\\Ohad\\SE - Intro_server - master\\user.txt");
+            messHandler = new MessagesHandler(@"C:\Users\Ohad\SE-Intro_server-master\mess.txt");
+            usersHandler = new UsersHandler(@"C:\Users\Ohad\SE-Intro_server-master\user.txt");
             this._loggedinUser = null;
             this.recievedMessages = (Dictionary < Guid, IMessage >) messHandler.load();
             this.registeredUsers = (Dictionary<String, User>)usersHandler.load();
