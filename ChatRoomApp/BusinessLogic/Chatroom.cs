@@ -25,18 +25,18 @@ namespace BusinessLogic
         {
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
-            Console.WriteLine("1");
-            Console.ReadLine();
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
             {
                 recievedMessages = new Dictionary<Guid, Message>();
+                messHandler.save(recievedMessages);
             }
             registeredUsers = (Dictionary<String, User>)usersHandler.load();
             if (registeredUsers == null)
             {
                 registeredUsers = new Dictionary<String, User>();
+                usersHandler.save(registeredUsers);
             }
             this.mLogger = Logger.Instance;
             this.mFileLogger = new FileLogger

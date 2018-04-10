@@ -49,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{77a76b4f-39e4-4033-8a49-f134e4ba67ae}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{752ee4b0-e98e-4212-9f8f-bd8254b2749c}</Project>
       <Name>Persistence</Name>

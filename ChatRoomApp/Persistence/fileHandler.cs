@@ -19,7 +19,7 @@ namespace Persistence
         
         public void save(object o)
         {
-            Stream myFileStream = File.OpenRead(binPath);
+            Stream myFileStream = File.OpenWrite(binPath);
             BinaryFormatter serializes = new BinaryFormatter();
             serializes.Serialize(myFileStream, o);
             myFileStream.Close();
@@ -28,8 +28,10 @@ namespace Persistence
         {
             if(!File.Exists(binPath))
             {
-                File.Create(binPath);
+                FileStream f = File.Create(binPath);
+                f.Close();
                 return null;
+                
             }
             Stream myOtherFileStream = File.OpenRead(binPath);
             BinaryFormatter deserializer = new BinaryFormatter();
