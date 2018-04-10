@@ -20,8 +20,7 @@ namespace Persistence
             }
             catch(Exception e)
             {
-                Console.WriteLine("An error occurred: '{0}'", e);
-                return null;
+                throw e;
             }
         }
     }
