@@ -34,7 +34,7 @@ namespace Persistence
         {
             try
             {
-                mLogFile = new StreamWriter(mFileName);
+                mLogFile = new StreamWriter(mFileName,true);
             }
             catch (Exception e)
             {
