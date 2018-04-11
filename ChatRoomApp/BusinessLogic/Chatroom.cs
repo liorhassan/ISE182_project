@@ -21,6 +21,8 @@ namespace BusinessLogic
         private ChatroomMenu _ChatroomMenu;
         public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
+        // a class for the chatroom
+        // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
         {
             messHandler = new MessagesHandler();
@@ -47,7 +49,9 @@ namespace BusinessLogic
             this._ChatroomMenu = new ChatroomMenu();
         }
 
-
+        // a function that registers a user
+        // doesn't do anything if a user with that nickname exists
+        // creates a new user and adds to registered users
         public Boolean Register(String nickname)
         {
             if (registeredUsers.ContainsKey(nickname))
@@ -61,10 +65,11 @@ namespace BusinessLogic
             return true;
         }
 
+        // a fuction to login a user
+        // finds the user and makes the loggedinUser
+        // does nothing if the user doesn't exist
         public Boolean Login(String nickname)
         {
-            
-
             if (registeredUsers.ContainsKey(nickname))
             {
                 User user = registeredUsers[nickname];
@@ -76,6 +81,9 @@ namespace BusinessLogic
             return false;
         }
 
+        // a fuction to logout the loggedinUser
+        // checks if the loggedinUser is not null, and then turns it to null
+        // else does nothing
         public Boolean Logout()
         {   
             if (this._loggedinUser != null)
@@ -89,6 +97,10 @@ namespace BusinessLogic
             return false;
         }
 
+        // a fuction to retrieve 10 messages from the server
+        // calls the fuction from the loggedinUser
+        // adds the new messages to recievedMessages
+        // returns the number of new messages added
         public int Retrieve10Messages()
         {
             int c = 0;
@@ -104,6 +116,7 @@ namespace BusinessLogic
             return c;   
         }
 
+        // a fuction to retrieve 20 messages from the dictionary
         public List<Message> Retrieve20Messages()
         {
             var messages =
@@ -113,6 +126,7 @@ namespace BusinessLogic
             return messages.ToList();  
         }
 
+        // a fuction to retrieve all the messages from a user
         public List<Message> RetrieveAllByUser(String nickname, String g_id)
         {
             var messages =
@@ -123,6 +137,9 @@ namespace BusinessLogic
             return messages.ToList();
         }
 
+        // a fuction to write a message
+        // checks if it's valid
+        // creates the message and adds it to the dictionary
         public Boolean WriteMessage(String msg)
         {
             if (!CheckMessageValidity(msg))
@@ -137,6 +154,7 @@ namespace BusinessLogic
             return true;
         }
 
+        // checks if a message is valid
         private Boolean CheckMessageValidity(String content)
         {
             if (content.Length > 150)
@@ -146,10 +164,13 @@ namespace BusinessLogic
             return true;
         }
 
+        // exits chatroom
         public void exit()
         {
             mFileLogger.Terminate();
         }
+
+        // to implement ILogger
         public void ProcessLogMessage(string message)
         {
             return;

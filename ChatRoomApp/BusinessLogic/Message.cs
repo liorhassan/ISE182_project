@@ -8,6 +8,7 @@ using BusinessLogic;
 
 namespace BusinessLogic
 {
+    // a class to represent a message
     [Serializable]
     public class Message 
     {
@@ -22,6 +23,7 @@ namespace BusinessLogic
         private string _groupID;
         public string GroupID { get => _groupID; }
 
+        // recieves an IMessage and turns it to a message
         public Message(IMessage message)
         {
             _id = message.Id;
@@ -31,6 +33,7 @@ namespace BusinessLogic
             _groupID = message.GroupID;
         }
 
+        // string representation of a message
         override
         public String ToString()
         {
