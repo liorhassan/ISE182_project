@@ -32,12 +32,12 @@ namespace Presentation
             {
                 Console.Clear();
                 Console.WriteLine(menu.ToString());
-                char key = Console.ReadLine().ToCharArray()[0];
+                char key=Console.ReadKey().KeyChar;
                 string function= menu.getFunction(key);
                 while(function == "")
                 {
                     Console.WriteLine("key not supported, try again");
-                    key = Console.ReadLine().ToCharArray()[0];
+                    key = Console.ReadKey().KeyChar;
                     function = menu.getFunction(key);
                 }
                 Type thisType = this.GetType();
