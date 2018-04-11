@@ -8,13 +8,22 @@ using System.Xml.Linq;
 
 namespace BusinessLogic
 {
+    //class for using the chatroom menu as given from the xml file
+    //contains and usses the menu item class
     public class ChatroomMenu
     {
+        //list of the menu items it the menu
         private List<MenuItem> menuItems;
+
+        //the xml hadler for the xml menu file
         private XMLHandler xmlHandler;
+
+        //boolean field representing wether a user is logged in or not
+        //afects the menu option shown
         private bool _login;
         public bool Login { set => _login = value; }
 
+        //constructor - usess the xml handler and creates the menu items as needed
         public ChatroomMenu()
         {
             _login = false;
@@ -31,6 +40,8 @@ namespace BusinessLogic
             }
         }
 
+        //gets a key from the cli and returns the function name to be run
+        //returns empty string if no key is supported(either not found or needs login)
         public String getFunction(char key)
         {
             var items = from item in menuItems where (item.LoginRequierd == _login || item.LoginRequierd == false) && item.OptionKey == key select item;
@@ -39,7 +50,8 @@ namespace BusinessLogic
             return "";
         }
 
-        public String toString()
+        //returns the string of the current menu to be printed by the cli
+        public String ToString()
         {
             var itemList = from item in menuItems
                            where item.LoginRequierd == _login || item.LoginRequierd == false
@@ -48,7 +60,7 @@ namespace BusinessLogic
             String output = "";
             foreach (MenuItem item in itemList)
             {
-                output += item.toString() + "\n";
+                output += item.ToString() + "\n";
             }
             return output;
         }

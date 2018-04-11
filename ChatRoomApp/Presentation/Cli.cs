@@ -22,13 +22,16 @@ namespace Presentation
             running = true;
         }
 
+        //a function for showing the menu as long as the prooggram is running
+        //reads a key from the user and usess the Chatroom menu to get the function to run
+        //usses reflection to run the function given or askes for a diffrent key if an empty function is returnd
         public void showMenu()
         {
             
             while(running)
             {
                 Console.Clear();
-                Console.WriteLine(menu.toString());
+                Console.WriteLine(menu.ToString());
                 char key = Console.ReadLine().ToCharArray()[0];
                 string function= menu.getFunction(key);
                 while(function == "")

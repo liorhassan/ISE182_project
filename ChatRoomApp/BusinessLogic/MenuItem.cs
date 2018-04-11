@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
+    //class for handeling the menu items given from the xml file
+    //created and uused by the ChatroomMenu class
     class MenuItem
     {
+        //fields representing the xml fields
         private bool _loginRequierd;
         public bool LoginRequierd { get => _loginRequierd; }
 
@@ -23,6 +26,7 @@ namespace BusinessLogic
         private int _order;
         public int Order { get => _order; }
 
+        //constructor
         public MenuItem(char optionKey,string message,string itemFunction,bool loginRequierd)
         {
             _optionKey = optionKey;
@@ -31,7 +35,8 @@ namespace BusinessLogic
             _loginRequierd = loginRequierd;
         }
 
-        public string toString()
+        //ToString Function - returns the value of the item to be printed in the menu
+        public string ToString()
         {
             return _message+" - "+_optionKey;
         }

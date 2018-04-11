@@ -1,2 +1,3 @@
-11-Apr-18 08:57:14 - User shauli logged in successfully
-11-Apr-18 08:57:42 - Message e795ae56-b287-464c-80f0-1b10ca024218 was written successfully
+11-Apr-18 09:18:10 - User liori registered successfully
+11-Apr-18 09:18:21 - User liori logged in successfully
+11-Apr-18 09:18:30 - Message 3ba14428-2c9e-4f47-bc9f-bd767dc78c57 was written successfully
