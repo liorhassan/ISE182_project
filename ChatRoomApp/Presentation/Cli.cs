@@ -9,12 +9,15 @@ using System.Reflection;
 
 namespace Presentation
 {
+    //a class for the cli window and all its states
     public class Cli
     {
+        //fields for the chatroom and menu and a boolean field represanting wheter the app is running
         private Boolean running;
         private Chatroom myChatRoom;
         private ChatroomMenu menu;
 
+        //class constructor
         public Cli()
         {
             myChatRoom = new Chatroom();
@@ -32,12 +35,12 @@ namespace Presentation
             {
                 Console.Clear();
                 Console.WriteLine(menu.ToString());
-                char key=Console.ReadKey().KeyChar;
+                char key=GetKey();
                 string function= menu.getFunction(key);
                 while(function == "")
                 {
                     Console.WriteLine("key not supported, try again");
-                    key = Console.ReadKey().KeyChar;
+                    key = GetKey();
                     function = menu.getFunction(key);
                 }
                 Type thisType = this.GetType();
@@ -47,6 +50,20 @@ namespace Presentation
 
         }
 
+        //private method used by the showMenu method for getting a single char from the window
+        private char GetKey()
+        {
+            String input = Console.ReadLine();
+            while (input.Length!=1)
+            {
+                Console.WriteLine("Please enter one key!");
+                input = Console.ReadLine();
+            }
+            return input[0];
+        }
+
+        //a function for getting new user credentials and send them to the chat room for registration.
+        //notifies if the nickname is taken
         public void registration()
         {
             Console.Clear();
@@ -66,6 +83,8 @@ namespace Presentation
 
         }
 
+        //a function for login or logout. tries to log out and if it fails, askes for nickname for login
+        //notifies if nickname is non-exist
         public void loginLogout()
         {
             Console.Clear();
@@ -96,6 +115,8 @@ namespace Presentation
 
         }
 
+        //askes the chatroom to retrive 10 messages from the server
+        //prints how many new messages were recieved
         public void retrive10Messages()
         {
             Console.Clear();
@@ -105,6 +126,7 @@ namespace Presentation
             Console.ReadLine();
         }
 
+        //gets a list of the 20 newest messages from the chatroom and prints them
         public void display20Messages()
         {
             Console.Clear();
@@ -117,6 +139,8 @@ namespace Presentation
             Console.ReadLine();
         }
 
+        //askes for a nickname and group_id and askes the chatroom for all the messages by this user
+        //prints all the messages given, notifies if no such messages were returned
         public void displayAllByUser()
         {
             Console.Clear();
@@ -139,6 +163,8 @@ namespace Presentation
 
         }
 
+        //reads the new message from the user and askes the chatroom to send it
+        //notifies if failes
         public void writeMessage()
         {
             Console.Clear();
@@ -158,6 +184,7 @@ namespace Presentation
 
         }
 
+        //closes the chatroom
         public void exit()
         {
             myChatRoom.exit();
