@@ -128,9 +128,6 @@ namespace Presentation
             if (messages.Count == 0)
             {
                 Console.WriteLine("no messages by this user");
-                Console.WriteLine("Press ENTER to go back to the menu");
-                Console.ReadLine();
-
             }
             foreach (Message msg in messages)
             {
