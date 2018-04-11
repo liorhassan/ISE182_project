@@ -23,8 +23,10 @@ namespace Persistence
                 XDocument doc = XDocument.Load(xmlPath);
                 return doc;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                Console.WriteLine("Error!! Failed reading the XML file");
+                Console.ReadLine();
                 throw e;
             }
         }

@@ -33,6 +33,8 @@ namespace Persistence
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error!! Failed saving to the bin file: "+binPath);
+                Console.ReadLine();
                 throw e;
             }
         }
@@ -58,6 +60,8 @@ namespace Persistence
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error!! Failed loading from the bin file: " + binPath);
+                Console.ReadLine();
                 throw e;
             }
 

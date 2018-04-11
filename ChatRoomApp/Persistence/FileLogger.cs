@@ -38,6 +38,8 @@ namespace Persistence
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error!! Failed writing to logger");
+                Console.ReadLine();
                 throw e;
             }
         }

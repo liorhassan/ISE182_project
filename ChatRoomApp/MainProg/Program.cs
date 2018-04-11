@@ -12,8 +12,17 @@ namespace MainProg
     {
         static void Main(string[] args)
         {
-            String path = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(path.Substring(0, path.Length - 31)+ "\\Data");
+            try
+            {
+                String path = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(path.Substring(0, path.Length - 31) + "\\Data");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error!! Failed starting app");
+                Console.ReadLine();
+                throw e;
+            }
             Cli Chatroom = new Cli();
             Chatroom.showMenu();
         }

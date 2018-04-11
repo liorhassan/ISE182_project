@@ -37,6 +37,8 @@ namespace BusinessLogic
             }
             catch (Exception e)
             {
+                Console.WriteLine("Error!! Failed sending message to the server");
+                Console.ReadLine();
                 throw e;
             }
             
@@ -45,8 +47,17 @@ namespace BusinessLogic
         //askes the communicatoin layer for the last 10 messages in the server and returns them
         public List<IMessage> retrive10Messages(String url)
         {
-            List<IMessage> messages = Communication.Instance.GetTenMessages(url);
-            return messages;
+            try
+            {
+                List<IMessage> messages = Communication.Instance.GetTenMessages(url);
+                return messages;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error!! Failed getting messages from the server");
+                Console.ReadLine();
+                throw e;
+            }
         }
     }
 }
