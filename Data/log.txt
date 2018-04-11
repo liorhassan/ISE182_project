@@ -1,0 +1,2 @@
+11-Apr-18 08:57:14 - User shauli logged in successfully
+11-Apr-18 08:57:42 - Message e795ae56-b287-464c-80f0-1b10ca024218 was written successfully

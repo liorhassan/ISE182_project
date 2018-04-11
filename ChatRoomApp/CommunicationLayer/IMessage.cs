@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Communication
+namespace CommunicationLayer
 {
     public interface IMessage
     {

@@ -8,22 +8,37 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Persistence
 {
+    //an abstract class, the inherited by the UsersHandler and MessagesHandler
     public abstract class fileHandler
     {
+        //the relative path for the bin file
         private string binPath;
 
+        //the constructor for the abstract class
         public fileHandler(string path)
         {
             binPath = path;
         }
-        
+
+        //gets an object(needs to be serializable) and saves it to the bin file
+        //throw exception if falis
         public void save(object o)
         {
-            Stream myFileStream = File.OpenWrite(binPath);
-            BinaryFormatter serializes = new BinaryFormatter();
-            serializes.Serialize(myFileStream, o);
-            myFileStream.Close();
+            try
+            {
+                Stream myFileStream = File.OpenWrite(binPath);
+                BinaryFormatter serializes = new BinaryFormatter();
+                serializes.Serialize(myFileStream, o);
+                myFileStream.Close();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
+
+        //tries to load an object from the bin file
+        //throws an exception if failes
         public object load()
         {
             if(!File.Exists(binPath))

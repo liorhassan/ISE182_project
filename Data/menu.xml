@@ -23,28 +23,28 @@
 	<MenuItem>
 		<message>Display 20 Messages</message>
 		<sort>3</sort>
-		<key>c</key>
+		<key>d</key>
 		<function>display20Messages</function>
 		<loginReq>true</loginReq>
 	</MenuItem>
 	<MenuItem>
 		<message>Display All Messages By User</message>
 		<sort>4</sort>
-		<key>d</key>
+		<key>e</key>
 		<function>displayAllByUser</function>
 		<loginReq>true</loginReq>
 	</MenuItem>
 	<MenuItem>
 		<message>Write New Message</message>
 		<sort>5</sort>
-		<key>e</key>
+		<key>f</key>
 		<function>writeMessage</function>
 		<loginReq>true</loginReq>
 	</MenuItem>
 	<MenuItem>
 		<message>Exit</message>
 		<sort>6</sort>
-		<key>f</key>
+		<key>g</key>
 		<function>exit</function>
 		<loginReq>false</loginReq>
 	</MenuItem>
