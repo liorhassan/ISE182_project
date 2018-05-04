@@ -137,6 +137,81 @@ namespace BusinessLogic
             return messages.ToList();
         }
 
+        // a fuction to retrieve all the messages by a GID
+        public List<Message> RetrieveAllByGroup(String g_id)
+        {
+            var messages =
+                from m in recievedMessages
+                where m.Value.GroupID == g_id
+                orderby m.Value.Date
+                select m.Value;
+            return messages.ToList();
+        }
+
+        // a fuction to sort the messages by the timestamp
+        public List<Message> SortByTimestamp(Boolean isAsc)
+        {
+            if (isAsc)
+            {
+                var messages =
+                from m in recievedMessages
+                orderby m.Value.Date ascending
+                select m.Value;
+                return messages.ToList();
+            }
+            else
+            {
+                var messages =
+                from m in recievedMessages
+                orderby m.Value.Date descending
+                select m.Value;
+                return messages.ToList();
+            }
+            
+        }
+
+        // a fuction to sort the messages by nickname
+        public List<Message> SortByNickname(Boolean isAsc)
+        {
+            if (isAsc)
+            {
+                var messages =
+                from m in recievedMessages
+                orderby m.Value.UserName ascending
+                select m.Value;
+                return messages.ToList();
+            }
+            else
+            {
+                var messages =
+                from m in recievedMessages
+                orderby m.Value.UserName descending
+                select m.Value;
+                return messages.ToList();
+            }
+        }
+
+        // a fuction to sort the messages by g_id, nickname, and timestamp
+        public List<Message> SortByAll(Boolean isAsc)
+        {
+            if (isAsc)
+            {
+                var messages =
+                from m in recievedMessages
+                orderby m.Value.GroupID, m.Value.UserName, m.Value.Date ascending
+                select m.Value;
+                return messages.ToList();
+            }
+            else
+            {
+                var messages =
+                from m in recievedMessages
+                orderby m.Value.GroupID, m.Value.UserName, m.Value.Date descending
+                select m.Value;
+                return messages.ToList();
+            }
+        }
+
         // a fuction to write a message
         // checks if it's valid
         // creates the message and adds it to the dictionary
