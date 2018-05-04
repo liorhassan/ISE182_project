@@ -20,11 +20,9 @@ namespace PresentationWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginMenu : Window
     {
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        ObservableObject _main = new ObservableObject();
-        public MainWindow()
+        public LoginMenu()
         {
             InitializeComponent();
         }
