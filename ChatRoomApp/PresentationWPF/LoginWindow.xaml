@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="800">
     <Grid>
-        
+        <TextBox Text="{Binding NicknameL}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="51,106,0,0"/>
+        <Button Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="51,275,0,0" Height="33" Click="btn_login_Click"/>
+        <Label Content="Nickname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,75,0,0" Width="74"/>
+        <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,31,0,0" Width="74"/>
+        <Label Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="544,39,0,0" Width="74"/>
+        <TextBox Text="{Binding NicknameR}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="529,114,0,0" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Nickname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,83,0,0" Width="74"/>
+        <Button Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="529,275,0,0" Height="33" Click="btn_register_Click"/>
+
     </Grid>
 </Window>
