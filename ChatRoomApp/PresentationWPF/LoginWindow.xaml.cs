@@ -11,22 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace PresentationWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginMenu : Window
+    public partial class LoginWindow : Window
     {
-        public LoginMenu()
+        ObservableObject _main = new ObservableObject();
+        public LoginWindow()
         {
             InitializeComponent();
+
         }
     }
-
-
 }
