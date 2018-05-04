@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PresentationWPF
 {
@@ -20,9 +21,13 @@ namespace PresentationWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        ObservableObject _main = new ObservableObject();
         public MainWindow()
         {
             InitializeComponent();
         }
     }
+
+
 }
