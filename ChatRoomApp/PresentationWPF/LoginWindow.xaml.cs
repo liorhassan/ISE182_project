@@ -31,28 +31,47 @@ namespace PresentationWPF
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            
+            String nickname = NicknameL.Text;
+            if ((nickname == ""))
+            {
+                MessageBox.Show("Please enter a nickname");
+                return;
+            }
+
+            Boolean login = myChatRoom.Login(nickname);
+            if (!login)
+            {
+                MessageBox.Show("Nickname doesn't exist");
+            }
+            else
+            {
+
+            }
         }
 
         private void btn_register_Click(object sender, RoutedEventArgs e)
         {
-          //  String nickname = Text
-            if ((nickname != "") && (!myChatRoom.Register(nickname)))
+             String nickname = NicknameR.Text;
+             if ((nickname == ""))
+             {
+                MessageBox.Show("Please enter a nickname");
+                return;
+             }
+            Boolean reg = myChatRoom.Register(nickname);
+            if (!reg)
             {
-                Console.WriteLine("Enter another nickname, or press ENTER to go back to the menu");
-                nickname = Console.ReadLine();
+                MessageBox.Show("Nickname already exists, please choose another one");
             }
-            if (nickname != "")
+            else
             {
-                Console.WriteLine("user " + nickname + " created succesfuly♥");
-                Console.WriteLine("Press ENTER to go back to the menu");
-                Console.ReadLine();
-            }
+                MessageBox.Show("user " + nickname + " created succesfuly♥");
+            }  
         }
+
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+           // Text = "{Binding ElementName=NicknameR, Path=Text}"
         }
     }
 }

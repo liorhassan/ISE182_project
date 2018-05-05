@@ -57,16 +57,8 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="LoginWindow.xaml">
@@ -105,6 +97,18 @@
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
       <Project>{77A76B4F-39E4-4033-8A49-F134E4BA67AE}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommunicationLayer\CommunicationLayer.csproj">
+      <Project>{a943cba9-c293-474f-8fd9-32577a920d2b}</Project>
+      <Name>CommunicationLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{752ee4b0-e98e-4212-9f8f-bd8254b2749c}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation\Presentation.csproj">
+      <Project>{9ac46890-2b44-42d4-b6f1-eabb6586f488}</Project>
+      <Name>Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
