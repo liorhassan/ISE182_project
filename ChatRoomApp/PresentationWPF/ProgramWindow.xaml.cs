@@ -32,7 +32,7 @@ namespace PresentationWPF
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
             main.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CommunicationLayer;
 using Persistence;
 
+
 namespace BusinessLogic
 {
     public class Chatroom : ILogger
@@ -20,6 +21,7 @@ namespace BusinessLogic
         private FileLogger mFileLogger;
         private ChatroomMenu _ChatroomMenu;
         public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
+
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
