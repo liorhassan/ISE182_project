@@ -1,4 +1,5 @@
 ﻿using Presentation;
+using PresentationWPF;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace MainProg
     {
         static void Main(string[] args)
         {
+            
             try
             {
                 String path = Directory.GetCurrentDirectory();
@@ -25,6 +27,8 @@ namespace MainProg
             }
             Cli Chatroom = new Cli();
             Chatroom.showMenu();
+            
+            
         }
     }
 }

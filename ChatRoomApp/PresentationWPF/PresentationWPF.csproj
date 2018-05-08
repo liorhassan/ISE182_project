@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ListBox.cs" />
     <Compile Include="ProgramWindow.xaml.cs">
       <DependentUpon>ProgramWindow.xaml</DependentUpon>
     </Compile>

@@ -57,6 +57,10 @@
       <Project>{752ee4b0-e98e-4212-9f8f-bd8254b2749c}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PresentationWPF\PresentationWPF.csproj">
+      <Project>{3502baf8-6a8b-47a3-8e41-264a5770a6e6}</Project>
+      <Name>PresentationWPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Presentation\Presentation.csproj">
       <Project>{9ac46890-2b44-42d4-b6f1-eabb6586f488}</Project>
       <Name>Presentation</Name>

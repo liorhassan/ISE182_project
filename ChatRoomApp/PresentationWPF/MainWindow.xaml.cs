@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.IO;
 
 namespace PresentationWPF
 {
@@ -29,6 +30,19 @@ namespace PresentationWPF
         public MainWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                String path = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(path.Substring(0, path.Length - 38) + "\\Data");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error!! Failed starting app");
+                Console.ReadLine();
+                throw e;
+            }
+            //Cli Chatroom = new Cli();
             myChatRoom = new Chatroom();
             pw = new ProgramWindow(this);
         }
