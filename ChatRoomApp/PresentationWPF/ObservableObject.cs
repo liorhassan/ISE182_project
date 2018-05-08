@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DispatcherAndBinding
+namespace PresentationWPF
 {
     public class ObservableObject : INotifyPropertyChanged
     {
@@ -34,7 +34,45 @@ namespace DispatcherAndBinding
                 OnPropertyChanged("MessageContent");
             }
         }
-        
+        private string nicknameR="";
+        public string NicknameR
+        {
+            get
+            {
+                return nicknameR;
+            }
+            set
+            {
+                nicknameR = value;
+                OnPropertyChanged("NicknameR");
+            }
+        }
+        private string nicknameL="";
+        public string NicknameL
+        {
+            get
+            {
+                return nicknameL;
+            }
+            set
+            {
+                nicknameL = value;
+                OnPropertyChanged("NicknameL");
+            }
+        }
+        private string sortCombo="";
+        public string SortCombo
+        {
+            get
+            {
+                return sortCombo;
+            }
+            set
+            {
+                sortCombo = value;
+                OnPropertyChanged("SortCombo");
+            }
+        }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

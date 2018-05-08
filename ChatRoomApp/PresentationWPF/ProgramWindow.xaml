@@ -10,7 +10,12 @@
     <Grid>
         <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True" IsEnabled="True" HorizontalAlignment="Right" Height="353" VerticalAlignment="Top" Width="489" Margin="0,23,0,0" />
         <Button Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="135,240,0,0" Click="btn_logout_Click"/>
-        <ComboBox HorizontalAlignment="Left" Margin="70,56,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Left" Margin="70,56,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Time Recieved" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Nickname" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="GroupID, Nickname, Time Recivied" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="116,133,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
     </Grid>
     
 </Window>

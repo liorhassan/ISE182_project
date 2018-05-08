@@ -1,4 +1,4 @@
-﻿using DispatcherAndBinding;
+﻿
 using System;
 using BusinessLogic;
 using System.Collections.Generic;
@@ -24,13 +24,13 @@ namespace PresentationWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableObject _main = new ObservableObject();
+        private ObservableObject _main = new ObservableObject();
         private Chatroom myChatRoom;
         private ProgramWindow pw;
         public MainWindow()
         {
             InitializeComponent();
-
+            DataContext = _main;
             try
             {
                 String path = Directory.GetCurrentDirectory();
@@ -38,18 +38,16 @@ namespace PresentationWPF
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error!! Failed starting app");
-                Console.ReadLine();
                 throw e;
             }
             //Cli Chatroom = new Cli();
             myChatRoom = new Chatroom();
-            pw = new ProgramWindow(this);
+            pw = new ProgramWindow(this,myChatRoom);
         }
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
-            String nickname = NicknameL.Text;
+            String nickname = _main.NicknameL;
             if ((nickname == ""))
             {
                 MessageBox.Show("Please enter a nickname");
@@ -69,7 +67,7 @@ namespace PresentationWPF
 
         private void btn_register_Click(object sender, RoutedEventArgs e)
         {
-            String nickname = NicknameR.Text;
+            String nickname = _main.NicknameR;
             if ((nickname == ""))
             {
                 MessageBox.Show("Please enter a nickname");
@@ -83,6 +81,7 @@ namespace PresentationWPF
             else
             {
                 MessageBox.Show("user " + nickname + " created succesfuly♥");
+                _main.NicknameR = "";
             }
         }
 

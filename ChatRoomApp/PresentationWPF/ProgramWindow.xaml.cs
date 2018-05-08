@@ -1,5 +1,4 @@
 ﻿using BusinessLogic;
-using DispatcherAndBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +22,26 @@ namespace PresentationWPF
     {
         ObservableObject _main = new ObservableObject();
         MainWindow main;
-        public ProgramWindow(MainWindow main) 
+        Chatroom chatroom;
+        public ProgramWindow(MainWindow main,Chatroom chatroom) 
         {
             InitializeComponent();
+            this.chatroom = chatroom;
+            DataContext = _main; 
             this.main = main;
+            foreach (String s in chatroom.SortByTimestamp(true)) _main.Messages.Add(s);
         }
 
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
+            chatroom.Logout();
             main.Show();
-            this.Close();
+            this.Hide();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            chatroom.SortType = Int32.Parse(_main.SortCombo);
         }
     }
 }

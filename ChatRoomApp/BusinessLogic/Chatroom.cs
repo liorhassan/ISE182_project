@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunicationLayer;
 using Persistence;
-
+using System.Windows.Threading;
 namespace BusinessLogic
 {
     public class Chatroom : ILogger
     {
+        private int sortType;
+        private DispatcherTimer dispatcherTimer;
         private User _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
@@ -25,8 +27,12 @@ namespace BusinessLogic
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
         {
+            SortType = 0;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
@@ -41,12 +47,23 @@ namespace BusinessLogic
                 usersHandler.save(registeredUsers);
             }
             this.mLogger = Logger.Instance;
-            this.mFileLogger = new FileLogger
-                ("log.txt");
+            this.mFileLogger = new FileLogger("log.txt");
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);
             this._ChatroomMenu = new ChatroomMenu();
+        }
+        public int SortType
+        {
+            set
+            {
+                sortType = value;
+            }
+        }
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            //Retrieve10Messages();
+            return;
         }
 
         // a function that registers a user
@@ -76,6 +93,7 @@ namespace BusinessLogic
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
                 mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
+                dispatcherTimer.Start();
                 return true;
             }
             return false;
@@ -92,6 +110,7 @@ namespace BusinessLogic
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
                 mLogger.AddLogMessage("User " + name + " logged out successfully");
+                dispatcherTimer.Stop();
                 return true;
             }
             return false;
@@ -149,15 +168,16 @@ namespace BusinessLogic
         }
 
         // a fuction to sort the messages by the timestamp
-        public List<Message> SortByTimestamp(Boolean isAsc)
+        public List<String> SortByTimestamp(Boolean isAsc)
         {
+            List<String> output = new List<string>();
             if (isAsc)
             {
                 var messages =
                 from m in recievedMessages
                 orderby m.Value.Date ascending
                 select m.Value;
-                return messages.ToList();
+                foreach (Message m in messages) output.Add(m.ToString());
             }
             else
             {
@@ -165,8 +185,9 @@ namespace BusinessLogic
                 from m in recievedMessages
                 orderby m.Value.Date descending
                 select m.Value;
-                return messages.ToList();
+                foreach (Message m in messages) output.Add(m.ToString());
             }
+            return output;
             
         }
 
@@ -194,6 +215,7 @@ namespace BusinessLogic
         // a fuction to sort the messages by g_id, nickname, and timestamp
         public List<Message> SortByAll(Boolean isAsc)
         {
+            
             if (isAsc)
             {
                 var messages =
@@ -210,6 +232,7 @@ namespace BusinessLogic
                 select m.Value;
                 return messages.ToList();
             }
+
         }
 
         // a fuction to write a message
@@ -245,6 +268,14 @@ namespace BusinessLogic
             mFileLogger.Terminate();
         }
 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            int c = Retrieve10Messages();
+            if (c != 0)
+            {
+
+            }
+        }
         // to implement ILogger
         public void ProcessLogMessage(string message)
         {
