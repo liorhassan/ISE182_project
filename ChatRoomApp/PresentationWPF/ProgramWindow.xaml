@@ -8,14 +8,28 @@
         mc:Ignorable="d"
         Title="ProgramWindow" Height="450" Width="800">
     <Grid>
-        <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True" IsEnabled="True" HorizontalAlignment="Right" Height="353" VerticalAlignment="Top" Width="489" Margin="0,23,0,0" />
-        <Button Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="135,240,0,0" Click="btn_logout_Click"/>
-        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Left" Margin="70,56,0,0" VerticalAlignment="Top" Width="120">
+        <ListBox ItemsSource="{Binding Messages}"  ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Right" Height="373" VerticalAlignment="Top" Width="479" Margin="0,10,10,0" />
+        <Button Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,388,0,0" Click="btn_logout_Click"/>
+        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Left" Margin="127,26,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Time Recieved" HorizontalAlignment="Left" Width="118"/>
             <ComboBoxItem Content="Nickname" HorizontalAlignment="Left" Width="118"/>
             <ComboBoxItem Content="GroupID, Nickname, Time Recivied" HorizontalAlignment="Left" Width="118"/>
         </ComboBox>
-        <Button Content="Sort" HorizontalAlignment="Left" Margin="116,133,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Button Content="Apply" HorizontalAlignment="Left" Margin="173,203,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Label Content="Sort By:" HorizontalAlignment="Left" Margin="72,22,0,0" VerticalAlignment="Top"/>
+        <ComboBox SelectedIndex="{Binding FilterCombo}" HorizontalAlignment="Left" Margin="127,81,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem Content="No Filter" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="GroupID" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Specific User" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <Label Content="GroupID:" IsEnabled="{Binding IsFilterGroup}" HorizontalAlignment="Left" Margin="65,114,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding FilterGroup}" IsEnabled="{Binding IsFilterGroup}" HorizontalAlignment="Left" Height="23" Margin="127,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Filter By:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,77,0,0" RenderTransformOrigin="0.091,-2.692"/>
+        <Label IsEnabled="{Binding IsFilterUser}" Content="User Nickname:" HorizontalAlignment="Left" Margin="29,154,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding FilterUser}" IsEnabled="{Binding IsFilterUser}" HorizontalAlignment="Left" Height="23" Margin="127,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="707,388,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <TextBox Text="{Binding MessageText}" HorizontalAlignment="Left" Height="23" Margin="303,388,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399"/>
+        <CheckBox IsChecked="{Binding IsDesc}" Content="Descending" HorizontalAlignment="Left" Margin="127,53,0,0" VerticalAlignment="Top"/>
     </Grid>
-    
+
 </Window>

@@ -275,18 +275,18 @@ namespace BusinessLogic
         // a fuction to write a message
         // checks if it's valid
         // creates the message and adds it to the dictionary
-        public Boolean WriteMessage(String msg)
+        public int WriteMessage(String msg)
         {
             if (!CheckMessageValidity(msg))
             {
                 mLogger.AddLogMessage("Invalid message was written");
-                return false;
+                return -1;
             }
             Message message = new Message(_loggedinUser.writeMessage(msg, URL));
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
             mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
-            return true;
+            return 1;
         }
 
         // checks if a message is valid
