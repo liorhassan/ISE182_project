@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ProgramWindow" Height="450" Width="800">
     <Grid>
-        <ListBox ItemsSource="{Binding Messages}"  ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Right" Height="373" VerticalAlignment="Top" Width="479" Margin="0,10,10,0" />
+        <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Right" Height="373" VerticalAlignment="Top" Width="479" Margin="0,10,10,0" />
         <Button Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,388,0,0" Click="btn_logout_Click"/>
         <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Left" Margin="127,26,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Time Recieved" HorizontalAlignment="Left" Width="118"/>
