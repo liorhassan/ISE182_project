@@ -34,6 +34,7 @@ namespace BusinessLogic
             filterType = 0;
             userFilter = "";
             groupFilter = "";
+            isAsc = true;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
             this._loggedinUser = null;

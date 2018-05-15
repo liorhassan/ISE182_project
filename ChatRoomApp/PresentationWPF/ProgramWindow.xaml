@@ -6,14 +6,15 @@
         xmlns:w="clr-namespace:System.Windows.Workarounds"
         xmlns:local="clr-namespace:PresentationWPF"
         mc:Ignorable="d"
-        Title="Chatroom24" Height="450" Width="800">
+        Title="Chatroom24" Height="450" Width="800"
+        Closing="ProgramWindow_Closing" >
     <Grid>
         <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Left" Width="479" Margin="303,0,0,37" Height="373" VerticalAlignment="Bottom" />
         <Button Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,388,707,0" Click="btn_logout_Click"/>
-        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Right" Margin="0,0,545,372" VerticalAlignment="Bottom" Width="120">
+        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Right" Margin="0,0,545,371.667" VerticalAlignment="Bottom" Width="120">
             <ComboBoxItem Content="Time Recieved" HorizontalAlignment="Left" Width="118"/>
             <ComboBoxItem Content="Nickname" HorizontalAlignment="Left" Width="118"/>
-            <ComboBoxItem Content="GroupID, Nickname, Time Recivied" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="GroupID, Nickname, TimeStamp" HorizontalAlignment="Left" Width="190" Margin="0,0,-18,0"/>
         </ComboBox>
         <Button Content="Apply" HorizontalAlignment="Right" Margin="0,0,545,195" VerticalAlignment="Bottom" Width="74" Click="Button_Click"/>
         <Label Content="Sort By:" HorizontalAlignment="Right" Margin="0,0,670,372" VerticalAlignment="Bottom"/>
