@@ -10,34 +10,19 @@
         ResizeMode="NoResize"
         Closing="ProgramWindow_Closing" >
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="file:///C:/Users/shaul/OneDrive/Pictures/chatroom24/mainBack.png" Stretch="Fill"/>
-        </Grid.Background>
+    <Grid Background="{DynamicResource mainBackg}">
         <GroupBox Header="FILTER" HorizontalAlignment="Left" Height="136" Margin="10,121,0,0" VerticalAlignment="Top" Width="257" BorderBrush="#FFBFB0D1" Foreground="White" FontFamily="Comic Sans MS" FontSize="16"/>
         <GroupBox Header="SORT" HorizontalAlignment="Left" Height="82" Margin="14,21,0,0" VerticalAlignment="Top" Width="253" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="#FFBEAFD1"/>
         <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Left" Width="496" Margin="286,0,0,46.667" Height="363" VerticalAlignment="Bottom" Opacity="0.5" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Comic Sans MS" FontSize="14" />
-        <Button Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Width="94" Margin="0,384,690,0" Click="btn_logout_Click" BorderBrush="{x:Null}" Foreground="White" Height="28" FontFamily="Showcard Gothic" FontSize="14">
-            <Button.Background>
-                <ImageBrush ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\mainButton.png"/>
-            </Button.Background>
-        </Button>
+        <Button Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Width="94" Margin="0,384,690,0" Click="btn_logout_Click" BorderBrush="{x:Null}" Foreground="White" Height="28" FontFamily="Showcard Gothic" FontSize="14" Background="{DynamicResource defButton}"/>
         <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Right" Margin="0,0,542,349.667" VerticalAlignment="Bottom" Width="120" Background="{x:Null}" FontFamily="Comic Sans MS">
             <ComboBoxItem Content="Time Recieved" HorizontalAlignment="Left" Width="118" Background="{x:Null}" BorderBrush="{x:Null}"/>
             <ComboBoxItem Content="Nickname" HorizontalAlignment="Left" Width="118" Background="{x:Null}" BorderBrush="{x:Null}"/>
             <ComboBoxItem Content="GroupID, Nickname,&#xA;TimeStamp" HorizontalAlignment="Left" Width="119" Background="{x:Null}" BorderBrush="{x:Null}"/>
         </ComboBox>
-        <Button Content="Apply" HorizontalAlignment="Right" Margin="0,0,537,120.667" VerticalAlignment="Bottom" Width="94" Click="Button_Click" FontFamily="Showcard Gothic" FontSize="14" BorderBrush="{x:Null}" Foreground="White" Height="28">
-            <Button.Background>
-                <ImageBrush ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\mainButton.png"/>
-            </Button.Background>
-        </Button>
+        <Button Content="Apply" HorizontalAlignment="Right" Margin="0,0,537,120.667" VerticalAlignment="Bottom" Width="94" Click="Button_Click" FontFamily="Showcard Gothic" FontSize="14" BorderBrush="{x:Null}" Foreground="White" Height="28" Background="{DynamicResource defButton}"/>
         <Label Content="Sort By:" HorizontalAlignment="Right" Margin="0,0,670,349.667" VerticalAlignment="Bottom" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="14"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="690,0,0,9.667" VerticalAlignment="Bottom" Width="94" Click="Button_Click_1" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="32">
-            <Button.Background>
-                <ImageBrush ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\sendButton.png"/>
-            </Button.Background>
-        </Button>
+        <Button Content="" HorizontalAlignment="Left" Margin="690,0,0,9.667" VerticalAlignment="Bottom" Width="94" Click="Button_Click_1" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="32" Background="{DynamicResource sendButton}"/>
         <TextBox Text="{Binding MessageText}" HorizontalAlignment="Left" Height="32" Margin="286,0,0,9.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18"/>
         <CheckBox IsChecked="{Binding IsDesc}" Content="Descending" HorizontalAlignment="Right" Margin="0,77,570,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <Label Content="Filter By:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.091,-2.692" Margin="49,140,0,0" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
