@@ -16,8 +16,6 @@
             <ComboBoxItem Content="GroupID, Nickname, Time Recivied" HorizontalAlignment="Left" Width="118"/>
         </ComboBox>
         <Button Content="Sort" HorizontalAlignment="Left" Margin="116,133,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
-        <RadioButton Content="Ascending" HorizontalAlignment="Left" Margin="70,95,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
-        <RadioButton Content="Descending" HorizontalAlignment="Left" Margin="181,95,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked_1"/>
     </Grid>
     
 </Window>
