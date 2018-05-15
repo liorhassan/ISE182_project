@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -116,6 +117,27 @@
       <Project>{752ee4b0-e98e-4212-9f8f-bd8254b2749c}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loginRegisterBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loginButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mainButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registerButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sendButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

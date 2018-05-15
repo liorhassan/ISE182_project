@@ -5,13 +5,13 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        
-        <ImageBrush x:Key="loginBuuton" ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\loginButton.png"/>
-        <ImageBrush x:Key="registerButton" ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\registerButton.png"/>
-        <ImageBrush x:Key="loginBackg" ImageSource="{DynamicResource loginBack}" Stretch="UniformToFill"/>
-        <ImageBrush x:Key="mainBackg" ImageSource="file:///C:/Users/shaul/OneDrive/Pictures/chatroom24/mainBack.png" Stretch="Fill"/>
-        <ImageBrush x:Key="sendButton" ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\sendButton.png"/>
-        <ImageBrush x:Key="defButton" ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\mainButton.png"/>
+
+        <ImageBrush x:Key="loginBuuton" ImageSource="pack://siteoforigin:,,,/Resources/loginButton.png"/>
+        <ImageBrush x:Key="registerButton" ImageSource="pack://siteoforigin:,,,/Resources/registerButton.png"/>
+        <ImageBrush x:Key="loginBackg" ImageSource="pack://siteoforigin:,,,/Resources/loginRegisterBack.png" Stretch="UniformToFill"/>
+        <ImageBrush x:Key="mainBackg" ImageSource="pack://siteoforigin:,,,/Resources/mainBack.png" Stretch="Fill"/>
+        <ImageBrush x:Key="sendButton" ImageSource="pack://siteoforigin:,,,/Resources/sendButton.png"/>
+        <ImageBrush x:Key="defButton" ImageSource="pack://siteoforigin:,,,/Resources/mainButton.png"/>
 
     </Application.Resources>
 </Application>
