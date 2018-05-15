@@ -6,12 +6,17 @@
         xmlns:w="clr-namespace:System.Windows.Workarounds"
         xmlns:local="clr-namespace:PresentationWPF"
         mc:Ignorable="d"
-        Title="Chatroom24" Height="450" Width="800"
+        Title="Chatroom24" Height="450" Width="800" Icon="C:\Users\shaul\OneDrive\Pictures\chatroom24\icon.png" 
+        ResizeMode="NoResize"
         Closing="ProgramWindow_Closing" >
+
     <Grid>
-        <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Left" Width="479" Margin="303,0,0,37" Height="373" VerticalAlignment="Bottom" />
+        <Grid.Background>
+            <ImageBrush ImageSource="file:///C:/Users/shaul/OneDrive/Pictures/chatroom24/mainBack.png" Stretch="Fill"/>
+        </Grid.Background>
+        <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Left" Width="479" Margin="303,0,0,37" Height="373" VerticalAlignment="Bottom" Opacity="0.5" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Comic Sans MS" FontSize="14" />
         <Button Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,388,707,0" Click="btn_logout_Click"/>
-        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Right" Margin="0,0,545,371.667" VerticalAlignment="Bottom" Width="120">
+        <ComboBox SelectedIndex="{Binding SortCombo}" HorizontalAlignment="Right" Margin="0,0,545,371.667" VerticalAlignment="Bottom" Width="120" Background="{x:Null}">
             <ComboBoxItem Content="Time Recieved" HorizontalAlignment="Left" Width="118"/>
             <ComboBoxItem Content="Nickname" HorizontalAlignment="Left" Width="118"/>
             <ComboBoxItem Content="GroupID, Nickname, TimeStamp" HorizontalAlignment="Left" Width="190" Margin="0,0,-18,0"/>
@@ -31,7 +36,7 @@
             <TextBox Text="{Binding FilterUser}" IsEnabled="{Binding IsFilterUser}" HorizontalAlignment="Left" Height="23" Margin="-48,45,0,-34" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         </UniformGrid>
         <Button Content="Send" HorizontalAlignment="Left" Margin="707,0,0,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_1"/>
-        <TextBox Text="{Binding MessageText}" HorizontalAlignment="Left" Height="23" Margin="303,0,0,9" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="399"/>
+        <TextBox Text="{Binding MessageText}" HorizontalAlignment="Left" Height="23" Margin="303,0,0,9" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="14"/>
         <CheckBox IsChecked="{Binding IsDesc}" Content="Descending" HorizontalAlignment="Right" Margin="0,53,586,0" VerticalAlignment="Top"/>
     </Grid>
 
