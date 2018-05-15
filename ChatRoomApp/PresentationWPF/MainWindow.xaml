@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PresentationWPF"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800"
+        Title="Chatroom24 - login" Height="450" Width="800" Icon="C:\Users\shaul\OneDrive\Pictures\chatroom24\icon.png"
         Closing="DataWindow_Closing" 
         ResizeMode="NoResize">
         
