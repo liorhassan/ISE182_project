@@ -69,6 +69,7 @@ namespace PresentationWPF
             }
             else
             {
+                _main.NicknameL = "";
                 StartProgram();
             }
         }

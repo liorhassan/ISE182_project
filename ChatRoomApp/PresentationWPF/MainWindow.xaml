@@ -19,7 +19,7 @@
                 <ImageBrush ImageSource="C:\Users\shaul\OneDrive\Pictures\chatroom24\loginButton.png"/>
             </Button.Background>
         </Button>
-        <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,182,0,0" Width="104" FontWeight="Bold" FontSize="18" Height="36" FontFamily="MV Boli"/>
+        <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,180,0,0" Width="104" FontWeight="Bold" FontSize="18" Height="36" FontFamily="MV Boli"/>
         <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="87,113,0,0" Width="106" FontWeight="Bold" FontFamily="Cooper Black" FontSize="24" Background="{x:Null}" Foreground="#FF919791"/>
         <TextBox Text="{Binding NicknameL,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="143,187,0,0" Background="#FF99D9EA" FontSize="16"/>
         <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="561,275,0,0" Height="56" Click="btn_register_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
@@ -28,7 +28,7 @@
             </Button.Background>
         </Button>
         <Label Content="Registration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="526,113,0,0" Width="184" FontWeight="Bold" FontFamily="Cooper Black" FontSize="24" Background="{x:Null}" Foreground="#FF919791"/>
-        <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,182,0,0" Width="110" FontWeight="Bold" FontSize="18" Height="38" FontFamily="MV Boli"/>
+        <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,180,0,0" Width="110" FontWeight="Bold" FontSize="18" Height="38" FontFamily="MV Boli"/>
         <Label Content="CHATROOM24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,32,0,0" Width="339" FontWeight="Bold" FontFamily="Cooper Black" FontSize="36" Background="{x:Null}" Height="60" Foreground="White" BorderBrush="Black" OpacityMask="Black">
             <Label.Effect>
                 <DropShadowEffect/>
