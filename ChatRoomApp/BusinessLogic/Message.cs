@@ -28,7 +28,7 @@ namespace BusinessLogic
         {
             _id = message.Id;
             _userName = message.UserName;
-            _date = message.Date;
+            _date = message.Date.AddHours(3);
             _messageContent = message.MessageContent;
             _groupID = message.GroupID;
         }
@@ -37,7 +37,7 @@ namespace BusinessLogic
         override
         public String ToString()
         {
-            String output = _date.ToString() + " -  " + _userName + " - " + MessageContent;
+            String output = _date.ToString() + " -  " +_groupID+" - "+ _userName + " - " + MessageContent;
             return output;
         }
     }

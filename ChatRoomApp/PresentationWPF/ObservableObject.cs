@@ -34,6 +34,7 @@ namespace PresentationWPF
                 OnPropertyChanged("MessageContent");
             }
         }
+
         private string nicknameR="";
         public string NicknameR
         {
@@ -47,6 +48,7 @@ namespace PresentationWPF
                 OnPropertyChanged("NicknameR");
             }
         }
+
         private string nicknameL="";
         public string NicknameL
         {
@@ -60,7 +62,8 @@ namespace PresentationWPF
                 OnPropertyChanged("NicknameL");
             }
         }
-        private string sortCombo="";
+
+        private string sortCombo="0";
         public string SortCombo
         {
             get
@@ -73,6 +76,105 @@ namespace PresentationWPF
                 OnPropertyChanged("SortCombo");
             }
         }
+
+        private string isDesc = "True";
+        public string IsDesc
+        {
+            get
+            {
+                return isDesc;
+            }
+            set
+            {
+                isDesc = value;
+                OnPropertyChanged("IsDesc");
+            }
+        }
+
+        private string filterCombo = "0";
+        public string FilterCombo
+        {
+            get
+            {
+                return filterCombo;
+            }
+            set
+            {
+                filterCombo = value;
+                OnPropertyChanged("FilterCombo");
+            }
+        }
+
+        private string isFilterGroup = "False";
+        public string IsFilterGroup
+        {
+            get
+            {
+                return isFilterGroup;
+            }
+            set
+            {
+                isFilterGroup = value;
+                OnPropertyChanged("IsFilterGroup");
+            }
+        }
+
+        private string filterGroup = "";
+        public string FilterGroup
+        {
+            get
+            {
+                return filterGroup;
+            }
+            set
+            {
+                filterGroup = value;
+                OnPropertyChanged("FilterGroup");
+            }
+        }
+
+        private string isFilterUser = "False";
+        public string IsFilterUser
+        {
+            get
+            {
+                return isFilterUser;
+            }
+            set
+            {
+                isFilterUser = value;
+                OnPropertyChanged("IsFilterUser");
+            }
+        }
+
+        private string filterUser = "";
+        public string FilterUser
+        {
+            get
+            {
+                return filterUser;
+            }
+            set
+            {
+                filterUser = value;
+                OnPropertyChanged("FilterUser");
+            }
+        }
+
+        private string messageText = "";
+        public string MessageText
+        {
+            get
+            {
+                return messageText;
+            }
+            set
+            {
+                messageText = value;
+                OnPropertyChanged("MessageText");
+            }
+        }
+
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

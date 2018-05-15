@@ -10,8 +10,11 @@ namespace BusinessLogic
 {
     public class Chatroom : ILogger
     {
-        private int sortType;
-        private DispatcherTimer dispatcherTimer;
+        private int sortType;//0-timeStamp(default), 1-nickname, 2-everything
+        private Boolean isAsc;//determain sort asc/desc
+        private int filterType;// 0-no filter(default), 1- filter by groupID, 2 - filter by user
+        private string userFilter; //user nickname to filter by
+        private string groupFilter; //groupID nickname to filter by
         private User _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
@@ -27,12 +30,13 @@ namespace BusinessLogic
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
         {
-            SortType = 0;
+            sortType = 0;
+            filterType = 0;
+            userFilter = "";
+            groupFilter = "";
+            isAsc = true;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
@@ -59,11 +63,6 @@ namespace BusinessLogic
             {
                 sortType = value;
             }
-        }
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            //Retrieve10Messages();
-            return;
         }
 
         // a function that registers a user
@@ -93,7 +92,6 @@ namespace BusinessLogic
                 this._loggedinUser = user;
                 ChatroomMenu.Login = true;
                 mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
-                dispatcherTimer.Start();
                 return true;
             }
             return false;
@@ -110,7 +108,6 @@ namespace BusinessLogic
                 this._loggedinUser = null;
                 ChatroomMenu.Login = false;
                 mLogger.AddLogMessage("User " + name + " logged out successfully");
-                dispatcherTimer.Stop();
                 return true;
             }
             return false;
@@ -135,101 +132,142 @@ namespace BusinessLogic
             return c;   
         }
 
+        //set filter and sort arguments givven by the presentation
+        public void SetFilterAndSort(int sortType,int filterType,Boolean isAsc, string groupFilter, string userFilter)
+        {
+            this.sortType = sortType;
+            this.filterType = filterType;
+            this.isAsc = isAsc;
+            this.groupFilter = groupFilter;
+            this.userFilter = userFilter;
+        }
+
+        //return all the messages to be shown on the message panel, filtered and sorted as needed
+        public List<String> GetAllMessages()
+        {
+            List<Message> FilteredMessages;
+            List<String> output;
+            if (filterType == 0)
+            {
+                FilteredMessages = GetMessagesByAll();
+            }
+            else if (filterType == 1)
+            {
+                FilteredMessages = GetAllByGroup();
+            }
+            else
+            {
+                FilteredMessages = GetAllByUser();
+            }
+            if (sortType == 0)
+            {
+                output = SortByTimestamp(FilteredMessages);
+            }
+            else if (sortType == 1)
+            {
+                output = SortByNickname(FilteredMessages);
+            }
+            else
+            {
+                output = SortByAll(FilteredMessages);
+            }
+            return output;
+        }
+
         // a fuction to retrieve 20 messages from the dictionary
-        public List<Message> Retrieve20Messages()
+        public List<Message> GetMessagesByAll()
         {
             var messages =
                 (from m in recievedMessages
                 orderby m.Value.Date
-                select m.Value).Take(20);
+                select m.Value);
             return messages.ToList();  
         }
 
+
         // a fuction to retrieve all the messages from a user
-        public List<Message> RetrieveAllByUser(String nickname, String g_id)
+        public List<Message> GetAllByUser()
         {
             var messages =
                 from m in recievedMessages
-                where m.Value.UserName == nickname & m.Value.GroupID == g_id
+                where m.Value.UserName == userFilter & m.Value.GroupID == groupFilter
                 orderby m.Value.Date
                 select m.Value;
             return messages.ToList();
         }
 
         // a fuction to retrieve all the messages by a GID
-        public List<Message> RetrieveAllByGroup(String g_id)
+        public List<Message> GetAllByGroup()
         {
             var messages =
                 from m in recievedMessages
-                where m.Value.GroupID == g_id
+                where m.Value.GroupID == groupFilter
                 orderby m.Value.Date
                 select m.Value;
             return messages.ToList();
         }
 
         // a fuction to sort the messages by the timestamp
-        public List<String> SortByTimestamp(Boolean isAsc)
-        {
-            List<String> output = new List<string>();
-            if (isAsc)
-            {
-                var messages =
-                from m in recievedMessages
-                orderby m.Value.Date ascending
-                select m.Value;
-                foreach (Message m in messages) output.Add(m.ToString());
-            }
-            else
-            {
-                var messages =
-                from m in recievedMessages
-                orderby m.Value.Date descending
-                select m.Value;
-                foreach (Message m in messages) output.Add(m.ToString());
-            }
-            return output;
-            
-        }
-
-        // a fuction to sort the messages by nickname
-        public List<Message> SortByNickname(Boolean isAsc)
+        public List<String> SortByTimestamp(List<Message> filteredMessages)
         {
             if (isAsc)
             {
                 var messages =
-                from m in recievedMessages
-                orderby m.Value.UserName ascending
-                select m.Value;
+                from m in filteredMessages
+                orderby m.Date ascending
+                select m.ToString();
                 return messages.ToList();
             }
             else
             {
                 var messages =
-                from m in recievedMessages
-                orderby m.Value.UserName descending
-                select m.Value;
+                from m in filteredMessages
+                orderby m.Date descending
+                select m.ToString();
+                return messages.ToList();
+            }
+            
+        }
+
+        // a fuction to sort the messages by nickname
+        public List<String> SortByNickname(List<Message> filteredMessages)
+        {
+            if (isAsc)
+            {
+                var messages =
+                from m in filteredMessages
+                orderby m.UserName ascending
+                select m.ToString();
+                return messages.ToList();
+            }
+            else
+            {
+                var messages =
+                from m in filteredMessages
+                orderby m.UserName descending
+                select m.ToString();
                 return messages.ToList();
             }
         }
 
         // a fuction to sort the messages by g_id, nickname, and timestamp
-        public List<Message> SortByAll(Boolean isAsc)
+        public List<String> SortByAll(List<Message> filteredMessages)
         {
             
             if (isAsc)
             {
                 var messages =
-                from m in recievedMessages
-                orderby m.Value.GroupID, m.Value.UserName, m.Value.Date ascending
-                select m.Value;
+                from m in filteredMessages
+                orderby m.GroupID, m.UserName, m.Date ascending
+                select m.ToString();
                 return messages.ToList();
             }
             else
             {
                 var messages =
-                from m in recievedMessages
-                orderby m.Value.GroupID, m.Value.UserName, m.Value.Date descending
-                select m.Value;
+                from m in filteredMessages
+                orderby m.GroupID, m.UserName, m.Date descending
+                select m.ToString();
                 return messages.ToList();
             }
 
@@ -238,18 +276,18 @@ namespace BusinessLogic
         // a fuction to write a message
         // checks if it's valid
         // creates the message and adds it to the dictionary
-        public Boolean WriteMessage(String msg)
+        public int WriteMessage(String msg)
         {
             if (!CheckMessageValidity(msg))
             {
                 mLogger.AddLogMessage("Invalid message was written");
-                return false;
+                return -1;
             }
             Message message = new Message(_loggedinUser.writeMessage(msg, URL));
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
             mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
-            return true;
+            return 1;
         }
 
         // checks if a message is valid
@@ -267,15 +305,7 @@ namespace BusinessLogic
         {
             mFileLogger.Terminate();
         }
-
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            int c = Retrieve10Messages();
-            if (c != 0)
-            {
-
-            }
-        }
+        
         // to implement ILogger
         public void ProcessLogMessage(string message)
         {

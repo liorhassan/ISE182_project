@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
+using System.ComponentModel;
 
 namespace PresentationWPF
 {
@@ -43,6 +44,13 @@ namespace PresentationWPF
             //Cli Chatroom = new Cli();
             myChatRoom = new Chatroom();
             pw = new ProgramWindow(this,myChatRoom);
+            
+        }
+
+        private void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+
         }
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
@@ -86,15 +94,13 @@ namespace PresentationWPF
         }
 
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Text = "{Binding ElementName=NicknameR, Path=Text}"
-        }
+
 
         private void StartProgram()
         {
             pw.Show();
             this.Hide();
+            pw.startWindow();
         }
     }
 }
