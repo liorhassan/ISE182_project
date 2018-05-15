@@ -6,12 +6,12 @@
     <Application.Resources>
 
 
-        <ImageBrush x:Key="loginBuuton" ImageSource="pack://siteoforigin:,,,/Resources/loginButton.png"/>
-        <ImageBrush x:Key="registerButton" ImageSource="pack://siteoforigin:,,,/Resources/registerButton.png"/>
-        <ImageBrush x:Key="loginBackg" ImageSource="pack://siteoforigin:,,,/Resources/loginRegisterBack.png" Stretch="UniformToFill"/>
-        <ImageBrush x:Key="mainBackg" ImageSource="pack://siteoforigin:,,,/Resources/mainBack.png" Stretch="Fill"/>
-        <ImageBrush x:Key="sendButton" ImageSource="pack://siteoforigin:,,,/Resources/sendButton.png"/>
-        <ImageBrush x:Key="defButton" ImageSource="pack://siteoforigin:,,,/Resources/mainButton.png"/>
+        <ImageBrush x:Key="loginBuuton" ImageSource="C:/Users/shaul/Source/Repos/ISE182_project/ChatRoomApp/PresentationWPF/Resources/loginButton.png"/>
+        <ImageBrush x:Key="registerButton" ImageSource="C:/Users/shaul/Source/Repos/ISE182_project/ChatRoomApp/PresentationWPF/Resources/registerButton.png"/>
+        <ImageBrush x:Key="loginBackg" ImageSource="C:/Users/shaul/Source/Repos/ISE182_project/ChatRoomApp/PresentationWPF/Resources/loginRegisterBack.png" Stretch="UniformToFill"/>
+        <ImageBrush x:Key="mainBackg" ImageSource="C:/Users/shaul/Source/Repos/ISE182_project/ChatRoomApp/PresentationWPF/Resources/mainBack.png" Stretch="Fill"/>
+        <ImageBrush x:Key="sendButton" ImageSource="C:/Users/shaul/Source/Repos/ISE182_project/ChatRoomApp/PresentationWPF/Resources/sendButton.png"/>
+        <ImageBrush x:Key="defButton" ImageSource="C:/Users/shaul/Source/Repos/ISE182_project/ChatRoomApp/PresentationWPF/Resources/mainButton.png"/>
 
     </Application.Resources>
 </Application>

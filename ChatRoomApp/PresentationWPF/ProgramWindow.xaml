@@ -6,7 +6,7 @@
         xmlns:w="clr-namespace:System.Windows.Workarounds"
         xmlns:local="clr-namespace:PresentationWPF"
         mc:Ignorable="d"
-        Title="Chatroom24" Height="450" Width="800" Icon="pack://siteoforigin:,,,/Resources/icon.png" 
+        Title="Chatroom24" Height="450" Width="800" Icon="/Resources/icon.png" 
         ResizeMode="NoResize"
         Closing="ProgramWindow_Closing" >
 
