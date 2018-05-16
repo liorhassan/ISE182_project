@@ -19,6 +19,7 @@ namespace Persistence
         {
             String currpath = Directory.GetCurrentDirectory();
             binPath = currpath.Substring(0, currpath.Length - 38) + "\\Data\\"+ path;
+            if (!Directory.Exists(currpath.Substring(0, currpath.Length - 38) + "\\Data")) Directory.CreateDirectory(currpath.Substring(0, currpath.Length - 38) + "\\Data");
         }
 
         //gets an object(needs to be serializable) and saves it to the bin file
