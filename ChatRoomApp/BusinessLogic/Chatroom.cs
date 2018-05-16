@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CommunicationLayer;
 using Persistence;
 using System.Windows.Threading;
+using System.IO;
+
 namespace BusinessLogic
 {
     public class Chatroom : ILogger
@@ -23,8 +25,8 @@ namespace BusinessLogic
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
-        private ChatroomMenu _ChatroomMenu;
-        public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
+        //private ChatroomMenu _ChatroomMenu;
+        //public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -51,11 +53,12 @@ namespace BusinessLogic
                 usersHandler.save(registeredUsers);
             }
             this.mLogger = Logger.Instance;
-            this.mFileLogger = new FileLogger("log.txt");
+            String currpath = Directory.GetCurrentDirectory();
+            this.mFileLogger = new FileLogger(currpath.Substring(0, currpath.Length - 38) + "\\Data\\log.txt");
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);
-            this._ChatroomMenu = new ChatroomMenu();
+            //this._ChatroomMenu = new ChatroomMenu();
         }
         public int SortType
         {
@@ -90,7 +93,7 @@ namespace BusinessLogic
             {
                 User user = registeredUsers[nickname];
                 this._loggedinUser = user;
-                ChatroomMenu.Login = true;
+                //ChatroomMenu.Login = true;
                 mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
                 return true;
             }
@@ -106,7 +109,7 @@ namespace BusinessLogic
             {
                 String name = _loggedinUser.Nickname;
                 this._loggedinUser = null;
-                ChatroomMenu.Login = false;
+                //ChatroomMenu.Login = false;
                 mLogger.AddLogMessage("User " + name + " logged out successfully");
                 return true;
             }

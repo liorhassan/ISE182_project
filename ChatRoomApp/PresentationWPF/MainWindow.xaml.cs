@@ -32,16 +32,6 @@ namespace PresentationWPF
         {
             InitializeComponent();
             DataContext = _main;
-            try
-            {
-                String path = Directory.GetCurrentDirectory();
-                Directory.SetCurrentDirectory(path.Substring(0, path.Length - 38) + "\\Data");
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            //Cli Chatroom = new Cli();
             myChatRoom = new Chatroom();
             pw = new ProgramWindow(this,myChatRoom);
             

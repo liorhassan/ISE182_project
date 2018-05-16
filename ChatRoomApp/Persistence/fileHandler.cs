@@ -17,7 +17,8 @@ namespace Persistence
         //the constructor for the abstract class
         public fileHandler(string path)
         {
-            binPath = path;
+            String currpath = Directory.GetCurrentDirectory();
+            binPath = currpath.Substring(0, currpath.Length - 38) + "\\Data\\"+ path;
         }
 
         //gets an object(needs to be serializable) and saves it to the bin file
