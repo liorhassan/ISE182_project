@@ -30,11 +30,36 @@ namespace PresentationWPF
         private ProgramWindow pw;
         public MainWindow()
         {
+            copyResources();
             InitializeComponent();
             DataContext = _main;
             myChatRoom = new Chatroom();
             pw = new ProgramWindow(this,myChatRoom);
             
+        }
+
+        private void copyResources()
+        {
+            string sourcePath = Directory.GetCurrentDirectory();
+            sourcePath = sourcePath.Substring(0, sourcePath.Length - 10);
+            string targetPath = sourcePath + "\\bin\\Debug\\Resources";
+            if (!System.IO.Directory.Exists(targetPath))
+            {
+                System.IO.Directory.CreateDirectory(targetPath);
+            }
+            if (System.IO.Directory.Exists(sourcePath + "\\Resources"))
+            {
+                string[] files = System.IO.Directory.GetFiles(sourcePath + "\\Resources");
+
+                // Copy the files and overwrite destination files if they already exist.
+                foreach (string s in files)
+                {
+                    // Use static Path methods to extract only the file name from the path.
+                    string fileName = System.IO.Path.GetFileName(s);
+                    string destFile = System.IO.Path.Combine(targetPath, fileName);
+                    if(!File.Exists(destFile)) System.IO.File.Copy(s, destFile, true);
+                }
+            }
         }
 
         private void DataWindow_Closing(object sender, CancelEventArgs e)
