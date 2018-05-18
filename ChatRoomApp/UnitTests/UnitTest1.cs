@@ -3,30 +3,84 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic;
 namespace UnitTests
 {
-    [TestClass]
+    [TestClass()]
     public class UnitTest1
     {
-        [TestMethod]
+        Chatroom chatroom = new Chatroom();
+        [TestMethod()]
         public void TestRegister()
         {
-            Chatroom chatroom = new Chatroom();
-            User user = new User("user");
+            chatroom.RestartChatroom();
+            User user = new User("user1");
             Boolean firstR = chatroom.Register(user.Nickname);
             Assert.AreEqual(firstR, true);
-            //Boolean secondR = chatroom.Register(user.Nickname);
-           // Assert.AreEqual(secondR, false);
+            Boolean secondR = chatroom.Register(user.Nickname);
+            Assert.AreEqual(secondR, false);
+            chatroom.Logout();
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void TestLogin()
         {
-            Chatroom chatroom = new Chatroom();
+            chatroom.RestartChatroom();
             User user = new User("user");
             chatroom.Register(user.Nickname);
             Boolean firstL = chatroom.Login("user");
             Assert.AreEqual(firstL, true);
             Boolean secondL = chatroom.Login("otheruser");
             Assert.AreEqual(secondL, false);
+            chatroom.Logout();
         }
+
+
+        //[TestMethod()]
+        //public void TestMessage()
+        //{
+        //    Chatroom chatroom = new Chatroom();
+        //    chatroom.RestartChatroom();
+        //    User user = new User("user");
+        //    chatroom.Register(user.Nickname);
+        //    chatroom.Login("user");
+        //    int first = chatroom.WriteMessage("message");
+        //    Assert.AreEqual(first, 1);
+        //    String s = new string('a', 151);
+        //    int second = chatroom.WriteMessage(s);
+        //    Assert.AreEqual(second, -1);
+        //}
+
+        [TestMethod()]
+        public void TestLogout()
+        {
+            chatroom.RestartChatroom();
+            User user = new User("user");
+            chatroom.Register(user.Nickname);
+            chatroom.Login("user");
+            Boolean firstlogout = chatroom.Logout();
+            Assert.AreEqual(firstlogout, true);
+            Boolean secondlogout = chatroom.Logout();
+            Assert.AreEqual(secondlogout, false);
+            chatroom.Logout();
+            //chatroom.RestartChatroom();
+            //chatroom.exit();
+        }
+
+        //[TestMethod()]
+        //public void TestFilter()
+        //{
+        //    Chatroom chatroom = new Chatroom();
+        //    chatroom.RestartChatroom();
+        //    User userOne = new User("userOne");
+        //    User userTwo = new User("userTwo");
+        //    User userThree = new User("userThree");
+        //    chatroom.Register(userOne.Nickname);
+        //    chatroom.Register(userTwo.Nickname);
+        //    chatroom.Register(userThree.Nickname);
+        //    chatroom.Login("user");
+        //    int first = chatroom.WriteMessage("message");
+        //    Assert.AreEqual(first, 1);
+        //    String s = new string('a', 151);
+        //    int second = chatroom.WriteMessage(s);
+        //    Assert.AreEqual(second, -1);
+        //}
     }
 }

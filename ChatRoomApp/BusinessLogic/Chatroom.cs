@@ -20,7 +20,7 @@ namespace BusinessLogic
         private User _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
-        private readonly String URL = "http://ise172.ise.bgu.ac.il";
+        private readonly String URL = "localhost";
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
         private Logger mLogger;
@@ -313,6 +313,14 @@ namespace BusinessLogic
         public void ProcessLogMessage(string message)
         {
             return;
+        }
+
+        public void RestartChatroom()
+        {
+            recievedMessages.Clear();
+            registeredUsers.Clear();
+            Console.Write(recievedMessages.Count);
+            Console.Write(registeredUsers.Count);
         }
 
 
