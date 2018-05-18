@@ -308,7 +308,12 @@ namespace BusinessLogic
         {
             mFileLogger.Terminate();
         }
-        
+
+        public void Start()
+        {
+            mFileLogger.Init();
+        }
+
         // to implement ILogger
         public void ProcessLogMessage(string message)
         {
@@ -317,10 +322,12 @@ namespace BusinessLogic
 
         public void RestartChatroom()
         {
+            //Start();
             recievedMessages.Clear();
             registeredUsers.Clear();
-            Console.Write(recievedMessages.Count);
-            Console.Write(registeredUsers.Count);
+            Logout();
+         
+            
         }
 
 

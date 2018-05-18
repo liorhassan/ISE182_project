@@ -6,7 +6,7 @@ namespace UnitTests
     [TestClass()]
     public class UnitTest1
     {
-        Chatroom chatroom = new Chatroom();
+        Chatroom chatroom = NewMethod();
         [TestMethod()]
         public void TestRegister()
         {
@@ -16,20 +16,27 @@ namespace UnitTests
             Assert.AreEqual(firstR, true);
             Boolean secondR = chatroom.Register(user.Nickname);
             Assert.AreEqual(secondR, false);
-            chatroom.Logout();
+            chatroom.exit();
+        }
+
+        private static Chatroom NewMethod()
+        {
+            return new Chatroom();
         }
 
         [TestMethod()]
         public void TestLogin()
         {
             chatroom.RestartChatroom();
+            //chatroomTwo.Start();
+            //.RestartChatroom();
             User user = new User("user");
             chatroom.Register(user.Nickname);
             Boolean firstL = chatroom.Login("user");
             Assert.AreEqual(firstL, true);
             Boolean secondL = chatroom.Login("otheruser");
             Assert.AreEqual(secondL, false);
-            chatroom.Logout();
+            chatroom.exit();
         }
 
 
@@ -51,7 +58,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestLogout()
         {
-            chatroom.RestartChatroom();
+           // chatroom.RestartChatroom();
             User user = new User("user");
             chatroom.Register(user.Nickname);
             chatroom.Login("user");
@@ -59,7 +66,7 @@ namespace UnitTests
             Assert.AreEqual(firstlogout, true);
             Boolean secondlogout = chatroom.Logout();
             Assert.AreEqual(secondlogout, false);
-            chatroom.Logout();
+            //chatroomThree.Logout();
             //chatroom.RestartChatroom();
             //chatroom.exit();
         }
