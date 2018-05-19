@@ -78,8 +78,8 @@ namespace UnitTests
             {
                 fourth,
                 first,
-                second,
                 third,
+                second  
             };
             chatroom.RestartChatroom();
 
@@ -121,6 +121,85 @@ namespace UnitTests
             }
 
         }
+
+        [TestMethod()]
+        public void TestSortByAll()
+        {
+            String One_first = "first message of userOne";
+            String One_second = "second message of userOne";
+            String Two_first = "first message of userTwo";
+            String Two_second = "second message of userTwo";
+            String Three_first = "first message of userThree";
+            String Three_second = "second message of userThree";
+            String Four_first = "first message of userFour";
+            String Four_second = "second message of userFour";
+            List<String> test = new List<String>(8)
+            {
+                Four_first, Four_second, One_first, One_second,
+                Three_first, Three_second, Two_first, Two_second
+            };
+            chatroom.RestartChatroom();
+
+            chatroom.Register(userThree.Nickname);
+            chatroom.Login(userThree.Nickname);
+            chatroom.WriteMessage(Three_first);
+            chatroom.Logout();
+
+            chatroom.Register(userFour.Nickname);
+            chatroom.Login(userFour.Nickname);
+            chatroom.WriteMessage(Four_first);
+            chatroom.Logout();
+
+            chatroom.Register(userOne.Nickname);
+            chatroom.Login(userOne.Nickname);
+            chatroom.WriteMessage(One_first);
+            chatroom.Logout();
+
+            chatroom.Register(userTwo.Nickname);
+            chatroom.Login(userTwo.Nickname);
+            chatroom.WriteMessage(Two_first);
+            chatroom.Logout();
+
+            chatroom.Register(userThree.Nickname);
+            chatroom.Login(userThree.Nickname);
+            chatroom.WriteMessage(Three_second);
+            chatroom.Logout();
+
+            chatroom.Register(userFour.Nickname);
+            chatroom.Login(userFour.Nickname);
+            chatroom.WriteMessage(Four_second);
+            chatroom.Logout();
+
+            chatroom.Register(userOne.Nickname);
+            chatroom.Login(userOne.Nickname);
+            chatroom.WriteMessage(One_second);
+            chatroom.Logout();
+
+            chatroom.Register(userTwo.Nickname);
+            chatroom.Login(userTwo.Nickname);
+            chatroom.WriteMessage(Two_second);
+            chatroom.Logout();
+
+            chatroom.SetFilterAndSort(2, 0, true, "", "");
+            List<String> messages = chatroom.GetAllMessages();
+            int i = 0;
+            foreach (String mess in messages)
+            {
+                Assert.AreEqual(mess, test[i]);
+                i++;
+            }
+
+            chatroom.SetFilterAndSort(2, 0, false, "", "");
+            messages = chatroom.GetAllMessages();
+            i = 7;
+            foreach (String mess in messages)
+            {
+                Assert.AreEqual(mess, test[i]);
+                i--;
+            }
+
+        }
+
 
         [TestMethod()]
         public void TestFilter()
