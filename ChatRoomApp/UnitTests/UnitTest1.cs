@@ -178,7 +178,6 @@ namespace UnitTests
             chatroom.Register(userTwo.Nickname);
             chatroom.Login(userTwo.Nickname);
             chatroom.WriteMessage(Two_second);
-            chatroom.Logout();
 
             chatroom.SetFilterAndSort(2, 0, true, "", "");
             List<String> messages = chatroom.GetAllMessages();
