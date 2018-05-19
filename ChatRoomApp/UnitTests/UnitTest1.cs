@@ -1,38 +1,37 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic;
+using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
+
 namespace UnitTests
 {
     [TestClass()]
     public class UnitTest1
     {
-        Chatroom chatroom = NewMethod();
+        Chatroom chatroom = new Chatroom();
+        User userOne = new User("userOne");
+        User userTwo = new User("userTwo");
+        User userThree = new User("userThree");
+        User userFour = new User("userFour");
         [TestMethod()]
         public void TestRegister()
         {
-            chatroom.RestartChatroom();
-            User user = new User("user1");
-            Boolean firstR = chatroom.Register(user.Nickname);
+            chatroom.RestartChatroom();  
+            Boolean firstR = chatroom.Register(userOne.Nickname);
             Assert.AreEqual(firstR, true);
-            Boolean secondR = chatroom.Register(user.Nickname);
+            Boolean secondR = chatroom.Register(userOne.Nickname);
             Assert.AreEqual(secondR, false);
-            chatroom.exit();
-        }
-
-        private static Chatroom NewMethod()
-        {
-            return new Chatroom();
         }
 
         [TestMethod()]
         public void TestLogin()
         {
             chatroom.RestartChatroom();
-            //chatroomTwo.Start();
-            //.RestartChatroom();
-            User user = new User("user");
-            chatroom.Register(user.Nickname);
-            Boolean firstL = chatroom.Login("user");
+            Console.WriteLine("after");
+            chatroom.Register(userTwo.Nickname);
+            Boolean firstL = chatroom.Login(userTwo.Nickname);
             Assert.AreEqual(firstL, true);
             Boolean secondL = chatroom.Login("otheruser");
             Assert.AreEqual(secondL, false);
@@ -40,28 +39,25 @@ namespace UnitTests
         }
 
 
-        //[TestMethod()]
-        //public void TestMessage()
-        //{
-        //    Chatroom chatroom = new Chatroom();
-        //    chatroom.RestartChatroom();
-        //    User user = new User("user");
-        //    chatroom.Register(user.Nickname);
-        //    chatroom.Login("user");
-        //    int first = chatroom.WriteMessage("message");
-        //    Assert.AreEqual(first, 1);
-        //    String s = new string('a', 151);
-        //    int second = chatroom.WriteMessage(s);
-        //    Assert.AreEqual(second, -1);
-        //}
+        [TestMethod()]
+        public void TestMessage()
+        {
+            chatroom.RestartChatroom();
+            chatroom.Register(userOne.Nickname);
+            chatroom.Login(userOne.Nickname);
+            int first = chatroom.WriteMessage("message");
+            Assert.AreEqual(first, 1);
+            String s = new string('a', 151);
+            int second = chatroom.WriteMessage(s);
+            Assert.AreEqual(second, -1);
+        }
 
         [TestMethod()]
         public void TestLogout()
         {
-           // chatroom.RestartChatroom();
-            User user = new User("user");
-            chatroom.Register(user.Nickname);
-            chatroom.Login("user");
+            chatroom.RestartChatroom();
+            chatroom.Register(userOne.Nickname);
+            chatroom.Login(userOne.Nickname);
             Boolean firstlogout = chatroom.Logout();
             Assert.AreEqual(firstlogout, true);
             Boolean secondlogout = chatroom.Logout();
@@ -71,23 +67,108 @@ namespace UnitTests
             //chatroom.exit();
         }
 
-        //[TestMethod()]
-        //public void TestFilter()
-        //{
-        //    Chatroom chatroom = new Chatroom();
-        //    chatroom.RestartChatroom();
-        //    User userOne = new User("userOne");
-        //    User userTwo = new User("userTwo");
-        //    User userThree = new User("userThree");
-        //    chatroom.Register(userOne.Nickname);
-        //    chatroom.Register(userTwo.Nickname);
-        //    chatroom.Register(userThree.Nickname);
-        //    chatroom.Login("user");
-        //    int first = chatroom.WriteMessage("message");
-        //    Assert.AreEqual(first, 1);
-        //    String s = new string('a', 151);
-        //    int second = chatroom.WriteMessage(s);
-        //    Assert.AreEqual(second, -1);
-        //}
+        [TestMethod()]
+        public void TestSortByName()
+        {
+            String first = "message of userOne";
+            String second = "message of userTwo";
+            String third = "message of userThree";
+            String fourth = "message of userFour";
+            List<String> test = new List<String>(4)
+            {
+                fourth,
+                first,
+                second,
+                third,
+            };
+            chatroom.RestartChatroom();
+
+            chatroom.Register(userThree.Nickname);
+            chatroom.Login(userThree.Nickname);
+            chatroom.WriteMessage(third);
+            chatroom.Logout();
+
+            chatroom.Register(userFour.Nickname);
+            chatroom.Login(userFour.Nickname);
+            chatroom.WriteMessage(fourth);
+            chatroom.Logout();
+
+            chatroom.Register(userOne.Nickname);
+            chatroom.Login(userOne.Nickname);
+            chatroom.WriteMessage(first);           
+            chatroom.Logout();
+
+            chatroom.Register(userTwo.Nickname);
+            chatroom.Login(userTwo.Nickname);
+            chatroom.WriteMessage(second);
+
+            chatroom.SetFilterAndSort(1, 0, true, "", "");
+            List<String> messages = chatroom.GetAllMessages();
+            int i = 0;
+            foreach (String mess in messages)
+            {
+                Assert.AreEqual(mess, test[i]);
+                i++;
+            }
+
+            chatroom.SetFilterAndSort(1, 0, false, "", "");
+            messages = chatroom.GetAllMessages();
+            i = 3;
+            foreach (String mess in messages)
+            {
+                Assert.AreEqual(mess, test[i]);
+                i--;
+            }
+
+        }
+
+        [TestMethod()]
+        public void TestFilter()
+        {
+            String first = "first message";
+            String second = "second message";
+            String third = "third message";
+            List<String> test = new List<String>(3)
+            {
+                first,
+                second,
+                third
+            };
+            chatroom.RestartChatroom();
+            chatroom.Register(userOne.Nickname);
+            chatroom.Login(userOne.Nickname);
+            chatroom.WriteMessage("my first message");
+            chatroom.WriteMessage("group 24 is the best");
+            chatroom.WriteMessage("100 final grade");
+            chatroom.Logout();
+
+            chatroom.Register(userTwo.Nickname);
+            chatroom.Login(userTwo.Nickname);
+            chatroom.WriteMessage("second message");
+            chatroom.WriteMessage("my message is not important");
+            chatroom.Logout();
+
+            chatroom.Register(userThree.Nickname);
+            chatroom.Login(userThree.Nickname);
+            chatroom.WriteMessage("third message");
+            
+            chatroom.SetFilterAndSort(0, 2, true, userOne.Nickname, "24");
+            List<String> messages = chatroom.GetAllMessages();
+            int i = 0;
+            foreach (String mess in messages)
+            {
+                Assert.AreEqual(mess, test[i]);
+                i++;
+            }
+
+            chatroom.SetFilterAndSort(0, 2, true, userOne.Nickname, "24");
+            messages = chatroom.GetAllMessages();
+            i = 3;
+            foreach (String mess in messages)
+            {
+                Assert.AreEqual(mess, test[i]);
+                i--;
+            }
+        }
     }
 }

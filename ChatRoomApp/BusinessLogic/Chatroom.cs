@@ -323,10 +323,9 @@ namespace BusinessLogic
         public void RestartChatroom()
         {
             //Start();
+            Logout();
             recievedMessages.Clear();
             registeredUsers.Clear();
-            Logout();
-         
             
         }
 
