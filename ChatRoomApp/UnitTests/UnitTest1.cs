@@ -23,6 +23,7 @@ namespace UnitTests
             Assert.AreEqual(firstR, true);
             Boolean secondR = chatroom.Register(userOne.Nickname);
             Assert.AreEqual(secondR, false);
+           // Environment.Exit(0);
         }
 
         [TestMethod()]

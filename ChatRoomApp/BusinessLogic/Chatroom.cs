@@ -20,7 +20,7 @@ namespace BusinessLogic
         private User _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
-        private readonly String URL = "localhost";
+        private readonly String URL = "http://ise172.ise.bgu.ac.il";
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
         private Logger mLogger;
