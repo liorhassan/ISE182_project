@@ -12,6 +12,7 @@ namespace BusinessLogic
 {
     public class Chatroom : ILogger
     {
+        private static String projectpath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         private int sortType;//0-timeStamp(default), 1-nickname, 2-everything
         private Boolean isAsc;//determain sort asc/desc
         private int filterType;// 0-no filter(default), 1- filter by groupID, 2 - filter by user
@@ -51,8 +52,8 @@ namespace BusinessLogic
                 usersHandler.save(registeredUsers);
             }
             this.mLogger = Logger.Instance;
-            String currpath = Directory.GetCurrentDirectory();
-            this.mFileLogger = new FileLogger(currpath.Substring(0, currpath.Length - 38) + "\\Data\\log.txt");
+            //String currpath = Directory.GetCurrentDirectory();
+            this.mFileLogger = new FileLogger(projectpath + "\\Data\\log.txt");
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);
@@ -306,6 +307,7 @@ namespace BusinessLogic
         public void exit()
         {
             mFileLogger.Terminate();
+            mFileLogger = null;
         }
 
         public void Start()
@@ -321,10 +323,18 @@ namespace BusinessLogic
 
         public void RestartChatroom()
         {
-            //Start();
             Logout();
             recievedMessages.Clear();
             registeredUsers.Clear();
+        }
+
+        public void DeleteLog()
+        {
+            String filename = projectpath + "\\Data\\log.txt";
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
         }
     }
 }
