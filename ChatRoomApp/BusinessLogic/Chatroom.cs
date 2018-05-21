@@ -68,24 +68,24 @@ namespace BusinessLogic
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
-        public Boolean Register(String nickname,String group)
+        public Boolean Register(String nickname, String group)
         {
             String key = nickname + "@" + group;
             if (registeredUsers.ContainsKey(key))
             {
                 return false;
             }
-            User newUser = new User(nickname,group);
+            User newUser = new User(nickname, group);
             registeredUsers.Add(key, newUser);
             usersHandler.save(registeredUsers);
-            mLogger.AddLogMessage("User " + newUser.Nickname + " in group "+newUser.GroupID+" registered successfully");
+            mLogger.AddLogMessage("User " + newUser.Nickname + " in group " + newUser.GroupID + " registered successfully");
             return true;
         }
 
         // a fuction to login a user
         // finds the user and makes the loggedinUser
         // does nothing if the user doesn't exist
-        public Boolean Login(String nickname,String group)
+        public Boolean Login(String nickname, String group)
         {
             String key = nickname + "@" + group;
             if (registeredUsers.ContainsKey(key))
@@ -102,7 +102,7 @@ namespace BusinessLogic
         // checks if the loggedinUser is not null, and then turns it to null
         // else does nothing
         public Boolean Logout()
-        {   
+        {
             if (this._loggedinUser != null)
             {
                 String name = _loggedinUser.Nickname;
@@ -130,11 +130,11 @@ namespace BusinessLogic
                 }
             }
             messHandler.save(recievedMessages);
-            return c;   
+            return c;
         }
 
         //set filter and sort arguments givven by the presentation
-        public void SetFilterAndSort(int sortType,int filterType,Boolean isAsc, string groupFilter, string userFilter)
+        public void SetFilterAndSort(int sortType, int filterType, Boolean isAsc, string groupFilter, string userFilter)
         {
             this.sortType = sortType;
             this.filterType = filterType;
@@ -180,9 +180,9 @@ namespace BusinessLogic
         {
             var messages =
                 (from m in recievedMessages
-                orderby m.Value.Date
-                select m.Value);
-            return messages.ToList();  
+                 orderby m.Value.Date
+                 select m.Value);
+            return messages.ToList();
         }
 
 
@@ -227,7 +227,7 @@ namespace BusinessLogic
                 select m.ToString();
                 return messages.ToList();
             }
-            
+
         }
 
         // a fuction to sort the messages by nickname
@@ -254,20 +254,21 @@ namespace BusinessLogic
         // a fuction to sort the messages by g_id, nickname, and timestamp
         public List<String> SortByAll(List<Message> filteredMessages)
         {
-            
+
             if (isAsc)
             {
                 var messages =
                 from m in filteredMessages
-                orderby m.GroupID, m.UserName, m.Date ascending
+                orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
                 select m.ToString();
                 return messages.ToList();
+
             }
             else
             {
                 var messages =
                 from m in filteredMessages
-                orderby m.GroupID, m.UserName, m.Date descending
+                orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
                 select m.ToString();
                 return messages.ToList();
             }
@@ -324,9 +325,6 @@ namespace BusinessLogic
             Logout();
             recievedMessages.Clear();
             registeredUsers.Clear();
-            
         }
-
-
     }
 }
