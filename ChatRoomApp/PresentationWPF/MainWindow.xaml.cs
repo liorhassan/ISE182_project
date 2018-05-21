@@ -25,9 +25,9 @@ namespace PresentationWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableObject _main = new ObservableObject();
-        private Chatroom myChatRoom;
-        private ProgramWindow pw;
+        private ObservableObject _main = new ObservableObject(); //binding object
+        private Chatroom myChatRoom; //chatroom object
+        private ProgramWindow pw; //the next window to show after login
         public MainWindow()
         {
             copyResources();
@@ -38,6 +38,7 @@ namespace PresentationWPF
             
         }
 
+        //copies the images to the debug filter(becouse we coudnt find out how to make his looking in the resources folder).
         private void copyResources()
         {
             string sourcePath = Directory.GetCurrentDirectory();
@@ -62,12 +63,14 @@ namespace PresentationWPF
             }
         }
 
+        //closses the app when the user closses the window
         private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
             Application.Current.Shutdown();
 
         }
 
+        //tries to login with the nickname typed and show a messageBox if failes
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameL;
@@ -89,6 +92,7 @@ namespace PresentationWPF
             }
         }
 
+        //tries to register with the nickname typed and show a messageBox if failes
         private void btn_register_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameR;
@@ -111,7 +115,7 @@ namespace PresentationWPF
 
 
 
-
+        //when login succefuly hides this window and shows the next
         private void StartProgram()
         {
             pw.Show();

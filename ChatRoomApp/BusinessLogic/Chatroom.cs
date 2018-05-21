@@ -25,8 +25,6 @@ namespace BusinessLogic
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
-        //private ChatroomMenu _ChatroomMenu;
-        //public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -58,7 +56,6 @@ namespace BusinessLogic
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);
-            //this._ChatroomMenu = new ChatroomMenu();
         }
         public int SortType
         {

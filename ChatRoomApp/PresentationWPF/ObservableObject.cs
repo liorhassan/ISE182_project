@@ -7,13 +7,16 @@ namespace PresentationWPF
 {
     public class ObservableObject : INotifyPropertyChanged
     {
+        //property changed event for the INotifyPropertyChanged interface
         public event PropertyChangedEventHandler PropertyChanged;
 
+        
         public ObservableObject()
         {
             Messages.CollectionChanged += Messages_CollectionChanged;
         }
 
+        //binding for the messages panel
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
 
         private void Messages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -21,6 +24,7 @@ namespace PresentationWPF
             OnPropertyChanged("Messages");
         }
 
+        /*
         private string messageContent = "";
         public string MessageContent
         {
@@ -34,7 +38,9 @@ namespace PresentationWPF
                 OnPropertyChanged("MessageContent");
             }
         }
+        */
 
+        //binding for the register text field
         private string nicknameR="";
         public string NicknameR
         {
@@ -49,6 +55,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the login text field
         private string nicknameL="";
         public string NicknameL
         {
@@ -63,6 +70,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the sort type combo box
         private string sortCombo="0";
         public string SortCombo
         {
@@ -77,6 +85,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the Descending checkbox
         private string isDesc = "True";
         public string IsDesc
         {
@@ -91,6 +100,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the filter combo box
         private string filterCombo = "0";
         public string FilterCombo
         {
@@ -105,6 +115,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the filter group availability
         private string isFilterGroup = "False";
         public string IsFilterGroup
         {
@@ -119,6 +130,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the filter group text field
         private string filterGroup = "";
         public string FilterGroup
         {
@@ -133,6 +145,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the filter user availability
         private string isFilterUser = "False";
         public string IsFilterUser
         {
@@ -147,6 +160,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the filter user text field
         private string filterUser = "";
         public string FilterUser
         {
@@ -161,6 +175,7 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the send message text field
         private string messageText = "";
         public string MessageText
         {
