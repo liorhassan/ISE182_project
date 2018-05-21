@@ -12,7 +12,7 @@ namespace BusinessLogic
     public class User
     {
         //fields represanting the user's credentials and group id(fixed read-only)
-        private readonly string groupID = "24";
+        private string groupID;
         private String nickname;
 
         public String Nickname
@@ -20,8 +20,14 @@ namespace BusinessLogic
             get { return nickname; }
         }
 
-        public User(String nickname)
+        public String GroupID
         {
+            get { return groupID; }
+        }
+
+        public User(String nickname,string GroupID)
+        {
+            this.groupID = GroupID;
             this.nickname = nickname;
         }
 

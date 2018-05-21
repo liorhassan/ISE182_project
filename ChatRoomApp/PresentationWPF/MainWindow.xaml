@@ -7,16 +7,17 @@
         mc:Ignorable="d"
         Title="Chatroom24 - Login" Height="450" Width="800"
         Closing="DataWindow_Closing" 
-        ResizeMode="NoResize" Icon="pack://siteoforigin:,,,/Resources/icon.png" >
+        ResizeMode="NoResize" Icon="/Resources/icon.png" >
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/loginRegisterBack.png"/>
+            <ImageBrush ImageSource="/Resources/loginRegisterBack.png"/>
         </Grid.Background>
         <TextBox Text="{Binding NicknameR,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="583,187,0,0" Background="#FFE1F5A5" BorderBrush="#FFABADB3" FontSize="16"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="87,275,0,0" Height="56" Click="btn_login_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
+
             <Button.Background>
-                <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/loginButton.png"/>
+                <ImageBrush ImageSource="/Resources/loginButton.png"/>
             </Button.Background>
         </Button>
         <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,180,0,0" Width="104" FontWeight="Bold" FontSize="18" Height="36" FontFamily="MV Boli"/>
@@ -24,7 +25,7 @@
         <TextBox Text="{Binding NicknameL,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="143,187,0,0" Background="#FF99D9EA" FontSize="16"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="561,275,0,0" Height="56" Click="btn_register_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
             <Button.Background>
-                <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/registerButton.png"/>
+                <ImageBrush ImageSource="/Resources/registerButton.png"/>
             </Button.Background>
         </Button>
         <Label Content="Registration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="526,113,0,0" Width="184" FontWeight="Bold" FontFamily="Cooper Black" FontSize="24" Background="{x:Null}" Foreground="#FF919791"/>
@@ -34,6 +35,10 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
+        <TextBox  PreviewTextInput="NumberValidationTextBox" Text="{Binding GroupL, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="143,228,0,0" Background="#FF99D9EA" FontSize="16"/>
+        <Label Content="GroupID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,221,0,0" Width="104" FontWeight="Bold" FontSize="18" Height="36" FontFamily="MV Boli"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding GroupR, Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="583,228,0,0" Background="#FFE1F5A5" BorderBrush="#FFABADB3" FontSize="16"/>
+        <Label Content="GroupID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,223,0,0" Width="110" FontWeight="Bold" FontSize="18" Height="38" FontFamily="MV Boli"/>
 
     </Grid>
 </Window>
