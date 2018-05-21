@@ -25,8 +25,6 @@ namespace BusinessLogic
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
-        //private ChatroomMenu _ChatroomMenu;
-        //public ChatroomMenu ChatroomMenu { get => _ChatroomMenu; }
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -58,7 +56,6 @@ namespace BusinessLogic
             mFileLogger.Init();
             mLogger.RegisterObserver(this);
             mLogger.RegisterObserver(mFileLogger);
-            //this._ChatroomMenu = new ChatroomMenu();
         }
         public int SortType
         {
@@ -71,29 +68,30 @@ namespace BusinessLogic
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
-        public Boolean Register(String nickname)
+        public Boolean Register(String nickname,String group)
         {
-            if (registeredUsers.ContainsKey(nickname))
+            String key = nickname + "@" + group;
+            if (registeredUsers.ContainsKey(key))
             {
                 return false;
             }
-            User newUser = new User(nickname);
-            registeredUsers.Add(newUser.Nickname, newUser);
+            User newUser = new User(nickname,group);
+            registeredUsers.Add(key, newUser);
             usersHandler.save(registeredUsers);
-            mLogger.AddLogMessage("User " + newUser.Nickname + " registered successfully");
+            mLogger.AddLogMessage("User " + newUser.Nickname + " in group "+newUser.GroupID+" registered successfully");
             return true;
         }
 
         // a fuction to login a user
         // finds the user and makes the loggedinUser
         // does nothing if the user doesn't exist
-        public Boolean Login(String nickname)
+        public Boolean Login(String nickname,String group)
         {
-            if (registeredUsers.ContainsKey(nickname))
+            String key = nickname + "@" + group;
+            if (registeredUsers.ContainsKey(key))
             {
-                User user = registeredUsers[nickname];
+                User user = registeredUsers[key];
                 this._loggedinUser = user;
-                //ChatroomMenu.Login = true;
                 mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
                 return true;
             }
