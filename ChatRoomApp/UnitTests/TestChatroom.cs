@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunicationLayer;
 using Persistence;
-using System.Windows.Threading;
 using System.IO;
 
 namespace BusinessLogic
 {
-    public class Chatroom : ILogger
+    public class TestChatroom
     {
         private static String projectpath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
         private int sortType;//0-timeStamp(default), 1-nickname, 2-everything
@@ -24,12 +21,10 @@ namespace BusinessLogic
         private readonly String URL = "http://ise172.ise.bgu.ac.il";
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
-        private Logger mLogger;
-        private FileLogger mFileLogger;
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
-        public Chatroom()
+        public TestChatroom()
         {
             sortType = 0;
             filterType = 0;
@@ -51,22 +46,7 @@ namespace BusinessLogic
                 registeredUsers = new Dictionary<String, User>();
                 usersHandler.save(registeredUsers);
             }
-            this.mLogger = Logger.Instance;
-            //String currpath = Directory.GetCurrentDirectory();
-            this.mFileLogger = new FileLogger(projectpath + "\\Data\\log.txt");
-            mFileLogger.Init();
-            mLogger.RegisterObserver(this);
-            mLogger.RegisterObserver(mFileLogger);
         }
-
-        public int SortType
-        {
-            set
-            {
-                sortType = value;
-            }
-        }
-
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
@@ -80,7 +60,6 @@ namespace BusinessLogic
             User newUser = new User(nickname, group);
             registeredUsers.Add(key, newUser);
             usersHandler.save(registeredUsers);
-            mLogger.AddLogMessage("User " + newUser.Nickname + " in group " + newUser.GroupID + " registered successfully");
             return true;
         }
 
@@ -94,7 +73,6 @@ namespace BusinessLogic
             {
                 User user = registeredUsers[key];
                 this._loggedinUser = user;
-                mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
                 return true;
             }
             return false;
@@ -110,7 +88,6 @@ namespace BusinessLogic
                 String name = _loggedinUser.Nickname;
                 this._loggedinUser = null;
                 //ChatroomMenu.Login = false;
-                mLogger.AddLogMessage("User " + name + " logged out successfully");
                 return true;
             }
             return false;
@@ -284,13 +261,11 @@ namespace BusinessLogic
         {
             if (!CheckMessageValidity(msg))
             {
-                mLogger.AddLogMessage("Invalid message was written");
                 return -1;
             }
             Message message = new Message(_loggedinUser.writeMessage(msg, URL));
             recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
-            mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
             return 1;
         }
 
@@ -304,90 +279,11 @@ namespace BusinessLogic
             return true;
         }
 
-        // exits chatroom
-        public void exit()
-        {
-            mFileLogger.Terminate();
-            mFileLogger = null;
-        }
-
-        public void Dispose()
-        {
-            mFileLogger.Dispose();
-        }
-
-        public void Flush()
-        {
-            mFileLogger.Flush();
-        }
-
-        public void Start()
-        {
-            mFileLogger.Init();
-        }
-
-        // to implement ILogger
-        public void ProcessLogMessage(string message)
-        {
-            return;
-        }
-
         public void RestartChatroom()
         {
             Logout();
             recievedMessages.Clear();
             registeredUsers.Clear();
-        }
-
-        public void SetLog(String num)
-        {
-            mFileLogger.Dispose();
-            this.mFileLogger = new FileLogger(projectpath + "\\Data\\log" + num + ".txt");
-            mFileLogger.Init();
-            mLogger.RegisterObserver(this);
-            mLogger.RegisterObserver(mFileLogger);
-        }
-        public void CheckLog() {
-            mFileLogger.GetLoggerStatus();
-        }
-        public void DeleteLog(String num)
-        {
-
-            String log = projectpath + "\\Data\\log.txt";
-            String m = projectpath + "\\Data\\Messages.bin";
-            String u = projectpath + "\\Data\\Users.bin";
-            if (File.Exists(log))
-            {
-                File.Delete(log);
-            }
-            if (File.Exists(m))
-            {
-                File.WriteAllText(m, string.Empty);
-            }
-            if (File.Exists(u))
-            {
-                File.WriteAllText(u, string.Empty);
-            }
-        }
-
-        public void DeleteLog2()
-        {
-
-            String log = projectpath + "\\Data\\log.txt";
-            String m = projectpath + "\\Data\\Messages.bin";
-            String u = projectpath + "\\Data\\Users.bin";
-            if (File.Exists(log))
-            {
-                File.WriteAllText(log, string.Empty);
-            }
-            if (File.Exists(m))
-            {
-                File.WriteAllText(m, string.Empty);
-            }
-            if (File.Exists(u))
-            {
-                File.WriteAllText(u, string.Empty);
-            }
         }
     }
 }

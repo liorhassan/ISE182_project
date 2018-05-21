@@ -1,0 +1,2 @@
+21/05/2018 23:29:09 - User userTwo in group 5 registered successfully
+21/05/2018 23:29:09 - User userTwo logged in successfully

@@ -18,33 +18,38 @@ namespace UnitTests
         [TestMethod()]
         public void TestRegister4()
         {
-            Chatroom register = new Chatroom();
+            Chatroom register = new Chatroom("1");
             register.RestartChatroom();
+            //register.SetLog("1");
+            //register.CheckLog();
             //register.Start();
             Boolean firstR = register.Register(userOne.Nickname, userOne.GroupID);
+            register.CheckLog();
             Assert.AreEqual(firstR, true);
             Boolean secondR = register.Register(userOne.Nickname, userOne.GroupID);
             Assert.AreEqual(secondR, false);
             //Console.WriteLine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName));
             //Console.WriteLine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName);
-            register.exit();
-            register.DeleteLog();
+            register.Dispose();
+            register.DeleteLog("1");
         }
 
         [TestMethod()]
         public void TestLogin4()
         {
-            Chatroom login = new Chatroom();
+            Chatroom login = new Chatroom("2");
             login.RestartChatroom();
+            //login.SetLog("2");
+            //login.CheckLog();
             //login.Start();
-            Console.WriteLine("after");
+            //Console.WriteLine("after");
             login.Register(userTwo.Nickname, userTwo.GroupID);
             Boolean firstL = login.Login(userTwo.Nickname, userTwo.GroupID);
             Assert.AreEqual(firstL, true);
             Boolean secondL = login.Login("otheruser", "4");
             Assert.AreEqual(secondL, false);
-            login.exit();
-            login.DeleteLog();
+            login.Dispose();
+            login.DeleteLog("2");
         }
 
 
