@@ -11,17 +11,17 @@ namespace UnitTests
     public class UnitTest1
     {
         Chatroom chatroom = new Chatroom();
-        User userOne = new User("userOne");
-        User userTwo = new User("userTwo");
-        User userThree = new User("userThree");
-        User userFour = new User("userFour");
+        User userOne = new User("userOne","24");
+        User userTwo = new User("userTwo","24");
+        User userThree = new User("userThree","24");
+        User userFour = new User("userFour","24");
         [TestMethod()]
         public void TestRegister()
         {
             chatroom.RestartChatroom();  
-            Boolean firstR = chatroom.Register(userOne.Nickname);
+            Boolean firstR = chatroom.Register(userOne.Nickname,userOne.GroupID);
             Assert.AreEqual(firstR, true);
-            Boolean secondR = chatroom.Register(userOne.Nickname);
+            Boolean secondR = chatroom.Register(userOne.Nickname,userOne.GroupID);
             Assert.AreEqual(secondR, false);
         }
 
@@ -30,10 +30,10 @@ namespace UnitTests
         {
             chatroom.RestartChatroom();
             Console.WriteLine("after");
-            chatroom.Register(userTwo.Nickname);
-            Boolean firstL = chatroom.Login(userTwo.Nickname);
+            chatroom.Register(userTwo.Nickname,userTwo.GroupID);
+            Boolean firstL = chatroom.Login(userTwo.Nickname,userTwo.GroupID);
             Assert.AreEqual(firstL, true);
-            Boolean secondL = chatroom.Login("otheruser");
+            Boolean secondL = chatroom.Login("otheruser","24");
             Assert.AreEqual(secondL, false);
             chatroom.exit();
         }
@@ -43,8 +43,8 @@ namespace UnitTests
         public void TestMessage()
         {
             chatroom.RestartChatroom();
-            chatroom.Register(userOne.Nickname);
-            chatroom.Login(userOne.Nickname);
+            chatroom.Register(userOne.Nickname,userOne.GroupID);
+            chatroom.Login(userOne.Nickname,userOne.GroupID);
             int first = chatroom.WriteMessage("message");
             Assert.AreEqual(first, 1);
             String s = new string('a', 151);
@@ -56,8 +56,8 @@ namespace UnitTests
         public void TestLogout()
         {
             chatroom.RestartChatroom();
-            chatroom.Register(userOne.Nickname);
-            chatroom.Login(userOne.Nickname);
+            chatroom.Register(userOne.Nickname,userOne.GroupID);
+            chatroom.Login(userOne.Nickname,userOne.GroupID);
             Boolean firstlogout = chatroom.Logout();
             Assert.AreEqual(firstlogout, true);
             Boolean secondlogout = chatroom.Logout();
@@ -83,23 +83,23 @@ namespace UnitTests
             };
             chatroom.RestartChatroom();
 
-            chatroom.Register(userThree.Nickname);
-            chatroom.Login(userThree.Nickname);
+            chatroom.Register(userThree.Nickname,userThree.GroupID);
+            chatroom.Login(userThree.Nickname,userThree.GroupID);
             chatroom.WriteMessage(third);
             chatroom.Logout();
 
-            chatroom.Register(userFour.Nickname);
-            chatroom.Login(userFour.Nickname);
+            chatroom.Register(userFour.Nickname,userFour.GroupID);
+            chatroom.Login(userFour.Nickname,userFour.GroupID);
             chatroom.WriteMessage(fourth);
             chatroom.Logout();
 
-            chatroom.Register(userOne.Nickname);
-            chatroom.Login(userOne.Nickname);
+            chatroom.Register(userOne.Nickname,userOne.GroupID);
+            chatroom.Login(userOne.Nickname,userOne.GroupID);
             chatroom.WriteMessage(first);           
             chatroom.Logout();
 
-            chatroom.Register(userTwo.Nickname);
-            chatroom.Login(userTwo.Nickname);
+            chatroom.Register(userTwo.Nickname,userTwo.GroupID);
+            chatroom.Login(userTwo.Nickname,userTwo.GroupID);
             chatroom.WriteMessage(second);
 
             chatroom.SetFilterAndSort(1, 0, true, "", "");
@@ -140,43 +140,43 @@ namespace UnitTests
             };
             chatroom.RestartChatroom();
 
-            chatroom.Register(userThree.Nickname);
-            chatroom.Login(userThree.Nickname);
+            chatroom.Register(userThree.Nickname,userThree.GroupID);
+            chatroom.Login(userThree.Nickname,userThree.GroupID);
             chatroom.WriteMessage(Three_first);
             chatroom.Logout();
 
-            chatroom.Register(userFour.Nickname);
-            chatroom.Login(userFour.Nickname);
+            chatroom.Register(userFour.Nickname,userFour.GroupID);
+            chatroom.Login(userFour.Nickname,userFour.GroupID);
             chatroom.WriteMessage(Four_first);
             chatroom.Logout();
 
-            chatroom.Register(userOne.Nickname);
-            chatroom.Login(userOne.Nickname);
+            chatroom.Register(userOne.Nickname,userOne.GroupID);
+            chatroom.Login(userOne.Nickname,userOne.GroupID);
             chatroom.WriteMessage(One_first);
             chatroom.Logout();
 
-            chatroom.Register(userTwo.Nickname);
-            chatroom.Login(userTwo.Nickname);
+            chatroom.Register(userTwo.Nickname,userTwo.GroupID);
+            chatroom.Login(userTwo.Nickname,userTwo.GroupID);
             chatroom.WriteMessage(Two_first);
             chatroom.Logout();
 
-            chatroom.Register(userThree.Nickname);
-            chatroom.Login(userThree.Nickname);
+            chatroom.Register(userThree.Nickname,userThree.GroupID);
+            chatroom.Login(userThree.Nickname,userThree.GroupID);
             chatroom.WriteMessage(Three_second);
             chatroom.Logout();
 
-            chatroom.Register(userFour.Nickname);
-            chatroom.Login(userFour.Nickname);
+            chatroom.Register(userFour.Nickname,userFour.GroupID);
+            chatroom.Login(userFour.Nickname,userFour.GroupID);
             chatroom.WriteMessage(Four_second);
             chatroom.Logout();
 
-            chatroom.Register(userOne.Nickname);
-            chatroom.Login(userOne.Nickname);
+            chatroom.Register(userOne.Nickname,userOne.GroupID);
+            chatroom.Login(userOne.Nickname,userOne.GroupID);
             chatroom.WriteMessage(One_second);
             chatroom.Logout();
 
-            chatroom.Register(userTwo.Nickname);
-            chatroom.Login(userTwo.Nickname);
+            chatroom.Register(userTwo.Nickname,userTwo.GroupID);
+            chatroom.Login(userTwo.Nickname,userTwo.GroupID);
             chatroom.WriteMessage(Two_second);
 
             chatroom.SetFilterAndSort(2, 0, true, "", "");
@@ -213,21 +213,21 @@ namespace UnitTests
                 third
             };
             chatroom.RestartChatroom();
-            chatroom.Register(userOne.Nickname);
-            chatroom.Login(userOne.Nickname);
+            chatroom.Register(userOne.Nickname,userOne.GroupID);
+            chatroom.Login(userOne.Nickname,userOne.GroupID);
             chatroom.WriteMessage("my first message");
             chatroom.WriteMessage("group 24 is the best");
             chatroom.WriteMessage("100 final grade");
             chatroom.Logout();
 
-            chatroom.Register(userTwo.Nickname);
-            chatroom.Login(userTwo.Nickname);
+            chatroom.Register(userTwo.Nickname,userTwo.GroupID);
+            chatroom.Login(userTwo.Nickname,userTwo.GroupID);
             chatroom.WriteMessage("second message");
             chatroom.WriteMessage("my message is not important");
             chatroom.Logout();
 
-            chatroom.Register(userThree.Nickname);
-            chatroom.Login(userThree.Nickname);
+            chatroom.Register(userThree.Nickname,userThree.GroupID);
+            chatroom.Login(userThree.Nickname,userThree.GroupID);
             chatroom.WriteMessage("third message");
             
             chatroom.SetFilterAndSort(0, 2, true, userOne.Nickname, "24");
