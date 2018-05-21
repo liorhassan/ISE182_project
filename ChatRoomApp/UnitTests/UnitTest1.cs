@@ -55,7 +55,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestMessage()
         {
-            Chatroom mes = new Chatroom();
+            TestChatroom mes = new TestChatroom();
             mes.RestartChatroom();
             mes.Register(userOne.Nickname, userOne.GroupID);
             mes.Login(userOne.Nickname, userOne.GroupID);
@@ -69,7 +69,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestSortByName()
         {
-            Chatroom sortbyname = new Chatroom();
+            TestChatroom sortbyname = new TestChatroom();
             String first = "message of userOne";
             String second = "message of userTwo";
             String third = "message of userThree";
@@ -125,7 +125,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestSortByAll()
         {
-            Chatroom sortbyall = new Chatroom();
+            TestChatroom sortbyall = new TestChatroom();
             String One_first = "first message of userOne";
             String One_second = "second message of userOne";
             String Two_first = "first message of userTwo";
@@ -212,7 +212,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestFilter()
         {
-            Chatroom filter = new Chatroom();
+            TestChatroom filter = new TestChatroom();
             String first = "first message";
             String second = "second message";
             String third = "third message";

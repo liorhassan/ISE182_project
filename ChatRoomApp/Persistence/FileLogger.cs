@@ -48,29 +48,8 @@ namespace Persistence
         {
             mLogFile.Close();
         }
-
-        public void Dispose()
-        {
-            mLogFile.Dispose();
-        }
-
-        public void Flush()
-        {
-            mLogFile.Flush();
-        }
-        #endregion
-
-        public void GetLoggerStatus()
-        {
-            if (mLogFile.BaseStream==null)
-            {
-                Console.WriteLine("shit");
-            }
-            else
-            {
-                Console.WriteLine("ok");
-            }
-        }
+     
+        #endregion 
         #region ILogger Members
 
         public void ProcessLogMessage(string logMessage)

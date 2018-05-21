@@ -308,22 +308,6 @@ namespace BusinessLogic
         public void exit()
         {
             mFileLogger.Terminate();
-            mFileLogger = null;
-        }
-
-        public void Dispose()
-        {
-            mFileLogger.Dispose();
-        }
-
-        public void Flush()
-        {
-            mFileLogger.Flush();
-        }
-
-        public void Start()
-        {
-            mFileLogger.Init();
         }
 
         // to implement ILogger
@@ -331,63 +315,6 @@ namespace BusinessLogic
         {
             return;
         }
-
-        public void RestartChatroom()
-        {
-            Logout();
-            recievedMessages.Clear();
-            registeredUsers.Clear();
-        }
-
-        public void SetLog(String num)
-        {
-            mFileLogger.Dispose();
-            this.mFileLogger = new FileLogger(projectpath + "\\Data\\log" + num + ".txt");
-            mFileLogger.Init();
-            mLogger.RegisterObserver(this);
-            mLogger.RegisterObserver(mFileLogger);
-        }
-        public void CheckLog() {
-            mFileLogger.GetLoggerStatus();
-        }
-        public void DeleteLog(String num)
-        {
-
-            String log = projectpath + "\\Data\\log.txt";
-            String m = projectpath + "\\Data\\Messages.bin";
-            String u = projectpath + "\\Data\\Users.bin";
-            if (File.Exists(log))
-            {
-                File.Delete(log);
-            }
-            if (File.Exists(m))
-            {
-                File.WriteAllText(m, string.Empty);
-            }
-            if (File.Exists(u))
-            {
-                File.WriteAllText(u, string.Empty);
-            }
-        }
-
-        public void DeleteLog2()
-        {
-
-            String log = projectpath + "\\Data\\log.txt";
-            String m = projectpath + "\\Data\\Messages.bin";
-            String u = projectpath + "\\Data\\Users.bin";
-            if (File.Exists(log))
-            {
-                File.WriteAllText(log, string.Empty);
-            }
-            if (File.Exists(m))
-            {
-                File.WriteAllText(m, string.Empty);
-            }
-            if (File.Exists(u))
-            {
-                File.WriteAllText(u, string.Empty);
-            }
-        }
+        
     }
 }

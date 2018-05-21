@@ -18,7 +18,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestRegister4()
         {
-            Chatroom register = new Chatroom("1");
+            Chatroom register = new Chatroom();
             register.RestartChatroom();
             //register.SetLog("1");
             //register.CheckLog();
@@ -37,7 +37,7 @@ namespace UnitTests
         [TestMethod()]
         public void TestLogin4()
         {
-            Chatroom login = new Chatroom("2");
+            Chatroom login = new Chatroom();
             login.RestartChatroom();
             //login.SetLog("2");
             //login.CheckLog();
