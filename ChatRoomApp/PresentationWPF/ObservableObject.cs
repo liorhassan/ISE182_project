@@ -40,8 +40,8 @@ namespace PresentationWPF
         }
         */
 
-        //binding for the register text field
-        private string nicknameR="";
+        //binding for the nickname register text field
+        private string nicknameR = "";
         public string NicknameR
         {
             get
@@ -55,8 +55,23 @@ namespace PresentationWPF
             }
         }
 
-        //binding for the login text field
-        private string nicknameL="";
+        //binding for the group register text field
+        private string groupR = "24";
+        public string GroupR
+        {
+            get
+            {
+                return groupR;
+            }
+            set
+            {
+                groupR = value;
+                OnPropertyChanged("GroupR");
+            }
+        }
+
+        //binding for the nickname login text field
+        private string nicknameL = "";
         public string NicknameL
         {
             get
@@ -67,6 +82,21 @@ namespace PresentationWPF
             {
                 nicknameL = value;
                 OnPropertyChanged("NicknameL");
+            }
+        }
+
+        //binding for the group login text field
+        private string groupL = "24";
+        public string GroupL
+        {
+            get
+            {
+                return groupL;
+            }
+            set
+            {
+                groupL = value;
+                OnPropertyChanged("GroupL");
             }
         }
 

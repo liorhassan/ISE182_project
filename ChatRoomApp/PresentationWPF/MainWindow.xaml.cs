@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace PresentationWPF
 {
@@ -30,7 +31,7 @@ namespace PresentationWPF
         private ProgramWindow pw; //the next window to show after login
         public MainWindow()
         {
-            copyResources();
+            //copyResources();
             InitializeComponent();
             DataContext = _main;
             myChatRoom = new Chatroom();
@@ -66,6 +67,7 @@ namespace PresentationWPF
         //closses the app when the user closses the window
         private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
+            myChatRoom.exit();
             Application.Current.Shutdown();
 
         }
@@ -74,20 +76,27 @@ namespace PresentationWPF
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameL;
-            if ((nickname == ""))
+            if (nickname.Contains('@'))
             {
-                MessageBox.Show("Please enter a nickname");
+                MessageBox.Show("Nickname Can't contain the char '@'");
+                return;
+            }
+            String group =Int32.Parse(_main.GroupL).ToString();
+            if (nickname == ""|group=="")
+            {
+                MessageBox.Show("Please enter a Nickname and a GroupID");
                 return;
             }
 
-            Boolean login = myChatRoom.Login(nickname);
+            Boolean login = myChatRoom.Login(nickname,group);
             if (!login)
             {
-                MessageBox.Show("Nickname doesn't exist");
+                MessageBox.Show("User doesn't exist");
             }
             else
             {
                 _main.NicknameL = "";
+                _main.GroupL = "24";
                 StartProgram();
             }
         }
@@ -96,24 +105,36 @@ namespace PresentationWPF
         private void btn_register_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameR;
-            if ((nickname == ""))
+            if (nickname.Contains('@'))
             {
-                MessageBox.Show("Please enter a nickname");
+                MessageBox.Show("Nickname Can't contain the char '@'");
                 return;
             }
-            Boolean reg = myChatRoom.Register(nickname);
+            String group = Int32.Parse(_main.GroupR).ToString();
+            if (nickname == ""|group=="")
+            {
+                MessageBox.Show("Please enter a Nickname and a GroupID");
+                return;
+            }
+            Boolean reg = myChatRoom.Register(nickname,group);
             if (!reg)
             {
                 MessageBox.Show("Nickname already exists, please choose another one");
             }
             else
             {
-                MessageBox.Show("user " + nickname + " created succesfuly♥");
+                MessageBox.Show("user " + nickname + " created in group "+group+" succesfuly♥");
                 _main.NicknameR = "";
+                _main.GroupR = "24";
             }
         }
 
-
+        //makes sure only numbers go to the groupID fields
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
         //when login succefuly hides this window and shows the next
         private void StartProgram()

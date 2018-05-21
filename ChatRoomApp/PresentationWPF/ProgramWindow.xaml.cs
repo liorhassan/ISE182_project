@@ -104,6 +104,7 @@ namespace PresentationWPF
         private void ProgramWindow_Closing(object sender, CancelEventArgs e)
         {
             chatroom.Logout();
+            chatroom.exit();
             Application.Current.Shutdown();
         }
     }
