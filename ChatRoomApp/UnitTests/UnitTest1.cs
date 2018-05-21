@@ -147,36 +147,43 @@ namespace UnitTests
             chatroom.WriteMessage(Three_first);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userFour.Nickname, userFour.GroupID);
             chatroom.Login(userFour.Nickname, userFour.GroupID);
             chatroom.WriteMessage(Four_first);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userOne.Nickname, userOne.GroupID);
             chatroom.Login(userOne.Nickname, userOne.GroupID);
             chatroom.WriteMessage(One_first);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userTwo.Nickname, userTwo.GroupID);
             chatroom.Login(userTwo.Nickname, userTwo.GroupID);
             chatroom.WriteMessage(Two_first);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userThree.Nickname, userThree.GroupID);
             chatroom.Login(userThree.Nickname, userThree.GroupID);
             chatroom.WriteMessage(Three_second);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userFour.Nickname, userFour.GroupID);
             chatroom.Login(userFour.Nickname, userFour.GroupID);
             chatroom.WriteMessage(Four_second);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userOne.Nickname, userOne.GroupID);
             chatroom.Login(userOne.Nickname, userOne.GroupID);
             chatroom.WriteMessage(One_second);
             chatroom.Logout();
             System.Threading.Thread.Sleep(2000);
+
             chatroom.Register(userTwo.Nickname, userTwo.GroupID);
             chatroom.Login(userTwo.Nickname, userTwo.GroupID);
             chatroom.WriteMessage(Two_second);
@@ -187,7 +194,6 @@ namespace UnitTests
             foreach (String mess in messagesAsc)
             {
                 Assert.AreEqual(mess.Contains(test[i]), true);
-                Console.WriteLine(mess);
                 i++;
             }
 
@@ -197,7 +203,6 @@ namespace UnitTests
             foreach (String mess in messagesDes)
             {
                 Assert.AreEqual(mess.Contains(test[i]), true);
-                Console.WriteLine(mess);
                 i--;
             }
 
