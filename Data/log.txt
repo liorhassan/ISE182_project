@@ -1,3 +1,10 @@
 22/05/2018 18:45:38 - User ohad in group 24 registered successfully
 22/05/2018 18:45:41 - User ohad logged in successfully
 22/05/2018 18:46:20 - User ohad logged out successfully
+22/05/2018 19:00:35 - User userOne in group 24 registered successfully
+22/05/2018 19:00:37 - User userOne logged in successfully
+22/05/2018 19:02:42 - User userOne logged out successfully
+22/05/2018 19:09:53 - User userOne logged in successfully
+22/05/2018 19:10:51 - User userOne logged out successfully
+22/05/2018 19:11:05 - User userOne logged in successfully
+22/05/2018 19:11:56 - User userOne logged out successfully

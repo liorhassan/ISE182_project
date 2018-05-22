@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using CommunicationLayer;
 using Persistence;
 using System.IO;
@@ -47,6 +49,14 @@ namespace BusinessLogic
                 usersHandler.save(registeredUsers);
             }
         }
+        public int SortType
+        {
+            set
+            {
+                sortType = value;
+            }
+        }
+
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
@@ -281,6 +291,7 @@ namespace BusinessLogic
 
         public void RestartChatroom()
         {
+            //Start();
             Logout();
             recievedMessages.Clear();
             registeredUsers.Clear();

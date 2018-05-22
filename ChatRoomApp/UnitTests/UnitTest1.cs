@@ -188,7 +188,7 @@ namespace UnitTests
             // login user
             // write its' message
             // logout user except the last 
-            // wait 2 seconds to make sure the time per image is different
+            // wait 2 seconds to make sure the time per message is different
             sortbyall.Register(userThree.Nickname, userThree.GroupID);
             sortbyall.Login(userThree.Nickname, userThree.GroupID);
             sortbyall.WriteMessage(Three_first);
@@ -274,9 +274,9 @@ namespace UnitTests
             TestChatroom filter = new TestChatroom();
             filter.RestartChatroom();
             // strings of the 3 messages by userOne
-            String first = "first message";
-            String second = "second message";
-            String third = "third message";
+            String first = "my first message";
+            String second = "group 24 is the best";
+            String third = "100 final grade";
             // order them in the order the sould be, by timestamp 
             List<String> test = new List<String>(3)
             {
@@ -284,16 +284,19 @@ namespace UnitTests
                 second,
                 third
             };
-            
+
             // register user
             // login user
             // write a number of messages
             // logout expect the last one
+            // wait 2 seconds to make sure the time per message is different
             filter.Register(userOne.Nickname, userOne.GroupID);
             filter.Login(userOne.Nickname, userOne.GroupID);
-            filter.WriteMessage("my first message");
-            filter.WriteMessage("group 24 is the best");
-            filter.WriteMessage("100 final grade");
+            filter.WriteMessage(first);
+            System.Threading.Thread.Sleep(2000);
+            filter.WriteMessage(second);
+            System.Threading.Thread.Sleep(2000);
+            filter.WriteMessage(third);
             filter.Logout();
 
             filter.Register(userTwo.Nickname, userTwo.GroupID);
@@ -306,23 +309,21 @@ namespace UnitTests
             filter.Login(userThree.Nickname, userThree.GroupID);
             filter.WriteMessage("third message");
             
-            filter.SetFilterAndSort(0, 2, true, "userOne" , "24");
+            filter.SetFilterAndSort(0, 2, true, userOne.GroupID, userOne.Nickname);
             List<String> messages = filter.GetAllMessages();
-            Console.WriteLine(messages.Count);
             int i = 0;
             foreach (String mess in messages)
             {
-                Assert.AreEqual(mess, test[i]);
-                Console.WriteLine(mess);
+                Assert.AreEqual(mess.Contains(test[i]), true);
                 i++;
             }
 
-            filter.SetFilterAndSort(0, 2, false, userOne.Nickname, userOne.GroupID);
+            filter.SetFilterAndSort(0, 2, false, userOne.GroupID, userOne.Nickname);
             messages = filter.GetAllMessages();
-            i = 3;
+            i = 2;
             foreach (String mess in messages)
             {
-                Assert.AreEqual(mess, test[i]);
+                Assert.AreEqual(mess.Contains(test[i]), true);             
                 i--;
             }
         }
