@@ -1,0 +1,11 @@
+22/05/2018 16:56:19 - User ohad in group 24 registered successfully
+22/05/2018 16:56:21 - User ohad logged in successfully
+22/05/2018 16:56:29 - Message 795778c4-3082-4d97-87fd-0888032cdb9c was written successfully
+22/05/2018 16:56:36 - Message 2fd9b487-7f50-4e76-9f7a-11ce823c784e was written successfully
+22/05/2018 16:57:18 - Message 57db87be-abfc-44df-be4e-746c088f327d was written successfully
+22/05/2018 16:57:20 - Message 982401b8-e22c-4475-843e-63d79bd75318 was written successfully
+22/05/2018 16:58:32 - User ohad logged out successfully
+22/05/2018 16:58:40 - User yoyo in group 868 registered successfully
+22/05/2018 16:58:48 - User yoyo logged in successfully
+22/05/2018 16:58:51 - Message 4b1d95ee-4c66-4ee5-8688-699cbdea0d8c was written successfully
+22/05/2018 16:59:01 - User yoyo logged out successfully
