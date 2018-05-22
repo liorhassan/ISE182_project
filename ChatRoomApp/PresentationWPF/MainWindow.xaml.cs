@@ -105,11 +105,6 @@ namespace PresentationWPF
         private void btn_register_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameR;
-            if (nickname.Contains('@'))
-            {
-                MessageBox.Show("Nickname Can't contain the char '@'");
-                return;
-            }
             String group = Int32.Parse(_main.GroupR).ToString();
             if (nickname == ""|group=="")
             {
