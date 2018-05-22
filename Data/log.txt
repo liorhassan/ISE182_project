@@ -1,0 +1,3 @@
+22/05/2018 18:45:38 - User ohad in group 24 registered successfully
+22/05/2018 18:45:41 - User ohad logged in successfully
+22/05/2018 18:46:20 - User ohad logged out successfully

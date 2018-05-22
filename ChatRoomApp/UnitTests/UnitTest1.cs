@@ -306,16 +306,18 @@ namespace UnitTests
             filter.Login(userThree.Nickname, userThree.GroupID);
             filter.WriteMessage("third message");
             
-            filter.SetFilterAndSort(0, 2, true, userOne.Nickname, userOne.GroupID);
+            filter.SetFilterAndSort(0, 2, true, "userOne" , "24");
             List<String> messages = filter.GetAllMessages();
+            Console.WriteLine(messages.Count);
             int i = 0;
             foreach (String mess in messages)
             {
                 Assert.AreEqual(mess, test[i]);
+                Console.WriteLine(mess);
                 i++;
             }
 
-            filter.SetFilterAndSort(0, 2, true, userOne.Nickname, userOne.GroupID);
+            filter.SetFilterAndSort(0, 2, false, userOne.Nickname, userOne.GroupID);
             messages = filter.GetAllMessages();
             i = 3;
             foreach (String mess in messages)
