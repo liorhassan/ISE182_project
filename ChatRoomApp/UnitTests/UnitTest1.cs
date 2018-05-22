@@ -301,26 +301,38 @@ namespace UnitTests
 
             filter.Register(userTwo.Nickname, userTwo.GroupID);
             filter.Login(userTwo.Nickname, userTwo.GroupID);
-            filter.WriteMessage("second message");
+            filter.WriteMessage("message of second");
             filter.WriteMessage("my message is not important");
             filter.Logout();
 
             filter.Register(userThree.Nickname, userThree.GroupID);
             filter.Login(userThree.Nickname, userThree.GroupID);
-            filter.WriteMessage("third message");
-            
+            filter.WriteMessage("message of third");
+
+            // set sort ascending
             filter.SetFilterAndSort(0, 2, true, userOne.GroupID, userOne.Nickname);
+            // get the sorted messages ascending
             List<String> messages = filter.GetAllMessages();
+            // initialize variable for iteration
             int i = 0;
+            // go through the messages and check that each message 
+            // contains the body of the message written in the beginning
+            // in the correct order
             foreach (String mess in messages)
             {
                 Assert.AreEqual(mess.Contains(test[i]), true);
                 i++;
             }
 
+            // set sort descending
             filter.SetFilterAndSort(0, 2, false, userOne.GroupID, userOne.Nickname);
+            // get the sorted messages descending
             messages = filter.GetAllMessages();
+            // initialize variable for iteration
             i = 2;
+            // go through the messages and check that each message 
+            // contains the body of the message written in the beginning
+            // in the correct order
             foreach (String mess in messages)
             {
                 Assert.AreEqual(mess.Contains(test[i]), true);             
