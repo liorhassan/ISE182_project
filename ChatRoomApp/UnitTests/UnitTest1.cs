@@ -10,12 +10,14 @@ namespace UnitTests
     [TestClass()]
     public class UnitTest1
     {
-        //Chatroom chatroom = new Chatroom();
+        // create users
+        // RestartChatroom clears the dictionaries so there will be no data inside
         User userOne = new User("userOne", "24");
         User userTwo = new User("userTwo", "5");
         User userThree = new User("userThree", "5");
         User userFour = new User("userFour", "8");
         [TestMethod()]
+        
         public void TestRegister()
         {
             TestChatroom register = new TestChatroom();
@@ -70,6 +72,7 @@ namespace UnitTests
         public void TestSortByName()
         {
             TestChatroom sortbyname = new TestChatroom();
+            sortbyname.RestartChatroom();
             String first = "message of userOne";
             String second = "message of userTwo";
             String third = "message of userThree";
@@ -81,8 +84,7 @@ namespace UnitTests
                 third,
                 second  
             };
-            sortbyname.RestartChatroom();
-
+            
             sortbyname.Register(userThree.Nickname, userThree.GroupID);
             sortbyname.Login(userThree.Nickname, userThree.GroupID);
             sortbyname.WriteMessage(third);
@@ -126,6 +128,7 @@ namespace UnitTests
         public void TestSortByAll()
         {
             TestChatroom sortbyall = new TestChatroom();
+            sortbyall.RestartChatroom();
             String One_first = "first message of userOne";
             String One_second = "second message of userOne";
             String Two_first = "first message of userTwo";
@@ -140,8 +143,7 @@ namespace UnitTests
                 Four_first, Four_second, One_first, One_second
                  
             };
-            sortbyall.RestartChatroom();
-
+            
             sortbyall.Register(userThree.Nickname, userThree.GroupID);
             sortbyall.Login(userThree.Nickname, userThree.GroupID);
             sortbyall.WriteMessage(Three_first);
@@ -213,6 +215,7 @@ namespace UnitTests
         public void TestFilter()
         {
             TestChatroom filter = new TestChatroom();
+            filter.RestartChatroom();
             String first = "first message";
             String second = "second message";
             String third = "third message";
@@ -222,7 +225,7 @@ namespace UnitTests
                 second,
                 third
             };
-            filter.RestartChatroom();
+            
             filter.Register(userOne.Nickname, userOne.GroupID);
             filter.Login(userOne.Nickname, userOne.GroupID);
             filter.WriteMessage("my first message");
