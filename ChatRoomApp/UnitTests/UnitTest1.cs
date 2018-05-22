@@ -99,7 +99,7 @@ namespace UnitTests
             String second = "message of userTwo";
             String third = "message of userThree";
             String fourth = "message of userFour";
-            // order them in the order the sould be, alphabetically by username
+            // order them in the order they should be, alphabetically by username
             List<String> test = new List<String>(4)
             {
                 fourth,
@@ -176,7 +176,7 @@ namespace UnitTests
             String Three_second = "second message of userThree";
             String Four_first = "first message of userFour";
             String Four_second = "second message of userFour";
-            // order them in the order the sould be, 
+            // order them in the order they should be, 
             // first by group id, then username, then timestamp
             List<String> test = new List<String>(8)
             {
@@ -277,7 +277,7 @@ namespace UnitTests
             String first = "my first message";
             String second = "group 24 is the best";
             String third = "100 final grade";
-            // order them in the order the sould be, by timestamp 
+            // order them in the order they sould be, by timestamp 
             List<String> test = new List<String>(3)
             {
                 first,
