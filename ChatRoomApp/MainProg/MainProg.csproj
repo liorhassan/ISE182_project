@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -60,10 +60,6 @@
     <ProjectReference Include="..\PresentationWPF\PresentationWPF.csproj">
       <Project>{3502baf8-6a8b-47a3-8e41-264a5770a6e6}</Project>
       <Name>PresentationWPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Presentation\Presentation.csproj">
-      <Project>{9ac46890-2b44-42d4-b6f1-eabb6586f488}</Project>
-      <Name>Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
