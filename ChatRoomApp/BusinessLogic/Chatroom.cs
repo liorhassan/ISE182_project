@@ -73,6 +73,7 @@ namespace BusinessLogic
         // creates a new user and adds to registered users
         public Boolean Register(String nickname, String group)
         {
+            sqlHandler.isExist(nickname, group);
             String key = nickname + "@" + group;
             if (registeredUsers.ContainsKey(key))
             {
