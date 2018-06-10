@@ -39,32 +39,8 @@ namespace PresentationWPF
             
         }
 
-        //copies the images to the debug filter(becouse we coudnt find out how to make his looking in the resources folder).
-        private void copyResources()
-        {
-            string sourcePath = Directory.GetCurrentDirectory();
-            sourcePath = sourcePath.Substring(0, sourcePath.Length - 10);
-            string targetPath = sourcePath + "\\bin\\Debug\\Resources";
-            if (!System.IO.Directory.Exists(targetPath))
-            {
-                System.IO.Directory.CreateDirectory(targetPath);
-            }
-            if (System.IO.Directory.Exists(sourcePath + "\\Resources"))
-            {
-                string[] files = System.IO.Directory.GetFiles(sourcePath + "\\Resources");
-
-                // Copy the files and overwrite destination files if they already exist.
-                foreach (string s in files)
-                {
-                    // Use static Path methods to extract only the file name from the path.
-                    string fileName = System.IO.Path.GetFileName(s);
-                    string destFile = System.IO.Path.Combine(targetPath, fileName);
-                    if(!File.Exists(destFile)) System.IO.File.Copy(s, destFile, true);
-                }
-            }
-        }
-
-        //closses the app when the user closses the window
+        
+        //closes the app when the user closses the window
         private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
             myChatRoom.exit();
@@ -76,19 +52,17 @@ namespace PresentationWPF
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameL;
-            if (nickname.Contains('@'))
-            {
-                MessageBox.Show("Nickname Can't contain the char '@'");
-                return;
-            }
             String group =Int32.Parse(_main.GroupL).ToString();
-            if (nickname == ""|group=="")
+            String pass = _main.PassL;
+            if (nickname == ""|group==""|pass=="")
             {
-                MessageBox.Show("Please enter a Nickname and a GroupID");
+                MessageBox.Show("Please enter a Nickname , a GroupID and Passward");
                 return;
             }
 
-            Boolean login = myChatRoom.Login(nickname,group);
+
+            //Boolean login = myChatRoom.Login(nickname,group,pass);
+            Boolean login = myChatRoom.Login(nickname, group);
             if (!login)
             {
                 MessageBox.Show("User doesn't exist");
@@ -100,18 +74,37 @@ namespace PresentationWPF
                 StartProgram();
             }
         }
+        private Boolean isPassValid(string pass)
+        {
+            if (pass.Length < 4)
+                return false;
+            for (int i =0; i<pass.Length; i++)
+            {
+                char c = pass.ElementAt(i);
+                if (!((c <= 'z' & c >= 'a') || (c <= 'Z' & c >= 'A') || (c >= 0 & c <= 9)))
+                    return false;
+            }
+            return true;
+            
+        }
 
         //tries to register with the nickname typed and show a messageBox if failes
         private void btn_register_Click(object sender, RoutedEventArgs e)
         {
             String nickname = _main.NicknameR;
             String group = Int32.Parse(_main.GroupR).ToString();
-            if (nickname == ""|group=="")
+            String pass = _main.PassR;
+            if (nickname == ""|group=="" | pass=="")
             {
                 MessageBox.Show("Please enter a Nickname and a GroupID");
                 return;
             }
-            Boolean reg = myChatRoom.Register(nickname,group);
+            if (!isPassValid(pass))
+            {
+                MessageBox.Show("Passward invalid");
+                return;
+            }
+            Boolean reg = myChatRoom.Register(nickname,group, pass);
             if (!reg)
             {
                 MessageBox.Show("Nickname already exists, please choose another one");
@@ -138,5 +131,18 @@ namespace PresentationWPF
             this.Hide();
             pw.startWindow();
         }
+
+        private void LPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = sender as PasswordBox;
+            _main.PassL = pb.Password;
+        }
+
+        private void RPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox pb = sender as PasswordBox;
+            _main.PassR = pb.Password;
+        }
+
     }
 }

@@ -100,6 +100,36 @@ namespace PresentationWPF
             }
         }
 
+        //binding for the passward register field
+        private string passR;
+        public string PassR
+        {
+            get
+            {
+                return passR;
+            }
+            set
+            {
+                passR = value;
+                OnPropertyChanged("PassR");
+            }
+        }
+
+        //binding for the passward login field
+        private string passL;
+        public string PassL
+        {
+            get
+            {
+                return passL;
+            }
+            set
+            {
+                passL = value;
+                OnPropertyChanged("PassL");
+            }
+        }
+
         //binding for the sort type combo box
         private string sortCombo="0";
         public string SortCombo
