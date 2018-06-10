@@ -8,3 +8,8 @@
 22/05/2018 19:10:51 - User userOne logged out successfully
 22/05/2018 19:11:05 - User userOne logged in successfully
 22/05/2018 19:11:56 - User userOne logged out successfully
+10/06/2018 15:08:49 - User ohad logged in successfully
+10/06/2018 15:09:43 - Message 57835c49-3d03-4b43-b544-e8cca6dc3155 was written successfully
+10/06/2018 15:11:00 - User ohad logged out successfully
+10/06/2018 15:25:51 - User ohad logged in successfully
+10/06/2018 15:31:41 - User ohad logged out successfully
