@@ -292,7 +292,14 @@ namespace BusinessLogic
             mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
             return 1;
         }
-
+        // check message owner
+        public Boolean isOwner(String[] parts)
+        {
+            String id = parts[0];
+            String name = parts[1];
+            String time = parts[2];
+            String body = parts[3];
+        }
         // checks if a message is valid
         private Boolean CheckMessageValidity(String content)
         {
