@@ -114,8 +114,12 @@ namespace PresentationWPF
             if (index<0 ) return;
             var message = _main.Messages.ElementAt(index).ToString();
             char[] chars = { ' ', '-', ' ' };
-            string[] a = message.Split(chars);
-
+            string[] parts = message.Split(chars);
+            String guid = chatroom.isOwner(parts);
+            if(guid!=null)
+            {
+                chatroom.
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
