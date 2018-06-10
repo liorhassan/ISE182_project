@@ -301,6 +301,7 @@ namespace BusinessLogic
             String name = parts[1];
             String time = parts[2];
             DateTime date = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", null);
+            date = date.ToUniversalTime();
             String body = parts[3];
             //return sqlHandler.isOwner(id, name, date, body);
             return " ";
