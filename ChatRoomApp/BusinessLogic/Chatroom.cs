@@ -18,7 +18,7 @@ namespace BusinessLogic
         private int filterType;// 0-no filter(default), 1- filter by groupID, 2 - filter by user
         private string userFilter; //user nickname to filter by
         private string groupFilter; //groupID nickname to filter by
-        private User _loggedinUser;
+        private string _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
         private readonly String URL = "http://ise172.ise.bgu.ac.il";
@@ -26,7 +26,7 @@ namespace BusinessLogic
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
-        private sqlHandler sqlHandler;
+        private sqlHandler _sqlHandler;
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -39,7 +39,7 @@ namespace BusinessLogic
             isAsc = true;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
-            sqlHandler = new sqlHandler();
+            _sqlHandler = new sqlHandler();
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
@@ -71,13 +71,14 @@ namespace BusinessLogic
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
-        public Boolean Register(String nickname, String group)
+        public Boolean Register(String nickname, String group, string pass)
         {
-            if (sqlHandler.isExist(nickname, group)==true)
+            if (_sqlHandler.isExist(nickname, group)==true)
             {
                 return false;
             }
-            sqlHandler.Register(nickname, group);
+            pass = hashing.passwordToHash(pass);
+            _sqlHandler.Register(nickname, group, pass);
             //User newUser = new User(nickname, group);
             //registeredUsers.Add(key, newUser);
             //usersHandler.save(registeredUsers);
@@ -88,14 +89,14 @@ namespace BusinessLogic
         // a fuction to login a user
         // finds the user and makes the loggedinUser
         // does nothing if the user doesn't exist
-        public Boolean Login(String nickname, String group)
+        public Boolean Login(String nickname, String group, string pass)
         {
-            String key = nickname + "@" + group;
-            if (registeredUsers.ContainsKey(key))
+            pass = hashing.passwordToHash(pass);
+            string userID = _sqlHandler.login(nickname, group, pass);
+            if (userID!=null)
             {
-                User user = registeredUsers[key];
-                this._loggedinUser = user;
-                mLogger.AddLogMessage("User " + user.Nickname + " logged in successfully");
+                this._loggedinUser = userID;
+                mLogger.AddLogMessage("User " + nickname + " logged in successfully");
                 return true;
             }
             return false;

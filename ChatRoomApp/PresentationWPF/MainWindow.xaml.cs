@@ -61,8 +61,8 @@ namespace PresentationWPF
             }
 
 
-            //Boolean login = myChatRoom.Login(nickname,group,pass);
-            Boolean login = myChatRoom.Login(nickname, group);
+            Boolean login = myChatRoom.Login(nickname,group,pass);
+            //Boolean login = myChatRoom.Login(nickname, group);
             if (!login)
             {
                 MessageBox.Show("User doesn't exist");
