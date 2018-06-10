@@ -26,6 +26,7 @@ namespace BusinessLogic
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
+        private sqlHandler sqlHandler;
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -38,6 +39,7 @@ namespace BusinessLogic
             isAsc = true;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
+            sqlHandler = new sqlHandler();
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
@@ -71,15 +73,15 @@ namespace BusinessLogic
         // creates a new user and adds to registered users
         public Boolean Register(String nickname, String group)
         {
-            String key = nickname + "@" + group;
-            if (registeredUsers.ContainsKey(key))
+            if (sqlHandler.isExist(nickname, group)==true)
             {
                 return false;
             }
-            User newUser = new User(nickname, group);
-            registeredUsers.Add(key, newUser);
-            usersHandler.save(registeredUsers);
-            mLogger.AddLogMessage("User " + newUser.Nickname + " in group " + newUser.GroupID + " registered successfully");
+            sqlHandler.Register(nickname, group);
+            //User newUser = new User(nickname, group);
+            //registeredUsers.Add(key, newUser);
+            //usersHandler.save(registeredUsers);
+            mLogger.AddLogMessage("User " + nickname + " in group " + group + " registered successfully");
             return true;
         }
 
@@ -292,7 +294,24 @@ namespace BusinessLogic
             mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
             return 1;
         }
+        // check message owner
+        public String isOwner(String[] parts)
+        {
+            int id = Int32.Parse(parts[0]);
+            String name = parts[1];
+            String time = parts[2];
+            DateTime date = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", null);
+            date = date.ToUniversalTime();
+            String body = parts[3];
+            //return sqlHandler.isOwner(id, name, date, body);
+            return " ";
+        }
 
+        // edit message by GUID
+        public void EditMessage(String GUID)
+        {
+            sqlHandler.EditMessage(GUID);
+        }
         // checks if a message is valid
         private Boolean CheckMessageValidity(String content)
         {

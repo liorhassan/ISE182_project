@@ -40,6 +40,20 @@ namespace PresentationWPF
         }
         */
 
+        //binding for the selected index
+        private string selectedmessage = "";
+        public string SelectedMessage
+        {
+            get
+            {
+                return selectedmessage;
+            }
+            set
+            {
+                selectedmessage = value;
+                OnPropertyChanged("SelectedMessage");
+            }
+        }
         //binding for the nickname register text field
         private string nicknameR = "";
         public string NicknameR
