@@ -26,7 +26,7 @@ namespace BusinessLogic
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
-        private SqlHandler sqlHandler;
+        private sqlHandler sqlHandler;
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -39,7 +39,7 @@ namespace BusinessLogic
             isAsc = true;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
-            sqlHandler = new SqlHandler();
+            sqlHandler = new sqlHandler();
             this._loggedinUser = null;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
@@ -73,16 +73,16 @@ namespace BusinessLogic
         // creates a new user and adds to registered users
         public Boolean Register(String nickname, String group)
         {
-            sqlHandler.isExist(nickname, group);
             String key = nickname + "@" + group;
-            if (registeredUsers.ContainsKey(key))
+            if (sqlHandler.isExist(nickname, group)==true)
             {
                 return false;
             }
-            User newUser = new User(nickname, group);
-            registeredUsers.Add(key, newUser);
-            usersHandler.save(registeredUsers);
-            mLogger.AddLogMessage("User " + newUser.Nickname + " in group " + newUser.GroupID + " registered successfully");
+            sqlHandler.Register(nickname, group);
+            //User newUser = new User(nickname, group);
+            //registeredUsers.Add(key, newUser);
+            //usersHandler.save(registeredUsers);
+            mLogger.AddLogMessage("User " + nickname + " in group " + group + " registered successfully");
             return true;
         }
 
