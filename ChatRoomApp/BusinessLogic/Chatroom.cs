@@ -27,6 +27,7 @@ namespace BusinessLogic
         private Logger mLogger;
         private FileLogger mFileLogger;
         private sqlHandler _sqlHandler;
+        private List<Guid> MessageGuid;
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -37,6 +38,7 @@ namespace BusinessLogic
             userFilter = "";
             groupFilter = "";
             isAsc = true;
+            MessageGuid = new List<String>;
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
@@ -221,6 +223,12 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.Date ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
                 return messages.ToList();
             }
             else
@@ -229,6 +237,12 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.Date descending
+                select m.Id;
+                MessageGuid = guid.ToList();
                 return messages.ToList();
             }
 
@@ -243,7 +257,16 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.UserName ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
+                
+
             }
             else
             {
@@ -251,6 +274,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.UserName descending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
         }
@@ -258,13 +288,19 @@ namespace BusinessLogic
         // a fuction to sort the messages by g_id, nickname, and timestamp
         public List<String> SortByAll(List<Message> filteredMessages)
         {
-
             if (isAsc)
             {
                 var messages =
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
 
             }
@@ -274,6 +310,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
 
@@ -296,16 +339,21 @@ namespace BusinessLogic
             return 1;
         }
         // check message owner
-        public String isOwner(String[] parts)
+        //public String isOwner(String[] parts)
+        //{
+        //    int id = Int32.Parse(parts[0]);
+        //    String name = parts[1];
+        //    String time = parts[2];
+        //    DateTime date = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", null);
+        //    date = date.ToUniversalTime();
+        //    String body = parts[3];
+        //    //return sqlHandler.isOwner(id, name, date, body);
+        //    return " ";
+        //}
+
+        public String isOwner(int index)
         {
-            int id = Int32.Parse(parts[0]);
-            String name = parts[1];
-            String time = parts[2];
-            DateTime date = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", null);
-            date = date.ToUniversalTime();
-            String body = parts[3];
-            //return sqlHandler.isOwner(id, name, date, body);
-            return " ";
+            MessageGuid.ElementAt(index);
         }
 
         // edit message by GUID

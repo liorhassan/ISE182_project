@@ -112,10 +112,10 @@ namespace PresentationWPF
         {
             int index = Int32.Parse(_main.SelectedMessage);
             if (index<0 ) return;
-            var message = _main.Messages.ElementAt(index).ToString();
-            char[] chars = { ' ', '-', ' ' };
-            string[] parts = message.Split(chars);
-            String guid = chatroom.isOwner(parts);
+            //var message = _main.Messages.ElementAt(index).ToString();
+            //char[] chars = { ' ', '-', ' ' };
+            //string[] parts = message.Split(chars);
+            String guid = chatroom.isOwner(index);
             if(guid!=null)
             {
                 chatroom.

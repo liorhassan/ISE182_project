@@ -22,6 +22,8 @@ namespace BusinessLogic
         public string MessageContent { get => _messageContent; }
         private string _groupID;
         public string GroupID { get => _groupID; }
+        private string _string;
+        public string String { get => _string; }
 
         // recieves an IMessage and turns it to a message
         public Message(IMessage message)
@@ -31,6 +33,7 @@ namespace BusinessLogic
             _date = message.Date.AddHours(3);
             _messageContent = message.MessageContent;
             _groupID = message.GroupID;
+            _string = message.ToString();
         }
 
         // string representation of a message
