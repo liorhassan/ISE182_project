@@ -20,12 +20,118 @@ namespace Persistence
         private readonly String usrTblName = "Users";
         private DateTime lastUpdate;
 
+        public Boolean userExists(String nickname, String gid)
+        {
+            Boolean output = false;
+            String sql_query = $"select * from {usrTblName} where Group_Id = {gid} AND Nickname = {nickname};";
+
+            SqlConnection connection;
+            SqlCommand command;
+
+            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
+            connection = new SqlConnection(connetion_string);
+            SqlDataReader data_reader;
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(sql_query, connection);
+                data_reader = command.ExecuteReader();
+                if (data_reader.HasRows) output = true;
+                data_reader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
+        }
+
+        public int loginUser(String nickname, String gid,String password)
+        {
+            int output=-1;
+            String sql_query = $"select Id from {usrTblName} where Group_Id = {gid} AND Nickname = {nickname} AND Password = {password};";
+
+            SqlConnection connection;
+            SqlCommand command;
+
+            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
+            connection = new SqlConnection(connetion_string);
+            SqlDataReader data_reader;
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(sql_query, connection);
+                data_reader = command.ExecuteReader();
+                if(data_reader.HasRows) output = data_reader.GetInt32(0);
+                data_reader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
+        }
+
+
+        public void registerUser(String nickname, String gid, String password)
+        {
+            SqlConnection connection;
+            SqlCommand command;
+
+            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
+            connection = new SqlConnection(connetion_string);
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(null, connection);
+
+                // Create and prepare an SQL statement.
+                // Use should never use something like: query = "insert into table values(" + value + ");" 
+                // Especially when selecting. More about it on the lab about security.
+                command.CommandText =
+                    $"INSERT INTO {usrTblName} ([Group_Id],[Nickname],[Password]" +
+                    "VALUES (@groupid,@nick,@pass)";
+                SqlParameter groupid = new SqlParameter(@"usrid", SqlDbType.Int, 20);
+                SqlParameter nick = new SqlParameter(@"time", SqlDbType.Text, 20);
+                SqlParameter pass = new SqlParameter(@"cont", SqlDbType.Text, 20);
+
+                groupid.Value = gid;
+                nick.Value = nickname;
+                pass.Value = password;
+                command.Parameters.Add(groupid);
+                command.Parameters.Add(nick);
+                command.Parameters.Add(pass);
+
+                // Call Prepare after setting the Commandtext and Parameters.
+                command.Prepare();
+                command.ExecuteNonQuery();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+                Console.WriteLine(ex.ToString());
+
+            }
+        }
+
+
         public List<IMessage> retriveAllMessages(String gid, String nickname)
         {
             List<IMessage> output = new List<IMessage>();
             String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id";
-            if (gid == "") sql_query += ";";
-            else if (nickname == "") sql_query += $" where {usrTblName}.Group_Id = {gid};";
+            if (gid.Equals("")) sql_query += ";";
+            else if (nickname.Equals("")) sql_query += $" where {usrTblName}.Group_Id = {gid};";
             else sql_query += $" where {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = {nickname};";
 
             SqlConnection connection;
@@ -45,7 +151,7 @@ namespace Persistence
                     DateTime dateFacturation = new DateTime();
                     if (!data_reader.IsDBNull(2))
                         dateFacturation = data_reader.GetDateTime(2);
-                    output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(0).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
+                    output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(4).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
 
                 }
                 data_reader.Close();
@@ -59,7 +165,6 @@ namespace Persistence
                 Console.WriteLine("Error");
                 Console.WriteLine(ex.ToString());
             }
-
             return output;
         }
 
@@ -89,7 +194,7 @@ namespace Persistence
                     DateTime dateFacturation = new DateTime();
                     if (!data_reader.IsDBNull(2))
                         dateFacturation = data_reader.GetDateTime(2);
-                    output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(0).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
+                    output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(4).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
 
                 }
                 data_reader.Close();
@@ -111,9 +216,8 @@ namespace Persistence
         {
             return $"'{lastUpdate.Year}-{lastUpdate.Month}-{lastUpdate.Day} {lastUpdate.Hour}:{lastUpdate.Minute}:{lastUpdate.Second}.000'";
         }
-
-        /**
-        public void sendMessage(IMessage msg)
+        
+        public void sendMessage(String uid,String content)
         {
             SqlConnection connection;
             SqlCommand command;
@@ -130,31 +234,24 @@ namespace Persistence
                 // Use should never use something like: query = "insert into table values(" + value + ");" 
                 // Especially when selecting. More about it on the lab about security.
                 command.CommandText =
-                    $"INSERT INTO {msgTblName} ([Guid],[User_Id],[SendTime],[Body]" +
-                    "VALUES (@first_name, @last_name,@city,@country,@phone)";
-                SqlParameter first_name_param = new SqlParameter(@"first_name", SqlDbType.Text, 20);
-                SqlParameter last_name_param = new SqlParameter(@"last_name", SqlDbType.Text, 20);
-                SqlParameter city_param = new SqlParameter(@"city", SqlDbType.Text, 20);
-                SqlParameter country_param = new SqlParameter(@"country", SqlDbType.Text, 20);
-                SqlParameter phone_param = new SqlParameter(@"phone", SqlDbType.Text, 20);
+                    $"INSERT INTO {msgTblName} ([User_Id],[SendTime],[Body]" +
+                    "VALUES (@usrid,@time,@cont)";
+                SqlParameter usrid = new SqlParameter(@"usrid", SqlDbType.Int, 20);
+                SqlParameter time = new SqlParameter(@"time", SqlDbType.Date, 20);
+                SqlParameter cont = new SqlParameter(@"cont", SqlDbType.Text, 120);
 
-                first_name_param.Value = "Edsger";
-                last_name_param.Value = "Dijkstra";
-                city_param.Value = "Amsterdam";
-                country_param.Value = "Netherlands";
-                phone_param.Value = "054-8965478";
-                command.Parameters.Add(first_name_param);
-                command.Parameters.Add(last_name_param);
-                command.Parameters.Add(city_param);
-                command.Parameters.Add(country_param);
-                command.Parameters.Add(phone_param);
+                usrid.Value = uid;
+                time.Value = DateTime.Now.ToUniversalTime();
+                cont.Value = content;
+                command.Parameters.Add(usrid);
+                command.Parameters.Add(time);
+                command.Parameters.Add(cont);
 
                 // Call Prepare after setting the Commandtext and Parameters.
                 command.Prepare();
-                int num_rows_changed = command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 command.Dispose();
                 connection.Close();
-                Console.WriteLine($"ExecuteNonQuery in SqlCommand executed!! {num_rows_changed.ToString()} row was changes\\inserted");
             }
             catch (Exception ex)
             {
@@ -162,9 +259,7 @@ namespace Persistence
                 Console.WriteLine(ex.ToString());
 
             }
-            Console.ReadKey();
         }
-        **/
 
         private sealed class DAMessage : IMessage
         {
@@ -176,12 +271,15 @@ namespace Persistence
             public DAMessage(Guid id = new Guid(), string groupId = "", string userName = "", string messageContent = "", DateTime utcTime=new DateTime())
             {
                 this.Id = id;
-                this.UserName = userName;
+                this.UserName = userName.Trim(' ');
                 this.Date = utcTime;
-                this.MessageContent = messageContent;
-                this.GroupID = groupId;
+                this.MessageContent = messageContent.Trim(' ');
+                this.GroupID = groupId.Trim(' ');
             }
-
+            public String ToString()
+            {
+                return Date.ToString() + " - " + GroupID + " - " + UserName + " - " + MessageContent;
+            }
         }
     }
 }
