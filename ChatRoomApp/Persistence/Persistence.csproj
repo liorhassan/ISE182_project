@@ -46,8 +46,15 @@
     <Compile Include="Logger.cs" />
     <Compile Include="MessagesHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sqlHandler.cs" />
     <Compile Include="UsersHandler.cs" />
     <Compile Include="XMLHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommunicationLayer\CommunicationLayer.csproj">
+      <Project>{a943cba9-c293-474f-8fd9-32577a920d2b}</Project>
+      <Name>CommunicationLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
