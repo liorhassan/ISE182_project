@@ -38,7 +38,6 @@ namespace BusinessLogic
             userFilter = "";
             groupFilter = "";
             isAsc = true;
-            MessageGuid = new List<Guid>(200);
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
