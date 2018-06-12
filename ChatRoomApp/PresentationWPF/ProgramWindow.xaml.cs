@@ -109,7 +109,11 @@ namespace PresentationWPF
             //string[] parts = message.Split(chars);
             string s = index.ToString();
             Guid guid = chatroom.MessageGuid.ElementAt(index);
-            MessageBox.Show(chatroom.recievedMessages[guid].ToString());
+           // MessageBox.Show(chatroom.recievedMessages[guid].ToString());
+            Window edit = new EditMessage();
+            edit.ShowDialog();
+            //MessageBox.Show(_main.EditMessageText);
+            //string k = _main.EditMessageText;
 
         }
         //closses the chatroom and the app when the user closes the window

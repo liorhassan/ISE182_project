@@ -21,3 +21,15 @@
 12/06/2018 10:53:51 - User ohad logged out successfully
 12/06/2018 11:04:32 - User ohad logged in successfully
 12/06/2018 11:04:47 - User ohad logged out successfully
+12/06/2018 11:40:56 - User ohad logged in successfully
+12/06/2018 11:41:19 - User ohad logged out successfully
+12/06/2018 11:51:41 - User ohad logged in successfully
+12/06/2018 11:52:15 - User ohad logged out successfully
+12/06/2018 11:53:11 - User ohad logged in successfully
+12/06/2018 11:53:27 - User ohad logged out successfully
+12/06/2018 11:59:49 - User ohad logged in successfully
+12/06/2018 12:00:04 - User ohad logged out successfully
+12/06/2018 12:01:59 - User ohad logged in successfully
+12/06/2018 12:02:07 - User ohad logged out successfully
+12/06/2018 12:06:38 - User ohad logged in successfully
+12/06/2018 12:07:01 - User ohad logged out successfully
