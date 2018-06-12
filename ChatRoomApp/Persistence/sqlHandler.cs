@@ -20,50 +20,6 @@ namespace Persistence
         private readonly String usrTblName = "Users";
         private DateTime lastUpdate;
 
-        public void test()
-        {
-
-            SqlConnection connection;
-            SqlCommand command;
-
-            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
-            connection = new SqlConnection(connetion_string);
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(null, connection);
-                // Create and prepare an SQL statement.
-                // Use should never use something like: query = "insert into table values(" + value + ");" 
-                // Especially when selecting. More about it on the lab about security.
-                command.CommandText =
-                    $"INSERT INTO {usrTblName} ([Group_Id],[Nickname],[Password])" +
-                    "VALUES (@groupid,@nick,@pass)";
-                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
-                SqlParameter pass = new SqlParameter(@"pass", SqlDbType.Text, 20);
-
-                groupid.Value = 1;
-                nick.Value = "asd";
-                pass.Value = "asdf";
-                command.Parameters.Add(groupid);
-                command.Parameters.Add(nick);
-                command.Parameters.Add(pass);
-
-                // Call Prepare after setting the Commandtext and Parameters.
-                command.Prepare();
-                command.ExecuteNonQuery();   
-                command.Dispose();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error");
-                Console.WriteLine(ex.ToString());
-
-            }
-        }
-
         public Boolean userExists(String nickname, String gid)
         {
             Boolean output = false;
@@ -137,7 +93,7 @@ namespace Persistence
         public Boolean isOwner(Guid mid,String uid)
         {
             Boolean output = false;
-            String sql_query = $"select * from {msgTblName} where Guid = {mid} AND User_Id = {uid};";
+            String sql_query = $"select * from {msgTblName} where Guid = {mid} AND User_Id = '{uid}';";
 
             SqlConnection connection;
             SqlCommand command;
@@ -151,7 +107,7 @@ namespace Persistence
                 connection.Open();
                 command = new SqlCommand(sql_query, connection);
                 data_reader = command.ExecuteReader();
-                if (data_reader.HasRows) output = true;
+                if (data_reader.Read()) output = true;
                 data_reader.Close();
                 command.Dispose();
                 connection.Close();
@@ -248,7 +204,7 @@ namespace Persistence
             String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id";
             if (gid.Equals("")) sql_query += ";";
             else if (nickname.Equals("")) sql_query += $" where {usrTblName}.Group_Id = {gid};";
-            else sql_query += $" where {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = {nickname};";
+            else sql_query += $" where {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";
 
             SqlConnection connection;
             SqlCommand command;
@@ -291,7 +247,7 @@ namespace Persistence
             String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime >= {UpdateSql()}";
             if (gid == "") sql_query += ";";
             else if (nickname == "") sql_query += $" AND {usrTblName}.Group_Id = {gid};";
-            else sql_query += $" AND {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = {nickname};";
+            else sql_query += $" AND {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";
 
             SqlConnection connection;
             SqlCommand command;
