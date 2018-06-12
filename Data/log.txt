@@ -24,3 +24,8 @@
 12/06/2018 18:51:31 - User admin logged in successfully
 12/06/2018 18:51:41 - New Message was written successfully
 12/06/2018 18:51:56 - The User has logged out successfully
+12/06/2018 19:25:33 - User ohad in group 24 registered successfully
+12/06/2018 19:25:35 - User ohad logged in successfully
+12/06/2018 19:25:41 - New Message was written successfully
+12/06/2018 19:27:11 - New Message was written successfully
+12/06/2018 19:27:25 - The User has logged out successfully
