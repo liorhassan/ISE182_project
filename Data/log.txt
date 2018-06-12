@@ -39,3 +39,22 @@
 12/06/2018 19:36:22 - User kop logged in successfully
 12/06/2018 19:36:30 - New Message was written successfully
 12/06/2018 19:36:37 - The User has logged out successfully
+12/06/2018 19:57:53 - User admin logged in successfully
+12/06/2018 19:58:00 - New Message was written successfully
+12/06/2018 19:58:06 - The User has logged out successfully
+12/06/2018 20:03:20 - User shauli logged in successfully
+12/06/2018 20:03:24 - New Message was written successfully
+12/06/2018 20:03:45 - New Message was written successfully
+12/06/2018 20:04:29 - The User has logged out successfully
+12/06/2018 20:08:00 - User shauli logged in successfully
+12/06/2018 20:08:04 - New Message was written successfully
+12/06/2018 20:08:11 - The User has logged out successfully
+12/06/2018 20:09:21 - User shauli logged in successfully
+12/06/2018 20:09:26 - New Message was written successfully
+12/06/2018 20:09:31 - The User has logged out successfully
+12/06/2018 20:11:17 - User shauli logged in successfully
+12/06/2018 20:11:24 - New Message was written successfully
+12/06/2018 20:12:07 - New Message was written successfully
+12/06/2018 20:13:27 - The User has logged out successfully
+12/06/2018 20:14:10 - User shauli logged in successfully
+12/06/2018 20:14:45 - The User has logged out successfully

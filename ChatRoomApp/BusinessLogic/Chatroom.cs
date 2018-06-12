@@ -19,11 +19,11 @@ namespace BusinessLogic
         private string userFilter; //user nickname to filter by
         private string groupFilter; //groupID nickname to filter by
         private int _loggedinUser;
-        private Dictionary<Guid, Message> recievedMessages;
-        private Dictionary<String, User> registeredUsers;
+        //private Dictionary<Guid, Message> recievedMessages;
+        //private Dictionary<String, User> registeredUsers;
         private readonly String URL = "http://ise172.ise.bgu.ac.il";
-        private MessagesHandler messHandler;
-        private UsersHandler usersHandler;
+        //private MessagesHandler messHandler;
+        //private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
         private sqlHandler _sqlHandler;
@@ -37,11 +37,12 @@ namespace BusinessLogic
             userFilter = "";
             groupFilter = "";
             isAsc = true;
-            messHandler = new MessagesHandler();
-            usersHandler = new UsersHandler();
+            //messHandler = new MessagesHandler();
+            //usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
             this._loggedinUser = -1;
-            recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
+            //recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
+            /**
             if (recievedMessages == null)
             {
                 recievedMessages = new Dictionary<Guid, Message>();
@@ -53,6 +54,7 @@ namespace BusinessLogic
                 registeredUsers = new Dictionary<String, User>();
                 usersHandler.save(registeredUsers);
             }
+            **/
             this.mLogger = Logger.Instance;
             String currpath = Directory.GetCurrentDirectory();
             this.mFileLogger = new FileLogger(projectpath + "\\Data\\log.txt");
@@ -116,6 +118,7 @@ namespace BusinessLogic
             return false;
         }
 
+        /**
         // a fuction to retrieve 10 messages from the server
         // calls the fuction from the loggedinUser
         // adds the new messages to recievedMessages
@@ -134,7 +137,7 @@ namespace BusinessLogic
             messHandler.save(recievedMessages);
             return c;
         }
-
+            **/
         //set filter and sort arguments givven by the presentation
         public void SetFilterAndSort(int sortType, int filterType, Boolean isAsc, string groupFilter, string userFilter)
         {
@@ -148,19 +151,19 @@ namespace BusinessLogic
         //return all the messages to be shown on the message panel, filtered and sorted as needed
         public List<String> GetAllMessages()
         {
-            List<Message> FilteredMessages;
+            List<IMessage> FilteredMessages;
             List<String> output;
             if (filterType == 0)
             {
-                FilteredMessages = GetMessagesByAll();
+                FilteredMessages = _sqlHandler.retriveAllMessages("", "");
             }
             else if (filterType == 1)
             {
-                FilteredMessages = GetAllByGroup();
+                FilteredMessages = _sqlHandler.retriveAllMessages(groupFilter, "");
             }
             else
             {
-                FilteredMessages = GetAllByUser();
+                FilteredMessages = _sqlHandler.retriveAllMessages(groupFilter, userFilter);
             }
             if (sortType == 0)
             {
@@ -177,6 +180,7 @@ namespace BusinessLogic
             return output;
         }
 
+        /**
         // a fuction to retrieve 20 messages from the dictionary
         public List<Message> GetMessagesByAll()
         {
@@ -209,9 +213,10 @@ namespace BusinessLogic
                 select m.Value;
             return messages.ToList();
         }
+        **/
 
         // a fuction to sort the messages by the timestamp
-        public List<String> SortByTimestamp(List<Message> filteredMessages)
+        public List<String> SortByTimestamp(List<IMessage> filteredMessages)
         {
             if (isAsc)
             {
@@ -245,7 +250,7 @@ namespace BusinessLogic
         }
 
         // a fuction to sort the messages by nickname
-        public List<String> SortByNickname(List<Message> filteredMessages)
+        public List<String> SortByNickname(List<IMessage> filteredMessages)
         {
             if (isAsc)
             {
@@ -280,7 +285,7 @@ namespace BusinessLogic
         }
 
         // a fuction to sort the messages by g_id, nickname, and timestamp
-        public List<String> SortByAll(List<Message> filteredMessages)
+        public List<String> SortByAll(List<IMessage> filteredMessages)
         {
 
             if (isAsc)
@@ -329,7 +334,6 @@ namespace BusinessLogic
             }
           _sqlHandler.sendMessage(_loggedinUser.ToString(), msg);
             //recievedMessages.Add(message.Id, message);
-            messHandler.save(recievedMessages);
             mLogger.AddLogMessage("New Message was written successfully");
             return 1;
         }
@@ -376,8 +380,6 @@ namespace BusinessLogic
         {
             //Start();
             Logout();
-            recievedMessages.Clear();
-            registeredUsers.Clear();
         }
 
         //chack validity of password

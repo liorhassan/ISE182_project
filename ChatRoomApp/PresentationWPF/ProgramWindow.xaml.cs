@@ -77,7 +77,7 @@ namespace PresentationWPF
         //every 2 seconds, askes the chatroom to retruve 10 messages and updates the display if needed
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (chatroom.Retrieve10Messages() != 0) UpdateView();
+            UpdateView();
         }
 
         //attempt to send a message and shows a warning if failes

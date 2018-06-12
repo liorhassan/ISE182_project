@@ -306,15 +306,18 @@ namespace Persistence
                 // Use should never use something like: query = "insert into table values(" + value + ");" 
                 // Especially when selecting. More about it on the lab about security.
                 command.CommandText =
-                    $"INSERT INTO {msgTblName} ([User_Id],[SendTime],[Body]" +
-                    "VALUES (@usrid,@time,@cont)";
+                    $"INSERT INTO {msgTblName} ([Guid],[User_Id],[SendTime],[Body])" +
+                    "VALUES (@guid,@usrid,@time,@cont)";
+                SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
                 SqlParameter usrid = new SqlParameter(@"usrid", SqlDbType.Int, 20);
                 SqlParameter time = new SqlParameter(@"time", SqlDbType.Date, 20);
                 SqlParameter cont = new SqlParameter(@"cont", SqlDbType.Text, 120);
 
+                guid.Value = Guid.NewGuid();
                 usrid.Value = uid;
                 time.Value = DateTime.Now.ToUniversalTime();
                 cont.Value = content;
+                command.Parameters.Add(guid);
                 command.Parameters.Add(usrid);
                 command.Parameters.Add(time);
                 command.Parameters.Add(cont);
