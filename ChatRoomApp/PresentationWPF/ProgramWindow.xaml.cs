@@ -101,8 +101,9 @@ namespace PresentationWPF
         }
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-            int index = Int32.Parse(_main.SelectedMessage);
-            if (index < 0) return;
+            //int index = Int32.Parse(_main.SelectedMessage);
+            int index = _main.Messages.IndexOf(_main.SelectedListItem);
+            if (index < 0) return;        
             //var message = _main.Messages.ElementAt(index).ToString();
             //char[] chars = { ' ', '-', ' ' };
             //string[] parts = message.Split(chars);

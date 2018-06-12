@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -115,6 +116,33 @@ namespace PresentationWPF
             }
         }
         //binding for the selected index
+        public const string SelectedStickPropertyName = "SelectedListItem";
+
+        private string _selectedItem;
+
+        /// <summary>
+        /// Gets the SelectedStick property.
+        /// TODO Update documentation:
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// This property's value is broadcasted by the Messenger's default instance when it changes.
+        /// </summary>
+        public string SelectedListItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+
+            set
+            {
+                if (_selectedItem == value || value == null)
+                {
+                    return;
+                }
+                var oldValue = _selectedItem;
+                _selectedItem = value;
+            }
+        }
         private string selectedmessage = "";
         public string SelectedMessage
         {
