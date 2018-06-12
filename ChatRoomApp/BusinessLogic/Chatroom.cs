@@ -27,8 +27,7 @@ namespace BusinessLogic
         private Logger mLogger;
         private FileLogger mFileLogger;
         private sqlHandler _sqlHandler;
-
-
+        private List<Guid> MessageGuid;
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
@@ -220,6 +219,12 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.Date ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
                 return messages.ToList();
             }
             else
@@ -228,6 +233,12 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.Date descending
+                select m.Id;
+                MessageGuid = guid.ToList();
                 return messages.ToList();
             }
 
@@ -242,6 +253,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.UserName ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
             else
@@ -250,6 +268,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.UserName descending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
         }
@@ -264,6 +289,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
 
             }
@@ -273,6 +305,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
 
@@ -295,16 +334,14 @@ namespace BusinessLogic
             return 1;
         }
         // check message owner
-        public String isOwner(String[] parts)
+        public Boolean isOwner(int index)
         {
-            int id = Int32.Parse(parts[0]);
-            String name = parts[1];
-            String time = parts[2];
-            DateTime date = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", null);
-            date = date.ToUniversalTime();
-            String body = parts[3];
-            //return sqlHandler.isOwner(id, name, date, body);
-            return " ";
+            return _sqlHandler.isOwner(MessageGuid.ElementAt(index), _loggedinUser.ToString());
+        }
+
+        public void EditMesage(int index, String newMessage)
+        {
+            _sqlHandler.editMessage(MessageGuid.ElementAt(index), newMessage);
         }
 
 

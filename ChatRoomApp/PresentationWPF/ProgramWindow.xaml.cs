@@ -110,13 +110,28 @@ namespace PresentationWPF
 
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-            int index = Int32.Parse(_main.SelectedMessage);
-            if (index<0 ) return;
-            var message = _main.Messages.ElementAt(index).ToString();
-            char[] chars = { ' ', '-', ' ' };
-            string[] parts = message.Split(chars);
-            String guid = chatroom.isOwner(parts);
-           
+            //int index = Int32.Parse(_main.SelectedMessage);
+            int index = _main.Messages.IndexOf(_main.SelectedListItem);
+            if (index < 0) return;
+            //var message = _main.Messages.ElementAt(index).ToString();
+            //char[] chars = { ' ', '-', ' ' };
+            //string[] parts = message.Split(chars);
+            Boolean isOwner = chatroom.isOwner(index);
+            if (isOwner)
+            {
+                Window edit = new EditMessage(_main);
+                edit.ShowDialog();
+                String newMessage = _main.Edit;
+                chatroom.EditMesage(index, newMessage);
+            }
+            //string s = index.ToString();
+            //Guid guid = chatroom.MessageGuid.ElementAt(index);
+           // MessageBox.Show(chatroom.recievedMessages[guid].ToString());
+
+
+            //MessageBox.Show(_main.EditMessageText);
+            //string k = _main.EditMessageText;
+
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

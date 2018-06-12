@@ -263,7 +263,40 @@ namespace PresentationWPF
                 OnPropertyChanged("MessageText");
             }
         }
+        //binding for the edit message text field
+        private string edit = "";
+        public string Edit
+        {
+            get
+            {
+                return edit;
+            }
+            set
+            {
+                edit = value;
+                OnPropertyChanged("Edit");
+            }
+        }
+        //binding for the selected index
+        public const string SelectedStickPropertyName = "SelectedListItem";
+        private string _selectedItem;
+        public string SelectedListItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
 
+            set
+            {
+                if (_selectedItem == value || value == null)
+                {
+                    return;
+                }
+                var oldValue = _selectedItem;
+                _selectedItem = value;
+            }
+        }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
