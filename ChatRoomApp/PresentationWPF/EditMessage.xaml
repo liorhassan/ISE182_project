@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="EditMessage" Height="150" Width="500">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Text="{Binding EditMessageText}" Height="23" Margin="169,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="294"/>
+        <TextBox MaxLength="120" Text="{Binding Edit}" HorizontalAlignment="Left" Height="32" Margin="63,0,0,83" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18"/>
         <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="169,89,0,0" RenderTransformOrigin="1.373,2.186" Click="Button_Click"/>
+        <TextBox x:Name="texty" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="83,47,0,0"/>
 
     </Grid>
 </Window>

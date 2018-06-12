@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace PresentationWPF
 {
@@ -20,15 +23,16 @@ namespace PresentationWPF
     public partial class EditMessage : Window
     {
         private ObservableObject _main;
-        public EditMessage(ObservableObject _main)
+        public EditMessage(ObservableObject main)
         {
-            this._main = _main;
             InitializeComponent();
+            this._main = main;
+            DataContext = _main;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string s = _main.MessageText;           
+            string s = _main.Edit;
             if(s!=null)
             {
                 MessageBox.Show(s.Length.ToString());
@@ -37,8 +41,10 @@ namespace PresentationWPF
             {
                 MessageBox.Show(s);
             }
-            _main.EditMessageText = "";
+            
             this.Hide();
         }
+
+     
     }
 }
