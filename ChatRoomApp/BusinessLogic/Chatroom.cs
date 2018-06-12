@@ -149,21 +149,39 @@ namespace BusinessLogic
         }
 
         //return all the messages to be shown on the message panel, filtered and sorted as needed
-        public List<String> GetAllMessages()
+        public List<String> GetAllMessages(bool all)
         {
             List<IMessage> FilteredMessages;
             List<String> output;
-            if (filterType == 0)
+            if(all)
             {
-                FilteredMessages = _sqlHandler.retriveAllMessages("", "");
-            }
-            else if (filterType == 1)
-            {
-                FilteredMessages = _sqlHandler.retriveAllMessages(groupFilter, "");
+                if (filterType == 0)
+                {
+                    FilteredMessages = _sqlHandler.retriveAllMessages("", "");
+                }
+                else if (filterType == 1)
+                {
+                    FilteredMessages = _sqlHandler.retriveAllMessages(groupFilter, "");
+                }
+                else
+                {
+                    FilteredMessages = _sqlHandler.retriveAllMessages(groupFilter, userFilter);
+                }
             }
             else
             {
-                FilteredMessages = _sqlHandler.retriveAllMessages(groupFilter, userFilter);
+                if (filterType == 0)
+                {
+                    FilteredMessages = _sqlHandler.retriveNewMessages("", "");
+                }
+                else if (filterType == 1)
+                {
+                    FilteredMessages = _sqlHandler.retriveNewMessages(groupFilter, "");
+                }
+                else
+                {
+                    FilteredMessages = _sqlHandler.retriveNewMessages(groupFilter, userFilter);
+                }
             }
             if (sortType == 0)
             {
@@ -381,6 +399,8 @@ namespace BusinessLogic
             //Start();
             Logout();
         }
+
+
 
         //chack validity of password
         public Boolean isPassValid(string pass)

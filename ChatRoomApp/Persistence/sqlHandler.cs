@@ -353,7 +353,7 @@ namespace Persistence
             }
             public String ToString()
             {
-                return Date.ToString() + " - " + GroupID + " - " + UserName + " - " + MessageContent;
+                return Date.ToLocalTime().ToString() + " - " + GroupID + " - " + UserName + " - " + MessageContent;
             }
         }
     }

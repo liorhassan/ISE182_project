@@ -25,7 +25,7 @@
             <ImageBrush ImageSource="/Resources/loginRegisterBack.png"/>
         </Grid.Background>
         <TextBox Text="{Binding NicknameR,Mode=TwoWay}"  HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="76,151,0,0" Background="#FFE1F5A5" BorderBrush="#FFABADB3" FontSize="16" Grid.ColumnSpan="3" Grid.Column="1"/>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="87,62,0,0" Height="56" Click="btn_login_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.Row="1">
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="87,71,0,0" Height="56" Click="btn_login_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.Row="1">
 
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/loginButton.png"/>
@@ -34,7 +34,7 @@
         <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,143,0,0" Width="104" FontWeight="Bold" FontSize="18" Height="36" FontFamily="MV Boli"/>
         <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="87,97,0,0" Width="106" FontWeight="Bold" FontFamily="Cooper Black" FontSize="24" Background="{x:Null}" Foreground="#FF919791"/>
         <TextBox Text="{Binding NicknameL,Mode=TwoWay}" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="143,151,0,0" Background="#FF99D9EA" FontSize="16"/>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="54,62,0,0" Height="56" Click="btn_register_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1">
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="54,71,0,0" Height="56" Click="btn_register_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/registerButton.png"/>
             </Button.Background>
@@ -48,12 +48,12 @@
         </Label>
         <TextBox  PreviewTextInput="NumberValidationTextBox" Text="{Binding GroupL, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="143,186,0,0" Background="#FF99D9EA" FontSize="16" RenderTransformOrigin="0.55,-0.5" Grid.RowSpan="2"/>
         <Label Content="GroupID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,184,0,0" Width="104" FontWeight="Bold" FontSize="18" Height="36" FontFamily="MV Boli" Grid.RowSpan="2"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding GroupR, Mode=TwoWay}"  HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="76,188,0,0" Background="#FFE1F5A5" BorderBrush="#FFABADB3" FontSize="16" Grid.ColumnSpan="3" Grid.Column="1" Grid.RowSpan="2"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" Text="{Binding GroupR, Mode=TwoWay}"  HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="76,187,0,0" Background="#FFE1F5A5" BorderBrush="#FFABADB3" FontSize="16" Grid.ColumnSpan="3" Grid.Column="1" Grid.RowSpan="2"/>
         <Label Content="GroupID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,184,0,0" Width="110" FontWeight="Bold" FontSize="18" Height="38" FontFamily="MV Boli" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,8,0,0" Width="110" FontWeight="Bold" FontSize="18" Height="38" FontFamily="MV Boli" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,7,0,0" Width="110" FontWeight="Bold" FontSize="18" Height="38" FontFamily="MV Boli" Grid.Row="1"/>
-        <PasswordBox MaxLength="6" PasswordChanged="RPasswordBox_PasswordChanged" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="76,9,0,0" VerticalAlignment="Top" Width="120" Background="#FFE1F5A5" FontSize="16" Grid.Row="1"/>
-        <PasswordBox MaxLength="6" PasswordChanged="LPasswordBox_PasswordChanged" HorizontalAlignment="Left" Height="30" Margin="143,8,0,0" VerticalAlignment="Top" Width="120" Background="#FF99D9EA" FontSize="16" Grid.Row="1"/>
+        <PasswordBox MaxLength="6" PasswordChanged="RPasswordBox_PasswordChanged" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="76,12,0,0" VerticalAlignment="Top" Width="120" Background="#FFE1F5A5" FontSize="16" Grid.Row="1"/>
+        <PasswordBox MaxLength="6" PasswordChanged="LPasswordBox_PasswordChanged" HorizontalAlignment="Left" Height="30" Margin="143,11,0,0" VerticalAlignment="Top" Width="120" Background="#FF99D9EA" FontSize="16" Grid.Row="1"/>
 
     </Grid>
 </Window>
