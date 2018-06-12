@@ -100,6 +100,11 @@ namespace BusinessLogic
             return false;
         }
 
+        public void isOwner(int index)
+        {
+            throw new NotImplementedException();
+        }
+
         // a fuction to logout the loggedinUser
         // checks if the loggedinUser is not null, and then turns it to null
         // else does nothing
@@ -336,6 +341,11 @@ namespace BusinessLogic
             return 1;
         }
 
+        public void isOwner(int index)
+        {
+
+            sqlHandler.isOwner(MessageGuid.ElementAt(index), )
+        }
         // checks if a message is valid
         private Boolean CheckMessageValidity(String content)
         {

@@ -104,10 +104,11 @@ namespace PresentationWPF
         {
             //int index = Int32.Parse(_main.SelectedMessage);
             int index = _main.Messages.IndexOf(_main.SelectedListItem);
-            if (index < 0) return;        
+            if (index < 0) return;
             //var message = _main.Messages.ElementAt(index).ToString();
             //char[] chars = { ' ', '-', ' ' };
             //string[] parts = message.Split(chars);
+            chatroom.isOwner(index);
             string s = index.ToString();
             Guid guid = chatroom.MessageGuid.ElementAt(index);
             MessageBox.Show(chatroom.recievedMessages[guid].ToString());
