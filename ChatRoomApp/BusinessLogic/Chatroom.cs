@@ -348,13 +348,8 @@ namespace BusinessLogic
         {
             if (pass.Length < 4)
                 return false;
-            for (int i = 0; i < pass.Length; i++)
-            {
-                char c = pass.ElementAt(i);
-                if (!((c <= 'z' & c >= 'a') || (c <= 'Z' & c >= 'A') || (c >= 0 & c <= 9)))
-                    return false;
-            }
-            return true;
+            bool validA = pass.All(c => Char.IsLetterOrDigit(c));
+            return validA;
 
         }
 

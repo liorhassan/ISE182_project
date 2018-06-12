@@ -86,11 +86,11 @@ namespace PresentationWPF
                 MessageBox.Show("Please enter a Nickname and a GroupID");
                 return;
             }
-           // if (!myChatRoom.isPassValid(pass))
-          //  {
-           //     MessageBox.Show("Passward invalid");
-            //    return;
-          //  }
+            if (!myChatRoom.isPassValid(pass))
+            {
+                MessageBox.Show("Passward invalid");
+                return;
+            }
             Boolean reg = myChatRoom.Register(nickname,group, pass);
             if (!reg)
             {
