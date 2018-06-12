@@ -58,3 +58,11 @@
 12/06/2018 20:13:27 - The User has logged out successfully
 12/06/2018 20:14:10 - User shauli logged in successfully
 12/06/2018 20:14:45 - The User has logged out successfully
+12/06/2018 20:22:19 - User shauli logged in successfully
+12/06/2018 20:22:29 - New Message was written successfully
+12/06/2018 20:23:11 - The User has logged out successfully
+12/06/2018 20:38:03 - User shauli logged in successfully
+12/06/2018 20:38:24 - New Message was written successfully
+12/06/2018 20:39:33 - The User has logged out successfully
+12/06/2018 20:45:11 - User shauli logged in successfully
+12/06/2018 20:45:56 - The User has logged out successfully

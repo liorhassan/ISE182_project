@@ -40,15 +40,25 @@ namespace PresentationWPF
         public void startWindow()
         {
             dispatcherTimer.Start();
-            UpdateView();
+            NewView();
         }
 
         //clears the messages panel and populates it with the right messages as given from the chatroom
-        private void UpdateView()
+        private void NewView()
         {
             _main.Messages.Clear();
-            foreach (String s in chatroom.GetAllMessages()) _main.Messages.Add(s);
+            foreach (String s in chatroom.GetAllMessages(true)) _main.Messages.Add(s);
             
+        }
+
+        private void UpdateView()
+        {
+            List<String> msgs = chatroom.GetAllMessages(false);
+            foreach (String s in msgs)
+            {
+                _main.Messages.RemoveAt(0);
+                _main.Messages.Add(s);
+            }
         }
 
         //stops this window, logout the chatroom and reshow the login window
@@ -61,10 +71,10 @@ namespace PresentationWPF
         }
 
         //sets the filter and order when the user presses the applay button
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void sort_filter_Button_Click(object sender, RoutedEventArgs e)
         {
             chatroom.SetFilterAndSort(Int32.Parse(_main.SortCombo), Int32.Parse(_main.FilterCombo), Boolean.Parse(_main.IsDesc), _main.FilterGroup, _main.FilterUser);
-            UpdateView();
+            NewView();
         }
 
         //changes the availability of the filter fields when the combo box changes
@@ -81,7 +91,7 @@ namespace PresentationWPF
         }
 
         //attempt to send a message and shows a warning if failes
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Send_Button_Click(object sender, RoutedEventArgs e)
         {
             int send = chatroom.WriteMessage(_main.MessageText);
             if (send == 1)
@@ -110,12 +120,8 @@ namespace PresentationWPF
 
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-            //int index = Int32.Parse(_main.SelectedMessage);
             int index = _main.Messages.IndexOf(_main.SelectedListItem);
             if (index < 0) return;
-            //var message = _main.Messages.ElementAt(index).ToString();
-            //char[] chars = { ' ', '-', ' ' };
-            //string[] parts = message.Split(chars);
             Boolean isOwner = chatroom.isOwner(index);
             if (isOwner)
             {
@@ -124,19 +130,8 @@ namespace PresentationWPF
                 String newMessage = _main.Edit;
                 chatroom.EditMesage(index, newMessage);
             }
-            //string s = index.ToString();
-            //Guid guid = chatroom.MessageGuid.ElementAt(index);
-           // MessageBox.Show(chatroom.recievedMessages[guid].ToString());
-
-
-            //MessageBox.Show(_main.EditMessageText);
-            //string k = _main.EditMessageText;
 
         }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
     }
 }
