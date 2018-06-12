@@ -116,10 +116,7 @@ namespace PresentationWPF
             char[] chars = { ' ', '-', ' ' };
             string[] parts = message.Split(chars);
             String guid = chatroom.isOwner(parts);
-            if(guid!=null)
-            {
-                chatroom.
-            }
+           
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

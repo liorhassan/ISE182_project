@@ -20,10 +20,54 @@ namespace Persistence
         private readonly String usrTblName = "Users";
         private DateTime lastUpdate;
 
+        public void test()
+        {
+
+            SqlConnection connection;
+            SqlCommand command;
+
+            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
+            connection = new SqlConnection(connetion_string);
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(null, connection);
+                // Create and prepare an SQL statement.
+                // Use should never use something like: query = "insert into table values(" + value + ");" 
+                // Especially when selecting. More about it on the lab about security.
+                command.CommandText =
+                    $"INSERT INTO {usrTblName} ([Group_Id],[Nickname],[Password])" +
+                    "VALUES (@groupid,@nick,@pass)";
+                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
+                SqlParameter pass = new SqlParameter(@"pass", SqlDbType.Text, 20);
+
+                groupid.Value = 1;
+                nick.Value = "asd";
+                pass.Value = "asdf";
+                command.Parameters.Add(groupid);
+                command.Parameters.Add(nick);
+                command.Parameters.Add(pass);
+
+                // Call Prepare after setting the Commandtext and Parameters.
+                command.Prepare();
+                command.ExecuteNonQuery();   
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+                Console.WriteLine(ex.ToString());
+
+            }
+        }
+
         public Boolean userExists(String nickname, String gid)
         {
             Boolean output = false;
-            String sql_query = $"select * from {usrTblName} where Group_Id = {gid} AND Nickname = {nickname};";
+            String sql_query = $"select * from {usrTblName} where Group_Id = {gid} AND Nickname = '{nickname}';";
 
             SqlConnection connection;
             SqlCommand command;
@@ -120,10 +164,10 @@ namespace Persistence
             return output;
         }
 
-        public int loginUser(String nickname, String gid,String password)
+        public int loginUser(String nickname, String gid,String pass)
         {
             int output=-1;
-            String sql_query = $"select Id from {usrTblName} where Group_Id = {gid} AND Nickname = {nickname} AND Password = {password};";
+            String sql_query = $"select Id from {usrTblName} where Group_Id = {gid} AND Nickname = '{nickname}' AND Password = '{pass}';";
 
             SqlConnection connection;
             SqlCommand command;
@@ -137,7 +181,7 @@ namespace Persistence
                 connection.Open();
                 command = new SqlCommand(sql_query, connection);
                 data_reader = command.ExecuteReader();
-                if(data_reader.HasRows) output = data_reader.GetInt32(0);
+                if (data_reader.Read()) output = data_reader.GetInt32(0);
                 data_reader.Close();
                 command.Dispose();
                 connection.Close();
@@ -151,8 +195,10 @@ namespace Persistence
         }
 
 
-        public void registerUser(String nickname, String gid, String password)
+        public void registerUser(String userNick, String userGid, String userPass)
         {
+
+
             SqlConnection connection;
             SqlCommand command;
 
@@ -163,23 +209,23 @@ namespace Persistence
             {
                 connection.Open();
                 command = new SqlCommand(null, connection);
-
                 // Create and prepare an SQL statement.
                 // Use should never use something like: query = "insert into table values(" + value + ");" 
                 // Especially when selecting. More about it on the lab about security.
                 command.CommandText =
-                    $"INSERT INTO {usrTblName} ([Group_Id],[Nickname],[Password]" +
+                    $"INSERT INTO {usrTblName} ([Group_Id],[Nickname],[Password])" +
                     "VALUES (@groupid,@nick,@pass)";
-                SqlParameter groupid = new SqlParameter(@"usrid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"time", SqlDbType.Text, 20);
-                SqlParameter pass = new SqlParameter(@"cont", SqlDbType.Text, 20);
+                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
+                SqlParameter pass = new SqlParameter(@"pass", SqlDbType.Text, 100);
 
-                groupid.Value = gid;
-                nick.Value = nickname;
-                pass.Value = password;
+                groupid.Value = Int32.Parse(userGid);
+                nick.Value = userNick;
+                pass.Value = userPass;
                 command.Parameters.Add(groupid);
                 command.Parameters.Add(nick);
                 command.Parameters.Add(pass);
+                
 
                 // Call Prepare after setting the Commandtext and Parameters.
                 command.Prepare();

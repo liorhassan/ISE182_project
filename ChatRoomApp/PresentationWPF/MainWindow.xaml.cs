@@ -31,12 +31,11 @@ namespace PresentationWPF
         private ProgramWindow pw; //the next window to show after login
         public MainWindow()
         {
-            //copyResources();
             InitializeComponent();
             DataContext = _main;
             myChatRoom = new Chatroom();
             pw = new ProgramWindow(this,myChatRoom);
-            
+            //myChatRoom.test();
         }
 
         
@@ -74,19 +73,7 @@ namespace PresentationWPF
                 StartProgram();
             }
         }
-        private Boolean isPassValid(string pass)
-        {
-            if (pass.Length < 4)
-                return false;
-            for (int i =0; i<pass.Length; i++)
-            {
-                char c = pass.ElementAt(i);
-                if (!((c <= 'z' & c >= 'a') || (c <= 'Z' & c >= 'A') || (c >= 0 & c <= 9)))
-                    return false;
-            }
-            return true;
-            
-        }
+
 
         //tries to register with the nickname typed and show a messageBox if failes
         private void btn_register_Click(object sender, RoutedEventArgs e)
@@ -99,11 +86,11 @@ namespace PresentationWPF
                 MessageBox.Show("Please enter a Nickname and a GroupID");
                 return;
             }
-            if (!isPassValid(pass))
-            {
-                MessageBox.Show("Passward invalid");
-                return;
-            }
+           // if (!myChatRoom.isPassValid(pass))
+          //  {
+           //     MessageBox.Show("Passward invalid");
+            //    return;
+          //  }
             Boolean reg = myChatRoom.Register(nickname,group, pass);
             if (!reg)
             {

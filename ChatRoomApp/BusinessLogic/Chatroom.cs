@@ -18,7 +18,7 @@ namespace BusinessLogic
         private int filterType;// 0-no filter(default), 1- filter by groupID, 2 - filter by user
         private string userFilter; //user nickname to filter by
         private string groupFilter; //groupID nickname to filter by
-        private string _loggedinUser;
+        private int _loggedinUser;
         private Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
         private readonly String URL = "http://ise172.ise.bgu.ac.il";
@@ -27,6 +27,7 @@ namespace BusinessLogic
         private Logger mLogger;
         private FileLogger mFileLogger;
         private sqlHandler _sqlHandler;
+
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -40,7 +41,7 @@ namespace BusinessLogic
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
-            this._loggedinUser = null;
+            this._loggedinUser = -1;
             recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
             if (recievedMessages == null)
             {
@@ -73,12 +74,12 @@ namespace BusinessLogic
         // creates a new user and adds to registered users
         public Boolean Register(String nickname, String group, string pass)
         {
-            if (_sqlHandler.isExist(nickname, group)==true)
+            if (_sqlHandler.userExists(nickname, group))
             {
                 return false;
             }
             pass = hashing.passwordToHash(pass);
-            _sqlHandler.Register(nickname, group, pass);
+            _sqlHandler.registerUser(nickname, group, pass);
             //User newUser = new User(nickname, group);
             //registeredUsers.Add(key, newUser);
             //usersHandler.save(registeredUsers);
@@ -92,8 +93,8 @@ namespace BusinessLogic
         public Boolean Login(String nickname, String group, string pass)
         {
             pass = hashing.passwordToHash(pass);
-            string userID = _sqlHandler.login(nickname, group, pass);
-            if (userID!=null)
+            int userID = _sqlHandler.loginUser(nickname, group, pass);
+            if (userID!=-1)
             {
                 this._loggedinUser = userID;
                 mLogger.AddLogMessage("User " + nickname + " logged in successfully");
@@ -107,12 +108,10 @@ namespace BusinessLogic
         // else does nothing
         public Boolean Logout()
         {
-            if (this._loggedinUser != null)
+            if (this._loggedinUser != -1)
             {
-                String name = _loggedinUser.Nickname;
-                this._loggedinUser = null;
-                //ChatroomMenu.Login = false;
-                mLogger.AddLogMessage("User " + name + " logged out successfully");
+                this._loggedinUser = -1;
+                mLogger.AddLogMessage("The User has logged out successfully");
                 return true;
             }
             return false;
@@ -125,7 +124,7 @@ namespace BusinessLogic
         public int Retrieve10Messages()
         {
             int c = 0;
-            foreach (IMessage m in _loggedinUser.retrive10Messages(URL))
+            foreach (IMessage m in _sqlHandler.retriveAllMessages("", ""))
             {
                 if (!recievedMessages.ContainsKey(m.Id))
                 {
@@ -289,10 +288,10 @@ namespace BusinessLogic
                 mLogger.AddLogMessage("Invalid message was written");
                 return -1;
             }
-            Message message = new Message(_loggedinUser.writeMessage(msg, URL));
-            recievedMessages.Add(message.Id, message);
+          _sqlHandler.sendMessage(_loggedinUser.ToString(), msg);
+            //recievedMessages.Add(message.Id, message);
             messHandler.save(recievedMessages);
-            mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
+            mLogger.AddLogMessage("New Message was written successfully");
             return 1;
         }
         // check message owner
@@ -308,11 +307,7 @@ namespace BusinessLogic
             return " ";
         }
 
-        // edit message by GUID
-        public void EditMessage(String GUID)
-        {
-            sqlHandler.EditMessage(GUID);
-        }
+
         // checks if a message is valid
         private Boolean CheckMessageValidity(String content)
         {
@@ -346,6 +341,26 @@ namespace BusinessLogic
             Logout();
             recievedMessages.Clear();
             registeredUsers.Clear();
+        }
+
+        //chack validity of password
+        public Boolean isPassValid(string pass)
+        {
+            if (pass.Length < 4)
+                return false;
+            for (int i = 0; i < pass.Length; i++)
+            {
+                char c = pass.ElementAt(i);
+                if (!((c <= 'z' & c >= 'a') || (c <= 'Z' & c >= 'A') || (c >= 0 & c <= 9)))
+                    return false;
+            }
+            return true;
+
+        }
+
+        public void test()
+        {
+            _sqlHandler.test();
         }
     }
 }
