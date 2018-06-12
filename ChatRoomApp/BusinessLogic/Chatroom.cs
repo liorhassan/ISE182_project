@@ -27,7 +27,7 @@ namespace BusinessLogic
         private Logger mLogger;
         private FileLogger mFileLogger;
         private sqlHandler _sqlHandler;
-        private List<Guid> MessageGuid;
+        public List<Guid> MessageGuid;
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()

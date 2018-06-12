@@ -60,3 +60,13 @@
 12/06/2018 20:14:45 - The User has logged out successfully
 12/06/2018 20:27:39 - User ohad logged in successfully
 12/06/2018 20:27:46 - The User has logged out successfully
+12/06/2018 20:35:44 - User ohad logged in successfully
+12/06/2018 20:35:50 - New Message was written successfully
+12/06/2018 20:36:03 - New Message was written successfully
+12/06/2018 20:36:28 - The User has logged out successfully
+12/06/2018 20:37:12 - User ohad logged in successfully
+12/06/2018 20:39:42 - The User has logged out successfully
+12/06/2018 20:49:23 - User ohad logged in successfully
+12/06/2018 20:53:39 - The User has logged out successfully
+12/06/2018 20:58:24 - User ohad logged in successfully
+12/06/2018 20:58:47 - The User has logged out successfully

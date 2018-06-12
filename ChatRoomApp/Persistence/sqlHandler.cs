@@ -67,9 +67,9 @@ namespace Persistence
                 // Use should never use something like: query = "insert into table values(" + value + ");" 
                 // Especially when selecting. More about it on the lab about security.
                 command.CommandText =
-                    $"UPDATE {msgTblName} SET Body = @cont where Guid = &mid;";
-                SqlParameter body = new SqlParameter(@"cont", SqlDbType.Int, 20);
-                SqlParameter guid = new SqlParameter(@"mid", SqlDbType.Text, 20);
+                    $"UPDATE {msgTblName} SET Body = @cont where Guid = @mid;";
+                SqlParameter body = new SqlParameter(@"cont", SqlDbType.Text, 100);
+                SqlParameter guid = new SqlParameter(@"mid", SqlDbType.UniqueIdentifier, 100);
 
                 body.Value = cont;
                 guid.Value = mid;
@@ -93,7 +93,7 @@ namespace Persistence
         public Boolean isOwner(Guid mid,String uid)
         {
             Boolean output = false;
-            String sql_query = $"select * from {msgTblName} where Guid = {mid} AND User_Id = '{uid}';";
+            String sql_query = $"select * from {msgTblName} where Guid = '{mid}' AND User_Id = {uid};";
 
             SqlConnection connection;
             SqlCommand command;
