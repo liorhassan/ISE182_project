@@ -50,6 +50,76 @@ namespace Persistence
             return output;
         }
 
+        public void editMessage(Guid mid, String cont)
+        {
+            SqlConnection connection;
+            SqlCommand command;
+
+            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
+            connection = new SqlConnection(connetion_string);
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(null, connection);
+
+                // Create and prepare an SQL statement.
+                // Use should never use something like: query = "insert into table values(" + value + ");" 
+                // Especially when selecting. More about it on the lab about security.
+                command.CommandText =
+                    $"UPDATE {msgTblName} SET Body = @cont where Guid = &mid;";
+                SqlParameter body = new SqlParameter(@"cont", SqlDbType.Int, 20);
+                SqlParameter guid = new SqlParameter(@"mid", SqlDbType.Text, 20);
+
+                body.Value = cont;
+                guid.Value = mid;
+                command.Parameters.Add(body);
+                command.Parameters.Add(guid);
+
+                // Call Prepare after setting the Commandtext and Parameters.
+                command.Prepare();
+                command.ExecuteNonQuery();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+                Console.WriteLine(ex.ToString());
+
+            }
+        }
+
+        public Boolean isOwner(Guid mid,String uid)
+        {
+            Boolean output = false;
+            String sql_query = $"select * from {msgTblName} where Guid = {mid} AND User_Id = {uid};";
+
+            SqlConnection connection;
+            SqlCommand command;
+
+            String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
+            connection = new SqlConnection(connetion_string);
+            SqlDataReader data_reader;
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(sql_query, connection);
+                data_reader = command.ExecuteReader();
+                if (data_reader.HasRows) output = true;
+                data_reader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
+        }
+
         public int loginUser(String nickname, String gid,String password)
         {
             int output=-1;
