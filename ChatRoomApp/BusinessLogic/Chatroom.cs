@@ -390,9 +390,6 @@ namespace BusinessLogic
 
         }
 
-        public void test()
-        {
-            _sqlHandler.test();
-        }
+
     }
 }

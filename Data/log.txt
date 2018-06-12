@@ -29,3 +29,13 @@
 12/06/2018 19:25:41 - New Message was written successfully
 12/06/2018 19:27:11 - New Message was written successfully
 12/06/2018 19:27:25 - The User has logged out successfully
+12/06/2018 19:33:30 - User lior in group 24 registered successfully
+12/06/2018 19:34:40 - User admin logged in successfully
+12/06/2018 19:34:46 - The User has logged out successfully
+12/06/2018 19:35:08 - User lior3 in group 24 registered successfully
+12/06/2018 19:35:28 - User lior3 logged in successfully
+12/06/2018 19:35:38 - The User has logged out successfully
+12/06/2018 19:36:11 - User kop in group 24 registered successfully
+12/06/2018 19:36:22 - User kop logged in successfully
+12/06/2018 19:36:30 - New Message was written successfully
+12/06/2018 19:36:37 - The User has logged out successfully
