@@ -121,6 +121,7 @@ namespace PresentationWPF
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
             int index = _main.Messages.IndexOf(_main.SelectedListItem);
+            MessageBox.Show(index.ToString());
             if (index < 0) return;
             Boolean isOwner = chatroom.isOwner(index);
             if (isOwner)
