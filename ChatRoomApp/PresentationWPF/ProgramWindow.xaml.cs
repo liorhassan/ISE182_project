@@ -108,12 +108,18 @@ namespace PresentationWPF
             //var message = _main.Messages.ElementAt(index).ToString();
             //char[] chars = { ' ', '-', ' ' };
             //string[] parts = message.Split(chars);
-            chatroom.isOwner(index);
+            Boolean isOwner = chatroom.isOwner(index);
+            if (isOwner)
+            {
+                Window edit = new EditMessage(_main);
+                edit.ShowDialog();
+                String newMessage = _main.Edit;
+                chatroom.EditMesage(index, newMessage);
+            }
             string s = index.ToString();
             Guid guid = chatroom.MessageGuid.ElementAt(index);
             MessageBox.Show(chatroom.recievedMessages[guid].ToString());
-            Window edit = new EditMessage(_main);
-            edit.ShowDialog();
+            
 
             //MessageBox.Show(_main.EditMessageText);
             //string k = _main.EditMessageText;
