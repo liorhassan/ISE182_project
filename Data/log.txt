@@ -58,3 +58,5 @@
 12/06/2018 20:13:27 - The User has logged out successfully
 12/06/2018 20:14:10 - User shauli logged in successfully
 12/06/2018 20:14:45 - The User has logged out successfully
+12/06/2018 20:27:39 - User ohad logged in successfully
+12/06/2018 20:27:46 - The User has logged out successfully

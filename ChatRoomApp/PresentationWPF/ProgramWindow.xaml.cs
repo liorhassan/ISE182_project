@@ -112,6 +112,7 @@ namespace PresentationWPF
         {
             //int index = Int32.Parse(_main.SelectedMessage);
             int index = _main.Messages.IndexOf(_main.SelectedListItem);
+            MessageBox.Show(index.ToString());
             if (index < 0) return;
             //var message = _main.Messages.ElementAt(index).ToString();
             //char[] chars = { ' ', '-', ' ' };
