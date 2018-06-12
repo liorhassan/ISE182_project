@@ -16,7 +16,7 @@
         </Grid.Background>
         <GroupBox Header="FILTER" HorizontalAlignment="Left" Height="136" Margin="10,121,0,0" VerticalAlignment="Top" Width="257" BorderBrush="#FFBFB0D1" Foreground="White" FontFamily="Comic Sans MS" FontSize="16"/>
         <GroupBox Header="SORT" HorizontalAlignment="Left" Height="82" Margin="14,21,0,0" VerticalAlignment="Top" Width="253" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="#FFBEAFD1"/>
-        <ListBox ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Left" Width="496" Margin="286,0,0,46.667" Height="363" VerticalAlignment="Bottom" Opacity="0.5" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Comic Sans MS" FontSize="14" />
+        <ListBox SelectedIndex="{Binding selectedMessage}" ItemsSource="{Binding Messages}" IsEnabled="True" HorizontalAlignment="Left" Width="496" Margin="286,0,0,46.667" Height="363" VerticalAlignment="Bottom" Opacity="0.5" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Comic Sans MS" FontSize="14" SelectionChanged="ListBox_SelectionChanged" />
         <Button Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Width="94" Margin="0,384,690,0" Click="btn_logout_Click" BorderBrush="{x:Null}" Foreground="White" Height="28" FontFamily="Showcard Gothic" FontSize="14">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/mainButton.png"/>
@@ -38,7 +38,7 @@
                 <ImageBrush ImageSource="/Resources/sendButton.png"/>
             </Button.Background>
         </Button>
-        <TextBox Text="{Binding MessageText}" HorizontalAlignment="Left" Height="32" Margin="286,0,0,9.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18"/>
+        <TextBox MaxLength="120" Text="{Binding MessageText}" HorizontalAlignment="Left" Height="32" Margin="286,0,0,9.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18"/>
         <CheckBox IsChecked="{Binding IsDesc}" Content="Descending" HorizontalAlignment="Right" Margin="0,77,570,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <Label Content="Filter By:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.091,-2.692" Margin="49,140,0,0" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <ComboBox SelectedIndex="{Binding FilterCombo}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" Margin="136,143,0,0" FontFamily="Comic Sans MS" Background="{x:Null}">
@@ -50,6 +50,7 @@
         <Label Content="GroupID:" IsEnabled="{Binding IsFilterGroup}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,180,0,0" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <Label IsEnabled="{Binding IsFilterUser}" Content="User Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,215,0,0" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="14"/>
         <TextBox Text="{Binding FilterUser}" IsEnabled="{Binding IsFilterUser}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Margin="136,220,0,0" FontFamily="Comic Sans MS" FontSize="14" Background="#FFB9A8D4" BorderBrush="Black" Opacity="0.8"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="163,318,0,0" VerticalAlignment="Top" Width="89" Height="23" Click="Button_Click_Edit"/>
     </Grid>
 
 </Window>

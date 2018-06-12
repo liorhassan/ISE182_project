@@ -114,7 +114,20 @@ namespace PresentationWPF
                 OnPropertyChanged("SortCombo");
             }
         }
-
+        //binding for the selected index
+        private string selectedmessage = "";
+        public string SelectedMessage
+        {
+            get
+            {
+                return selectedmessage;
+            }
+            set
+            {
+                selectedmessage = value;
+                OnPropertyChanged("SelectedMessage");
+            }
+        }
         //binding for the Descending checkbox
         private string isDesc = "True";
         public string IsDesc

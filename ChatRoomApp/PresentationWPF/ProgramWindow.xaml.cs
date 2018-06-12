@@ -99,13 +99,27 @@ namespace PresentationWPF
             }
 
         }
+        private void Button_Click_Edit(object sender, RoutedEventArgs e)
+        {
+            int index = Int32.Parse(_main.SelectedMessage);
+            if (index < 0) return;
+            //var message = _main.Messages.ElementAt(index).ToString();
+            //char[] chars = { ' ', '-', ' ' };
+            //string[] parts = message.Split(chars);
+            string s = index.ToString();
+            MessageBox.Show(s);
 
+        }
         //closses the chatroom and the app when the user closes the window
         private void ProgramWindow_Closing(object sender, CancelEventArgs e)
         {
             chatroom.Logout();
             chatroom.exit();
             Application.Current.Shutdown();
+        }
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
