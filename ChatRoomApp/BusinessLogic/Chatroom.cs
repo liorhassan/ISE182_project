@@ -19,13 +19,14 @@ namespace BusinessLogic
         private string userFilter; //user nickname to filter by
         private string groupFilter; //groupID nickname to filter by
         private User _loggedinUser;
-        private Dictionary<Guid, Message> recievedMessages;
+        public Dictionary<Guid, Message> recievedMessages;
         private Dictionary<String, User> registeredUsers;
         private readonly String URL = "http://ise172.ise.bgu.ac.il";
         private MessagesHandler messHandler;
         private UsersHandler usersHandler;
         private Logger mLogger;
         private FileLogger mFileLogger;
+        public List<Guid> MessageGuid;
 
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
@@ -218,6 +219,12 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.Date ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
                 return messages.ToList();
             }
             else
@@ -226,6 +233,12 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.Date descending
+                select m.Id;
+                MessageGuid = guid.ToList();
                 return messages.ToList();
             }
 
@@ -240,7 +253,16 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.UserName ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
+
+
             }
             else
             {
@@ -248,6 +270,13 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby m.UserName descending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
         }
@@ -255,13 +284,19 @@ namespace BusinessLogic
         // a fuction to sort the messages by g_id, nickname, and timestamp
         public List<String> SortByAll(List<Message> filteredMessages)
         {
-
             if (isAsc)
             {
                 var messages =
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
 
             }
@@ -271,11 +306,19 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
                 select m.ToString();
+
+                var guid =
+                from m in filteredMessages
+                orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
+                select m.Id;
+                MessageGuid = guid.ToList();
+
                 return messages.ToList();
             }
 
         }
 
+        
         // a fuction to write a message
         // checks if it's valid
         // creates the message and adds it to the dictionary
