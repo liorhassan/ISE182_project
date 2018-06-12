@@ -75,30 +75,30 @@ namespace PresentationWPF
         }
 
         //every 2 seconds, askes the chatroom to retruve 10 messages and updates the display if needed
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void dispatchertimer_tick(object sender, eventargs e)
         {
-            if (chatroom.Retrieve10Messages() != 0) UpdateView();
+           //if (chatroom.retrieve10messages() != 0) updateview();
         }
 
-        //attempt to send a message and shows a warning if failes
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            int send = chatroom.WriteMessage(_main.MessageText);
-            if (send == 1)
-            {
-                _main.MessageText = "";
-                UpdateView();
-            }
-            else if (send == -1)
-            {
-                MessageBox.Show("Can't send message");
-            }
-            else
-            {
-                _main.MessageText = "";
-            }
+        ////attempt to send a message and shows a warning if failes
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    int send = chatroom.WriteMessage(_main.MessageText);
+        //    if (send == 1)
+        //    {
+        //        _main.MessageText = "";
+        //        UpdateView();
+        //    }
+        //    else if (send == -1)
+        //    {
+        //        MessageBox.Show("Can't send message");
+        //    }
+        //    else
+        //    {
+        //        _main.MessageText = "";
+        //    }
 
-        }
+        //}
 
         //closses the chatroom and the app when the user closes the window
         private void ProgramWindow_Closing(object sender, CancelEventArgs e)
@@ -115,11 +115,12 @@ namespace PresentationWPF
             //var message = _main.Messages.ElementAt(index).ToString();
             //char[] chars = { ' ', '-', ' ' };
             //string[] parts = message.Split(chars);
-            String guid = chatroom.isOwner(index);
-            if(guid!=null)
-            {
-                chatroom.
-            }
+            //String guid = chatroom.isOwner(index);
+            MessageBox.Show("index");
+            //if (guid!=null)
+            //{
+                //chatroom.
+           // }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

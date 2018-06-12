@@ -38,7 +38,7 @@ namespace BusinessLogic
             userFilter = "";
             groupFilter = "";
             isAsc = true;
-            MessageGuid = new List<String>;
+            MessageGuid = new List<Guid>(200);
             messHandler = new MessagesHandler();
             usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
@@ -75,12 +75,12 @@ namespace BusinessLogic
         // creates a new user and adds to registered users
         public Boolean Register(String nickname, String group, string pass)
         {
-            if (_sqlHandler.isExist(nickname, group)==true)
-            {
-                return false;
-            }
+           // if (_sqlHandler.isExist(nickname, group)==true)
+            //{
+            //    return false;
+           // }
             pass = hashing.passwordToHash(pass);
-            _sqlHandler.Register(nickname, group, pass);
+           // _sqlHandler.Register(nickname, group, pass);
             //User newUser = new User(nickname, group);
             //registeredUsers.Add(key, newUser);
             //usersHandler.save(registeredUsers);
@@ -94,10 +94,10 @@ namespace BusinessLogic
         public Boolean Login(String nickname, String group, string pass)
         {
             pass = hashing.passwordToHash(pass);
-            string userID = _sqlHandler.login(nickname, group, pass);
-            if (userID!=null)
+            int userID = _sqlHandler.loginUser(nickname, group, pass);
+            if (userID!=-1)
             {
-                this._loggedinUser = userID;
+                this._loggedinUser = group;
                 mLogger.AddLogMessage("User " + nickname + " logged in successfully");
                 return true;
             }
@@ -111,7 +111,7 @@ namespace BusinessLogic
         {
             if (this._loggedinUser != null)
             {
-                String name = _loggedinUser.Nickname;
+                String name = _loggedinUser;
                 this._loggedinUser = null;
                 //ChatroomMenu.Login = false;
                 mLogger.AddLogMessage("User " + name + " logged out successfully");
@@ -124,20 +124,20 @@ namespace BusinessLogic
         // calls the fuction from the loggedinUser
         // adds the new messages to recievedMessages
         // returns the number of new messages added
-        public int Retrieve10Messages()
-        {
-            int c = 0;
-            foreach (IMessage m in _loggedinUser.retrive10Messages(URL))
-            {
-                if (!recievedMessages.ContainsKey(m.Id))
-                {
-                    recievedMessages.Add(m.Id, new Message(m));
-                    c++;
-                }
-            }
-            messHandler.save(recievedMessages);
-            return c;
-        }
+        //public int Retrieve10Messages()
+        //{
+        //    int c = 0;
+        //    foreach (IMessage m in _loggedinUser.retrive10Messages(URL))
+        //    {
+        //        if (!recievedMessages.ContainsKey(m.Id))
+        //        {
+        //            recievedMessages.Add(m.Id, new Message(m));
+        //            c++;
+        //        }
+        //    }
+        //    messHandler.save(recievedMessages);
+        //    return c;
+        //}
 
         //set filter and sort arguments givven by the presentation
         public void SetFilterAndSort(int sortType, int filterType, Boolean isAsc, string groupFilter, string userFilter)
@@ -325,19 +325,19 @@ namespace BusinessLogic
         // a fuction to write a message
         // checks if it's valid
         // creates the message and adds it to the dictionary
-        public int WriteMessage(String msg)
-        {
-            if (!CheckMessageValidity(msg))
-            {
-                mLogger.AddLogMessage("Invalid message was written");
-                return -1;
-            }
-            Message message = new Message(_loggedinUser.writeMessage(msg, URL));
-            recievedMessages.Add(message.Id, message);
-            messHandler.save(recievedMessages);
-            mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
-            return 1;
-        }
+        //public int WriteMessage(String msg)
+        //{
+        //    if (!CheckMessageValidity(msg))
+        //    {
+        //        mLogger.AddLogMessage("Invalid message was written");
+        //        return -1;
+        //    }
+        //    Message message = new Message(_loggedinUser.writeMessage(msg, URL));
+        //    recievedMessages.Add(message.Id, message);
+        //    messHandler.save(recievedMessages);
+        //    mLogger.AddLogMessage("Message " + message.Id + " was written successfully");
+        //    return 1;
+        //}
         // check message owner
         //public String isOwner(String[] parts)
         //{
@@ -351,16 +351,16 @@ namespace BusinessLogic
         //    return " ";
         //}
 
-        public String isOwner(int index)
-        {
-            MessageGuid.ElementAt(index);
-        }
+        //public String isOwner(int index)
+        //{
+        //    MessageGuid.ElementAt(index);
+        //}
 
-        // edit message by GUID
-        public void EditMessage(String GUID)
-        {
-            sqlHandler.EditMessage(GUID);
-        }
+        //// edit message by GUID
+        //public void EditMessage(String GUID)
+        //{
+        //    sqlHandler.EditMessage(GUID);
+        //}
         // checks if a message is valid
         private Boolean CheckMessageValidity(String content)
         {
