@@ -33,3 +33,5 @@
 12/06/2018 12:02:07 - User ohad logged out successfully
 12/06/2018 12:06:38 - User ohad logged in successfully
 12/06/2018 12:07:01 - User ohad logged out successfully
+12/06/2018 12:22:59 - User ohad logged in successfully
+12/06/2018 12:23:26 - User ohad logged out successfully

@@ -83,6 +83,7 @@ namespace PresentationWPF
         //attempt to send a message and shows a warning if failes
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(_main.MessageText.ToString());
             int send = chatroom.WriteMessage(_main.MessageText);
             if (send == 1)
             {
@@ -110,7 +111,7 @@ namespace PresentationWPF
             string s = index.ToString();
             Guid guid = chatroom.MessageGuid.ElementAt(index);
            // MessageBox.Show(chatroom.recievedMessages[guid].ToString());
-            Window edit = new EditMessage();
+            Window edit = new EditMessage(_main);
             edit.ShowDialog();
             //MessageBox.Show(_main.EditMessageText);
             //string k = _main.EditMessageText;

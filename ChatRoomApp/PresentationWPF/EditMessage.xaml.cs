@@ -19,16 +19,16 @@ namespace PresentationWPF
     /// </summary>
     public partial class EditMessage : Window
     {
-        private ObservableObject _main = new ObservableObject();
-        public EditMessage()
+        private ObservableObject _main;
+        public EditMessage(ObservableObject _main)
         {
+            this._main = _main;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string s = _main.EditMessageText;
-            
+            string s = _main.MessageText;           
             if(s!=null)
             {
                 MessageBox.Show(s.Length.ToString());

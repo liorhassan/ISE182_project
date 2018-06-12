@@ -261,16 +261,16 @@ namespace PresentationWPF
             }
         }
         //binding for the edit message text field
-        private string editMessageText = "g";
+        private string editmessageText = "";
         public string EditMessageText
         {
             get
             {
-                return editMessageText;
+                return editmessageText;
             }
             set
             {
-                editMessageText = value;
+                editmessageText = value;
                 OnPropertyChanged("EditMessageText");
             }
         }
