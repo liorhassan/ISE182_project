@@ -109,3 +109,5 @@
 13-Jun-18 15:20:00 - The User has logged out successfully
 13-Jun-18 15:22:18 - User shauli logged in successfully
 13-Jun-18 15:22:27 - The User has logged out successfully
+13-Jun-18 15:38:08 - User shauli logged in successfully
+13-Jun-18 15:38:45 - The User has logged out successfully
