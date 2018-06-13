@@ -38,7 +38,7 @@
                 <ImageBrush ImageSource="/Resources/sendButton.png"/>
             </Button.Background>
         </Button>
-        <TextBox MaxLength="120" Text="{Binding MessageText}" HorizontalAlignment="Left" Height="32" Margin="288,0,0,9.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="397" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18"/>
+        <TextBox MaxLength="100" Text="{Binding MessageText}" HorizontalAlignment="Left" Height="32" Margin="288,0,0,9.667" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="397" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18"/>
         <CheckBox IsChecked="{Binding IsDesc}" Content="Descending" HorizontalAlignment="Right" Margin="0,77,570,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <Label Content="Filter By:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.091,-2.692" Margin="49,140,0,0" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <ComboBox SelectedIndex="{Binding FilterCombo}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" Margin="136,143,0,0" FontFamily="Comic Sans MS" Background="{x:Null}">

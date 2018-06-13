@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunicationLayer;
 using Persistence;
 using System.Windows.Threading;
 using System.IO;
@@ -18,16 +17,11 @@ namespace BusinessLogic
         private int filterType;// 0-no filter(default), 1- filter by groupID, 2 - filter by user
         private string userFilter; //user nickname to filter by
         private string groupFilter; //groupID nickname to filter by
-        private int _loggedinUser;
-        //private Dictionary<Guid, Message> recievedMessages;
-        //private Dictionary<String, User> registeredUsers;
-        private readonly String URL = "http://ise172.ise.bgu.ac.il";
-        //private MessagesHandler messHandler;
-        //private UsersHandler usersHandler;
+        private int _loggedinUser; //the userID for the logged in user
         private Logger mLogger;
         private FileLogger mFileLogger;
-        private sqlHandler _sqlHandler;
-        private List<Guid> MessageGuid;
+        private sqlHandler _sqlHandler; //the sqlHandler used to get queries from the DB
+        private List<Guid> MessageGuid; //stores the GUID's of the displayed messages in order
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
@@ -37,24 +31,8 @@ namespace BusinessLogic
             userFilter = "";
             groupFilter = "";
             isAsc = true;
-            //messHandler = new MessagesHandler();
-            //usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
             this._loggedinUser = -1;
-            //recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
-            /**
-            if (recievedMessages == null)
-            {
-                recievedMessages = new Dictionary<Guid, Message>();
-                messHandler.save(recievedMessages);
-            }
-            registeredUsers = (Dictionary<String, User>)usersHandler.load();
-            if (registeredUsers == null)
-            {
-                registeredUsers = new Dictionary<String, User>();
-                usersHandler.save(registeredUsers);
-            }
-            **/
             this.mLogger = Logger.Instance;
             String currpath = Directory.GetCurrentDirectory();
             this.mFileLogger = new FileLogger(projectpath + "\\Data\\log.txt");
@@ -81,9 +59,6 @@ namespace BusinessLogic
             }
             pass = hashing.passwordToHash(pass);
             _sqlHandler.registerUser(nickname, group, pass);
-            //User newUser = new User(nickname, group);
-            //registeredUsers.Add(key, newUser);
-            //usersHandler.save(registeredUsers);
             mLogger.AddLogMessage("User " + nickname + " in group " + group + " registered successfully");
             return true;
         }
@@ -118,26 +93,7 @@ namespace BusinessLogic
             return false;
         }
 
-        /**
-        // a fuction to retrieve 10 messages from the server
-        // calls the fuction from the loggedinUser
-        // adds the new messages to recievedMessages
-        // returns the number of new messages added
-        public int Retrieve10Messages()
-        {
-            int c = 0;
-            foreach (IMessage m in _sqlHandler.retriveAllMessages("", ""))
-            {
-                if (!recievedMessages.ContainsKey(m.Id))
-                {
-                    recievedMessages.Add(m.Id, new Message(m));
-                    c++;
-                }
-            }
-            messHandler.save(recievedMessages);
-            return c;
-        }
-            **/
+
         //set filter and sort arguments givven by the presentation
         public void SetFilterAndSort(int sortType, int filterType, Boolean isAsc, string groupFilter, string userFilter)
         {
@@ -200,41 +156,6 @@ namespace BusinessLogic
             }
             return output;
         }
-
-        /**
-        // a fuction to retrieve 20 messages from the dictionary
-        public List<Message> GetMessagesByAll()
-        {
-            var messages =
-                (from m in recievedMessages
-                 orderby m.Value.Date
-                 select m.Value);
-            return messages.ToList();
-        }
-
-
-        // a fuction to retrieve all the messages from a user
-        public List<Message> GetAllByUser()
-        {
-            var messages =
-                from m in recievedMessages
-                where m.Value.UserName == userFilter & m.Value.GroupID == groupFilter
-                orderby m.Value.Date
-                select m.Value;
-            return messages.ToList();
-        }
-
-        // a fuction to retrieve all the messages by a GID
-        public List<Message> GetAllByGroup()
-        {
-            var messages =
-                from m in recievedMessages
-                where m.Value.GroupID == groupFilter
-                orderby m.Value.Date
-                select m.Value;
-            return messages.ToList();
-        }
-        **/
 
         // a fuction to sort the messages by the timestamp
         public List<String> SortByTimestamp(List<IMessage> filteredMessages)
@@ -354,7 +275,6 @@ namespace BusinessLogic
                 return -1;
             }
           _sqlHandler.sendMessage(_loggedinUser.ToString(), msg);
-            //recievedMessages.Add(message.Id, message);
             mLogger.AddLogMessage("New Message was written successfully");
             return 1;
         }
@@ -371,6 +291,8 @@ namespace BusinessLogic
                 MessageGuid.Add(g);
             }
         }
+
+        //function for editing a message
         public void EditMesage(int index, String newMessage)
         {
             _sqlHandler.editMessage(MessageGuid.ElementAt(index), newMessage);
@@ -393,25 +315,13 @@ namespace BusinessLogic
             mFileLogger.Terminate();
         }
 
-        public void Start()
-        {
-            mFileLogger.Init();
-        }
 
         // to implement ILogger
         public void ProcessLogMessage(string message)
         {
             return;
         }
-
-        public void RestartChatroom()
-        {
-            //Start();
-            Logout();
-        }
-
-
-
+        
         //chack validity of password
         public Boolean isPassValid(string pass)
         {

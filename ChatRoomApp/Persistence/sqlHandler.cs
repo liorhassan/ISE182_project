@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunicationLayer;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -231,7 +230,7 @@ namespace Persistence
                 command.Dispose();
                 connection.Close();
 
-                lastUpdate = DateTime.Now.ToUniversalTime().AddSeconds(2);
+                lastUpdate = DateTime.Now.ToUniversalTime();
             }
             catch (Exception ex)
             {
@@ -322,7 +321,7 @@ namespace Persistence
                 SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
                 SqlParameter usrid = new SqlParameter(@"usrid", SqlDbType.Int, 20);
                 SqlParameter time = new SqlParameter(@"time", SqlDbType.DateTime, 20);
-                SqlParameter cont = new SqlParameter(@"cont", SqlDbType.Text, 120);
+                SqlParameter cont = new SqlParameter(@"cont", SqlDbType.Text, 100);
 
                 guid.Value = Guid.NewGuid();
                 usrid.Value = uid;
