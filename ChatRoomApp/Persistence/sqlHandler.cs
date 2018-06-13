@@ -245,7 +245,7 @@ namespace Persistence
         {
 
             List<IMessage> output = new List<IMessage>();
-            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > {UpdateSql()}";
+            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > '{UpdateSql()}' AND {msgTblName}.SendTime<='{NextSql()}'";
             
             if (gid == "") sql_query += ";";
             else if (nickname == "") sql_query += $" AND {usrTblName}.Group_Id = {gid};";
@@ -277,20 +277,7 @@ namespace Persistence
                 data_reader.Close();
                 command.Dispose();
                 connection.Close();
-
-                if (output.Count > 0)
-                {
-                    Console.WriteLine("Start");
-                    Console.WriteLine(lastUpdate);
-                    foreach (IMessage m in output)
-                    {
-                        Console.WriteLine(m.ToString());
-                        Console.WriteLine(m.Date);
-                    }
-                    Console.WriteLine("End");
-                }
-
-                lastUpdate = DateTime.Now.ToUniversalTime().AddSeconds(2);
+                lastUpdate = DateTime.Now.ToUniversalTime();
             }
             catch (Exception ex)
             {
@@ -303,12 +290,13 @@ namespace Persistence
 
         private String UpdateSql()
         {
-            return $"'{lastUpdate.Year}-{lastUpdate.Month}-{lastUpdate.Day} {lastUpdate.Hour}:{lastUpdate.Minute}:{lastUpdate.Second}'";
+            return lastUpdate.ToString("yyyy-MM-dd HH:mm:ss.fff");
+           
         }
-        private String NowSql()
+        private String NextSql()
         {
-            DateTime now = DateTime.Now.ToUniversalTime();
-            return $"'{now.Year}-{now.Month}-{now.Day} {now.Hour}:{now.Minute}:{now.Second}'";
+            return lastUpdate.AddSeconds(2).ToString("yyyy-MM-dd HH:mm:ss.fff");
+
         }
 
 
@@ -376,7 +364,7 @@ namespace Persistence
             }
             public String ToString()
             {
-                return Date.ToLocalTime().ToString() + " - " + GroupID + " - " + UserName + " - " + MessageContent;
+                return Date.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff") + " - " + GroupID + " - " + UserName + " - " + MessageContent;
             }
         }
     }
