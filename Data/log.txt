@@ -118,3 +118,24 @@
 13/06/2018 17:49:43 - The User has logged out successfully
 13/06/2018 17:51:16 - User ohad logged in successfully
 13/06/2018 17:52:45 - The User has logged out successfully
+13-Jun-18 18:04:19 - User lior in group 24 registered successfully
+13-Jun-18 18:04:27 - User lior logged in successfully
+13-Jun-18 18:04:36 - New Message was written successfully
+13-Jun-18 18:05:33 - The User has logged out successfully
+13-Jun-18 18:05:38 - User lior logged in successfully
+13-Jun-18 18:05:54 - The User has logged out successfully
+13-Jun-18 18:07:40 - User shauli in group 24 registered successfully
+13-Jun-18 18:07:42 - User shauli logged in successfully
+13-Jun-18 18:07:58 - New Message was written successfully
+13-Jun-18 18:08:10 - New Message was written successfully
+13-Jun-18 18:08:31 - The User has logged out successfully
+13-Jun-18 18:09:58 - User shauli logged in successfully
+13-Jun-18 18:11:07 - The User has logged out successfully
+13-Jun-18 18:11:44 - User shauli logged in successfully
+13-Jun-18 18:11:48 - New Message was written successfully
+13-Jun-18 18:12:23 - The User has logged out successfully
+13-Jun-18 18:15:02 - User shauli logged in successfully
+13-Jun-18 18:15:06 - New Message was written successfully
+13-Jun-18 18:16:33 - The User has logged out successfully
+13-Jun-18 18:19:45 - User shauli logged in successfully
+13-Jun-18 18:20:10 - The User has logged out successfully

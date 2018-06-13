@@ -242,7 +242,8 @@ namespace Persistence
         {
 
             List<IMessage> output = new List<IMessage>();
-            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > {UpdateSql()} and {msgTblName}.SendTime <= {NowSql()}";
+            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > {UpdateSql()}";
+            Console.WriteLine(sql_query);
             if (gid == "") sql_query += ";";
             else if (nickname == "") sql_query += $" AND {usrTblName}.Group_Id = {gid};";
             else sql_query += $" AND {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";

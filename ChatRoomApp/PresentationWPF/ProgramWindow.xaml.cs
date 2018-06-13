@@ -98,7 +98,7 @@ namespace PresentationWPF
             if (send == 1)
             {
                 _main.MessageText = "";
-                //UpdateView();
+                NewView();
             }
             else if (send == -1)
             {
@@ -132,7 +132,7 @@ namespace PresentationWPF
                 chatroom.EditMesage(index, newMessage);
                 _main.Edit = "";
             }
-
+            NewView();
         }
         
     }

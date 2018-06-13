@@ -50,7 +50,7 @@
         <Label Content="GroupID:" IsEnabled="{Binding IsFilterGroup}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,180,0,0" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <Label IsEnabled="{Binding IsFilterUser}" Content="User Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,215,0,0" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="14"/>
         <TextBox Text="{Binding FilterUser}" IsEnabled="{Binding IsFilterUser}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Margin="136,220,0,0" FontFamily="Comic Sans MS" FontSize="14" Background="#FFB9A8D4" BorderBrush="Black" Opacity="0.8"/>
-        <Button Content="Edit Message" HorizontalAlignment="Left" Margin="178,380,0,0" VerticalAlignment="Top" Width="106" Height="30" Click="Button_Click_Edit" FontFamily="Showcard Gothic" FontSize="14" BorderBrush="{x:Null}" Foreground="White">
+        <Button Content="Edit Message" HorizontalAlignment="Left" Margin="178,380,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="Button_Click_Edit" FontFamily="Showcard Gothic" FontSize="14" BorderBrush="{x:Null}" Foreground="White">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/mainButton.png"/>
             </Button.Background>
