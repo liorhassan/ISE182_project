@@ -32,16 +32,6 @@ namespace PresentationWPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string s = _main.Edit;
-            if (s != null)
-            {
-                MessageBox.Show(s.Length.ToString());
-            }
-            else
-            {
-                MessageBox.Show(s);
-            }
-
             this.Hide();
         }
 

@@ -65,10 +65,10 @@ namespace Persistence
 
                 // Create and prepare an SQL statement.
                 command.CommandText =
-                    $"UPDATE {msgTblName} SET Body = @cont where Guid = &mid;";
-                SqlParameter body = new SqlParameter(@"cont", SqlDbType.Int, 20);
-                SqlParameter guid = new SqlParameter(@"mid", SqlDbType.Text, 20);
-
+                    $"UPDATE {msgTblName} SET Body = @cont where Guid = @guid;";
+                SqlParameter body = new SqlParameter(@"cont", SqlDbType.Text, 100);
+                SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
+                
                 body.Value = cont;
                 guid.Value = mid;
                 command.Parameters.Add(body);
@@ -91,8 +91,8 @@ namespace Persistence
         public Boolean isOwner(Guid mid,String uid)
         {
             Boolean output = false;
-            String sql_query = $"select * from {msgTblName} where Guid = {mid} AND User_Id = '{uid}';";
-
+            String sql_query = $"select * from {msgTblName} where Guid = '{mid}' AND User_Id = {uid};";
+            
             SqlConnection connection;
             SqlCommand command;
 

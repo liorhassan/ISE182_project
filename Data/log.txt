@@ -109,5 +109,12 @@
 13-Jun-18 15:20:00 - The User has logged out successfully
 13-Jun-18 15:22:18 - User shauli logged in successfully
 13-Jun-18 15:22:27 - The User has logged out successfully
-13-Jun-18 15:38:08 - User shauli logged in successfully
-13-Jun-18 15:38:45 - The User has logged out successfully
+13/06/2018 17:47:28 - User ohad logged in successfully
+13/06/2018 17:47:54 - New Message was written successfully
+13/06/2018 17:48:14 - The User has logged out successfully
+13/06/2018 17:48:41 - User ohad in group 24 registered successfully
+13/06/2018 17:48:43 - User ohad logged in successfully
+13/06/2018 17:48:48 - New Message was written successfully
+13/06/2018 17:49:43 - The User has logged out successfully
+13/06/2018 17:51:16 - User ohad logged in successfully
+13/06/2018 17:52:45 - The User has logged out successfully
