@@ -129,7 +129,11 @@ namespace PresentationWPF
                 Window edit = new EditMessage(_main);
                 edit.ShowDialog();
                 String newMessage = _main.Edit;
-                chatroom.EditMesage(index, newMessage);
+                if(_main.PressEdit)
+                {
+                    chatroom.EditMesage(index, newMessage);
+                    _main.PressEdit = false;
+                }
                 _main.Edit = "";
             }
             NewView();

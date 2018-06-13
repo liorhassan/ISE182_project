@@ -297,6 +297,19 @@ namespace PresentationWPF
                 _selectedItem = value;
             }
         }
+
+        private bool pressEdit=false;
+        public bool PressEdit
+        {
+            get
+            {
+                return pressEdit;
+            }
+            set
+            {
+                pressEdit = value;
+            }
+        }
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -17,7 +17,7 @@
         <GroupBox Header="FILTER" HorizontalAlignment="Left" Height="136" Margin="10,121,0,0" VerticalAlignment="Top" Width="257" BorderBrush="#FFBFB0D1" Foreground="White" FontFamily="Comic Sans MS" FontSize="16"/>
         <GroupBox Header="SORT" HorizontalAlignment="Left" Height="82" Margin="14,21,0,0" VerticalAlignment="Top" Width="253" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="#FFBEAFD1"/>
         <ListBox SelectedItem="{Binding SelectedListItem, Mode=TwoWay}" ItemsSource="{Binding Messages}" w:ListBox.AutoScroll="True" ScrollViewer.CanContentScroll="True"   IsEnabled="True" HorizontalAlignment="Left" Width="496" Margin="286,0,0,46.667" Height="363" VerticalAlignment="Bottom" Opacity="0.5" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Comic Sans MS" FontSize="14" />
-        <Button Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Width="94" Margin="0,384,690,0" Click="btn_logout_Click" BorderBrush="{x:Null}" Foreground="White" Height="28" FontFamily="Showcard Gothic" FontSize="14">
+        <Button Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="94" Margin="10,0,0,10" Click="btn_logout_Click" BorderBrush="{x:Null}" Foreground="White" Height="28" FontFamily="Showcard Gothic" FontSize="14">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/mainButton.png"/>
             </Button.Background>
@@ -50,7 +50,7 @@
         <Label Content="GroupID:" IsEnabled="{Binding IsFilterGroup}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,180,0,0" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
         <Label IsEnabled="{Binding IsFilterUser}" Content="User Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,215,0,0" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="14"/>
         <TextBox Text="{Binding FilterUser}" IsEnabled="{Binding IsFilterUser}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" Margin="136,220,0,0" FontFamily="Comic Sans MS" FontSize="14" Background="#FFB9A8D4" BorderBrush="Black" Opacity="0.8"/>
-        <Button Content="Edit Message" HorizontalAlignment="Left" Margin="178,380,0,0" VerticalAlignment="Top" Width="106" Height="32" Click="Button_Click_Edit" FontFamily="Showcard Gothic" FontSize="14" BorderBrush="{x:Null}" Foreground="White">
+        <Button Content="Edit Message" HorizontalAlignment="Left" Margin="177,0,0,10" VerticalAlignment="Bottom" Width="106" Height="32" Click="Button_Click_Edit" FontFamily="Showcard Gothic" FontSize="14" BorderBrush="{x:Null}" Foreground="White">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/mainButton.png"/>
             </Button.Background>

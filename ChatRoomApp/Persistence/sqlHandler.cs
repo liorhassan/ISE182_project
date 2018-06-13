@@ -65,14 +65,17 @@ namespace Persistence
 
                 // Create and prepare an SQL statement.
                 command.CommandText =
-                    $"UPDATE {msgTblName} SET Body = @cont where Guid = @guid;";
+                    $"UPDATE {msgTblName} SET Body = @cont , [SendTime] = @time where Guid = @guid;";
                 SqlParameter body = new SqlParameter(@"cont", SqlDbType.Text, 100);
                 SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
-                
+                SqlParameter time = new SqlParameter(@"time", SqlDbType.DateTime, 100);
+
                 body.Value = cont;
                 guid.Value = mid;
+                time.Value = DateTime.Now.ToUniversalTime();
                 command.Parameters.Add(body);
                 command.Parameters.Add(guid);
+                command.Parameters.Add(time);
 
                 // Call Prepare after setting the Commandtext and Parameters.
                 command.Prepare();
@@ -228,7 +231,7 @@ namespace Persistence
                 command.Dispose();
                 connection.Close();
 
-                lastUpdate = DateTime.Now.ToUniversalTime();
+                lastUpdate = DateTime.Now.ToUniversalTime().AddSeconds(2);
             }
             catch (Exception ex)
             {
@@ -243,7 +246,7 @@ namespace Persistence
 
             List<IMessage> output = new List<IMessage>();
             String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > {UpdateSql()}";
-            Console.WriteLine(sql_query);
+            
             if (gid == "") sql_query += ";";
             else if (nickname == "") sql_query += $" AND {usrTblName}.Group_Id = {gid};";
             else sql_query += $" AND {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";
@@ -268,13 +271,26 @@ namespace Persistence
                     Guid gu = new Guid();
                     if (Guid.TryParse(data_reader.GetValue(4).ToString(), out gu))
                         output.Add(new DAMessage(gu, data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
+                    
 
                 }
                 data_reader.Close();
                 command.Dispose();
                 connection.Close();
 
-                lastUpdate = DateTime.Now.ToUniversalTime();
+                if (output.Count > 0)
+                {
+                    Console.WriteLine("Start");
+                    Console.WriteLine(lastUpdate);
+                    foreach (IMessage m in output)
+                    {
+                        Console.WriteLine(m.ToString());
+                        Console.WriteLine(m.Date);
+                    }
+                    Console.WriteLine("End");
+                }
+
+                lastUpdate = DateTime.Now.ToUniversalTime().AddSeconds(2);
             }
             catch (Exception ex)
             {
@@ -287,12 +303,12 @@ namespace Persistence
 
         private String UpdateSql()
         {
-            return $"'{lastUpdate.Year}-{lastUpdate.Month}-{lastUpdate.Day} {lastUpdate.Hour}:{lastUpdate.Minute}:{lastUpdate.Second}.000'";
+            return $"'{lastUpdate.Year}-{lastUpdate.Month}-{lastUpdate.Day} {lastUpdate.Hour}:{lastUpdate.Minute}:{lastUpdate.Second}'";
         }
         private String NowSql()
         {
             DateTime now = DateTime.Now.ToUniversalTime();
-            return $"'{now.Year}-{now.Month}-{now.Day} {now.Hour}:{now.Minute}:{now.Second}.000'";
+            return $"'{now.Year}-{now.Month}-{now.Day} {now.Hour}:{now.Minute}:{now.Second}'";
         }
 
 

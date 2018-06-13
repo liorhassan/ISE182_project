@@ -139,3 +139,42 @@
 13-Jun-18 18:16:33 - The User has logged out successfully
 13-Jun-18 18:19:45 - User shauli logged in successfully
 13-Jun-18 18:20:10 - The User has logged out successfully
+13/06/2018 18:26:26 - User shauli logged in successfully
+13/06/2018 18:27:01 - The User has logged out successfully
+13/06/2018 18:28:10 - User shauli logged in successfully
+13/06/2018 18:30:23 - New Message was written successfully
+13/06/2018 18:32:30 - New Message was written successfully
+13/06/2018 18:33:43 - The User has logged out successfully
+13/06/2018 18:43:32 - User shauli logged in successfully
+13/06/2018 18:43:35 - New Message was written successfully
+13/06/2018 18:45:07 - The User has logged out successfully
+13/06/2018 18:52:40 - User shauli logged in successfully
+13/06/2018 18:52:43 - New Message was written successfully
+13/06/2018 18:53:13 - The User has logged out successfully
+13/06/2018 18:53:37 - User shauli logged in successfully
+13/06/2018 18:53:51 - The User has logged out successfully
+13/06/2018 18:56:34 - User shauli logged in successfully
+13/06/2018 18:56:41 - New Message was written successfully
+13/06/2018 18:58:25 - New Message was written successfully
+13/06/2018 18:58:51 - New Message was written successfully
+13/06/2018 19:00:22 - The User has logged out successfully
+13/06/2018 19:07:33 - User shauli logged in successfully
+13/06/2018 19:09:07 - The User has logged out successfully
+13/06/2018 19:11:20 - User shauli logged in successfully
+13/06/2018 19:12:19 - The User has logged out successfully
+13/06/2018 19:13:35 - User shauli logged in successfully
+13/06/2018 19:14:15 - The User has logged out successfully
+13/06/2018 19:17:59 - User shauli logged in successfully
+13/06/2018 19:18:55 - The User has logged out successfully
+13/06/2018 19:19:44 - User shauli logged in successfully
+13/06/2018 19:21:40 - The User has logged out successfully
+13/06/2018 19:22:21 - User shauli logged in successfully
+13/06/2018 19:23:20 - New Message was written successfully
+13/06/2018 19:23:42 - New Message was written successfully
+13/06/2018 19:23:54 - New Message was written successfully
+13/06/2018 19:24:02 - New Message was written successfully
+13/06/2018 19:24:41 - The User has logged out successfully
+13/06/2018 19:26:05 - User shauli logged in successfully
+13/06/2018 19:26:58 - The User has logged out successfully
+13/06/2018 19:28:16 - User shauli logged in successfully
+13/06/2018 19:29:51 - The User has logged out successfully

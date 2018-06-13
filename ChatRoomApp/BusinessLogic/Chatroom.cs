@@ -183,6 +183,8 @@ namespace BusinessLogic
                 {
                     FilteredMessages = _sqlHandler.retriveNewMessages(groupFilter, userFilter);
                 }
+                
+                
             }
             if (sortType == 0)
             {

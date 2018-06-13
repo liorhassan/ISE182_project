@@ -32,6 +32,7 @@ namespace PresentationWPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            _main.PressEdit = true;
             this.Hide();
         }
     }
