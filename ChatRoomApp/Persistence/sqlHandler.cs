@@ -22,7 +22,7 @@ namespace Persistence
         public Boolean userExists(String nickname, String gid)
         {
             Boolean output = false;
-            String sql_query = $"select * from {usrTblName} where Group_Id = {gid} AND Nickname = '{nickname}';";
+            
 
             SqlConnection connection;
             SqlCommand command;
@@ -34,7 +34,19 @@ namespace Persistence
             try
             {
                 connection.Open();
-                command = new SqlCommand(sql_query, connection);
+                command = new SqlCommand(null, connection);
+                command.CommandText = $"select * from {usrTblName} where Group_Id = @gid AND Nickname = @nickname;";
+                SqlParameter groupid = new SqlParameter(@"gid", SqlDbType.Int, 100);
+                SqlParameter nick = new SqlParameter(@"nickname", SqlDbType.Text, 100);
+
+                nick.Value = nickname;
+                groupid.Value = gid;
+                command.Parameters.Add(nick);
+                command.Parameters.Add(groupid);
+
+                // Call Prepare after
+
+                command.Prepare();
                 data_reader = command.ExecuteReader();
                 if (data_reader.HasRows) output = true;
                 data_reader.Close();
@@ -93,7 +105,7 @@ namespace Persistence
         public Boolean isOwner(Guid mid,String uid)
         {
             Boolean output = false;
-            String sql_query = $"select * from {msgTblName} where Guid = '{mid}' AND User_Id = {uid};";
+            
             
             SqlConnection connection;
             SqlCommand command;
@@ -105,7 +117,21 @@ namespace Persistence
             try
             {
                 connection.Open();
-                command = new SqlCommand(sql_query, connection);
+                command = new SqlCommand(null, connection);
+
+                command.CommandText = $"select * from {msgTblName} where Guid = @guid AND User_Id = @uid;";
+
+                SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
+                SqlParameter usid = new SqlParameter(@"uid", SqlDbType.Int, 100);
+
+                guid.Value = mid;
+                usid.Value = uid;
+                command.Parameters.Add(guid);
+                command.Parameters.Add(usid);
+
+                // Call Prepare after setting the Commandtext and Parameters.
+                command.Prepare();
+
                 data_reader = command.ExecuteReader();
                 if (data_reader.Read()) output = true;
                 data_reader.Close();
@@ -123,7 +149,7 @@ namespace Persistence
         public int loginUser(String nickname, String gid,String pass)
         {
             int output=-1;
-            String sql_query = $"select Id from {usrTblName} where Group_Id = {gid} AND Nickname = '{nickname}' AND Password = '{pass}';";
+            
 
             SqlConnection connection;
             SqlCommand command;
@@ -135,7 +161,23 @@ namespace Persistence
             try
             {
                 connection.Open();
-                command = new SqlCommand(sql_query, connection);
+                command = new SqlCommand(null, connection);
+                command.CommandText = $"select Id from {usrTblName} where Group_Id = @groupid AND Nickname = @nick AND Password = @passw;";
+
+                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 100);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 100);
+                SqlParameter passw = new SqlParameter(@"passw", SqlDbType.Text, 100);
+
+                groupid.Value = gid;
+                nick.Value = nickname;
+                passw.Value = pass;
+                command.Parameters.Add(groupid);
+                command.Parameters.Add(nick);
+                command.Parameters.Add(passw);
+
+                // Call Prepare after setting the Commandtext and Parameters.
+                command.Prepare();
+
                 data_reader = command.ExecuteReader();
                 if (data_reader.Read()) output = data_reader.GetInt32(0);
                 data_reader.Close();
@@ -199,11 +241,7 @@ namespace Persistence
         public List<IMessage> retriveAllMessages(String gid, String nickname)
         {
             List<IMessage> output = new List<IMessage>();
-            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id";
-            if (gid.Equals("")) sql_query += ";";
-            else if (nickname.Equals("")) sql_query += $" where {usrTblName}.Group_Id = {gid};";
-            else sql_query += $" where {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";
-
+            
             SqlConnection connection;
             SqlCommand command;
 
@@ -214,7 +252,23 @@ namespace Persistence
             try
             {
                 connection.Open();
-                command = new SqlCommand(sql_query, connection);
+                command = new SqlCommand(null, connection);
+
+                command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id";
+                if (gid.Equals("")) command.CommandText += ";";
+                else if (nickname.Equals("")) command.CommandText += $" where {usrTblName}.Group_Id = @groupid;";
+                else command.CommandText += $" where {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
+
+
+                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
+
+                groupid.Value = Int32.Parse(gid);
+                nick.Value = nickname;
+                command.Parameters.Add(groupid);
+                command.Parameters.Add(nick);
+
+                command.Prepare();
                 data_reader = command.ExecuteReader();
                 while (data_reader.Read())
                 {
@@ -244,12 +298,7 @@ namespace Persistence
         {
 
             List<IMessage> output = new List<IMessage>();
-            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > '{UpdateSql()}' AND {msgTblName}.SendTime<='{NextSql()}'";
             
-            if (gid == "") sql_query += ";";
-            else if (nickname == "") sql_query += $" AND {usrTblName}.Group_Id = {gid};";
-            else sql_query += $" AND {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";
-
             SqlConnection connection;
             SqlCommand command;
 
@@ -260,7 +309,24 @@ namespace Persistence
             try
             {
                 connection.Open();
-                command = new SqlCommand(sql_query, connection);
+                command = new SqlCommand(null, connection);
+
+                command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > '{UpdateSql()}' AND {msgTblName}.SendTime<='{NextSql()}'";
+                if (gid.Equals("")) command.CommandText += ";";
+                else if (nickname.Equals("")) command.CommandText += $" AND {usrTblName}.Group_Id = @groupid;";
+                else command.CommandText += $" AND {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
+
+
+                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
+
+                groupid.Value = Int32.Parse(gid);
+                nick.Value = nickname;
+                command.Parameters.Add(groupid);
+                command.Parameters.Add(nick);
+
+                command.Prepare();
+
                 data_reader = command.ExecuteReader();
                 while (data_reader.Read())
                 {
@@ -313,8 +379,7 @@ namespace Persistence
                 command = new SqlCommand(null, connection);
 
                 // Create and prepare an SQL statement.
-                // Use should never use something like: query = "insert into table values(" + value + ");" 
-                // Especially when selecting. More about it on the lab about security.
+                
                 command.CommandText =
                     $"INSERT INTO {msgTblName} ([Guid],[User_Id],[SendTime],[Body])" +
                     "VALUES (@guid,@usrid,@time,@cont)";
