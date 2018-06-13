@@ -219,20 +219,9 @@ namespace Persistence
                     DateTime dateFacturation = new DateTime();
                     if (!data_reader.IsDBNull(2))
                         dateFacturation = data_reader.GetDateTime(2);
-                    try
-                    {
-
-                        output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(4).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
-                    }
-                    catch
-                    {
-                        Console.WriteLine(data_reader.GetValue(4).ToString());
-                        Console.WriteLine(data_reader.GetValue(0).ToString());
-                        Console.WriteLine(data_reader.GetValue(1).ToString());
-                        Console.WriteLine(data_reader.GetValue(3).ToString());
-
-
-                    }
+                    Guid gu = new Guid();
+                    if (Guid.TryParse(data_reader.GetValue(4).ToString(), out gu))
+                        output.Add(new DAMessage(gu, data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
 
                 }
                 data_reader.Close();
@@ -253,7 +242,7 @@ namespace Persistence
         {
 
             List<IMessage> output = new List<IMessage>();
-            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime >= {UpdateSql()}";
+            String sql_query = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > {UpdateSql()} and {msgTblName}.SendTime <= {NowSql()}";
             if (gid == "") sql_query += ";";
             else if (nickname == "") sql_query += $" AND {usrTblName}.Group_Id = {gid};";
             else sql_query += $" AND {usrTblName}.Group_Id = {gid} AND {usrTblName}.Nickname = '{nickname}';";
@@ -275,7 +264,9 @@ namespace Persistence
                     DateTime dateFacturation = new DateTime();
                     if (!data_reader.IsDBNull(2))
                         dateFacturation = data_reader.GetDateTime(2);
-                    output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(4).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
+                    Guid gu = new Guid();
+                    if (Guid.TryParse(data_reader.GetValue(4).ToString(), out gu))
+                        output.Add(new DAMessage(gu, data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
 
                 }
                 data_reader.Close();
@@ -297,7 +288,13 @@ namespace Persistence
         {
             return $"'{lastUpdate.Year}-{lastUpdate.Month}-{lastUpdate.Day} {lastUpdate.Hour}:{lastUpdate.Minute}:{lastUpdate.Second}.000'";
         }
-        
+        private String NowSql()
+        {
+            DateTime now = DateTime.Now.ToUniversalTime();
+            return $"'{now.Year}-{now.Month}-{now.Day} {now.Hour}:{now.Minute}:{now.Second}.000'";
+        }
+
+
         public void sendMessage(String uid,String content)
         {
             SqlConnection connection;

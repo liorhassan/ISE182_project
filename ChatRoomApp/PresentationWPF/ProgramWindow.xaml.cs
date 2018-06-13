@@ -56,7 +56,8 @@ namespace PresentationWPF
             List<String> msgs = chatroom.GetAllMessages(false);
             foreach (String s in msgs)
             {
-                _main.Messages.RemoveAt(0);
+                if(_main.Messages.Count>=200)
+                    _main.Messages.RemoveAt(0);
                 _main.Messages.Add(s);
             }
         }
