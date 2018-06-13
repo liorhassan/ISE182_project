@@ -70,3 +70,17 @@
 12/06/2018 20:54:03 - New Message was written successfully
 12/06/2018 20:54:19 - New Message was written successfully
 12/06/2018 20:54:39 - The User has logged out successfully
+13-Jun-18 14:22:48 - User shauli logged in successfully
+13-Jun-18 14:23:18 - New Message was written successfully
+13-Jun-18 14:23:34 - New Message was written successfully
+13-Jun-18 14:23:36 - The User has logged out successfully
+13-Jun-18 14:24:27 - User shauli logged in successfully
+13-Jun-18 14:24:39 - New Message was written successfully
+13-Jun-18 14:24:43 - The User has logged out successfully
+13-Jun-18 14:28:09 - User shauli logged in successfully
+13-Jun-18 14:28:19 - New Message was written successfully
+13-Jun-18 14:28:50 - New Message was written successfully
+13-Jun-18 14:28:59 - The User has logged out successfully
+13-Jun-18 14:30:06 - User shauli logged in successfully
+13-Jun-18 14:30:15 - New Message was written successfully
+13-Jun-18 14:30:42 - The User has logged out successfully

@@ -35,7 +35,6 @@ namespace PresentationWPF
             DataContext = _main;
             myChatRoom = new Chatroom();
             pw = new ProgramWindow(this,myChatRoom);
-            //myChatRoom.test();
         }
 
         

@@ -97,7 +97,7 @@ namespace PresentationWPF
             if (send == 1)
             {
                 _main.MessageText = "";
-                UpdateView();
+                //UpdateView();
             }
             else if (send == -1)
             {

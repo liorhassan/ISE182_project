@@ -64,8 +64,6 @@ namespace Persistence
                 command = new SqlCommand(null, connection);
 
                 // Create and prepare an SQL statement.
-                // Use should never use something like: query = "insert into table values(" + value + ");" 
-                // Especially when selecting. More about it on the lab about security.
                 command.CommandText =
                     $"UPDATE {msgTblName} SET Body = @cont where Guid = &mid;";
                 SqlParameter body = new SqlParameter(@"cont", SqlDbType.Int, 20);
@@ -166,8 +164,6 @@ namespace Persistence
                 connection.Open();
                 command = new SqlCommand(null, connection);
                 // Create and prepare an SQL statement.
-                // Use should never use something like: query = "insert into table values(" + value + ");" 
-                // Especially when selecting. More about it on the lab about security.
                 command.CommandText =
                     $"INSERT INTO {usrTblName} ([Group_Id],[Nickname],[Password])" +
                     "VALUES (@groupid,@nick,@pass)";
@@ -310,7 +306,7 @@ namespace Persistence
                     "VALUES (@guid,@usrid,@time,@cont)";
                 SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
                 SqlParameter usrid = new SqlParameter(@"usrid", SqlDbType.Int, 20);
-                SqlParameter time = new SqlParameter(@"time", SqlDbType.Date, 20);
+                SqlParameter time = new SqlParameter(@"time", SqlDbType.DateTime, 20);
                 SqlParameter cont = new SqlParameter(@"cont", SqlDbType.Text, 120);
 
                 guid.Value = Guid.NewGuid();
