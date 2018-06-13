@@ -42,7 +42,6 @@ namespace PresentationWPF
             dispatcherTimer.Start();
             NewView();
         }
-
         //clears the messages panel and populates it with the right messages as given from the chatroom
         private void NewView()
         {

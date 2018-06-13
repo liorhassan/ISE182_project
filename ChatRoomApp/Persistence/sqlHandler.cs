@@ -287,7 +287,7 @@ namespace Persistence
 
             return output;
         }
-
+        
         private String UpdateSql()
         {
             return lastUpdate.ToString("yyyy-MM-dd HH:mm:ss.fff");
