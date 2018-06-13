@@ -34,7 +34,5 @@ namespace PresentationWPF
         {
             this.Hide();
         }
-
-
     }
 }
