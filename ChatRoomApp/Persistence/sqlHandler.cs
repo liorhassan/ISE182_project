@@ -219,7 +219,20 @@ namespace Persistence
                     DateTime dateFacturation = new DateTime();
                     if (!data_reader.IsDBNull(2))
                         dateFacturation = data_reader.GetDateTime(2);
-                    output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(4).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
+                    try
+                    {
+
+                        output.Add(new DAMessage(Guid.Parse(data_reader.GetValue(4).ToString()), data_reader.GetValue(0).ToString(), data_reader.GetValue(1).ToString(), data_reader.GetValue(3).ToString(), dateFacturation));
+                    }
+                    catch
+                    {
+                        Console.WriteLine(data_reader.GetValue(4).ToString());
+                        Console.WriteLine(data_reader.GetValue(0).ToString());
+                        Console.WriteLine(data_reader.GetValue(1).ToString());
+                        Console.WriteLine(data_reader.GetValue(3).ToString());
+
+
+                    }
 
                 }
                 data_reader.Close();
