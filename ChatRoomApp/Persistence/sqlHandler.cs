@@ -19,6 +19,7 @@ namespace Persistence
         private readonly String usrTblName = "Users";
         private DateTime lastUpdate;
 
+        //user for finding if a user allready exists
         public Boolean userExists(String nickname, String gid)
         {
             Boolean output = false;
@@ -61,6 +62,7 @@ namespace Persistence
             return output;
         }
 
+        //function for editing a message using its guid
         public void editMessage(Guid mid, String cont)
         {
             SqlConnection connection;
@@ -102,6 +104,7 @@ namespace Persistence
             }
         }
 
+        //findes if the user id is the owner of the message id
         public Boolean isOwner(Guid mid,String uid)
         {
             Boolean output = false;
@@ -146,6 +149,7 @@ namespace Persistence
             return output;
         }
 
+        // gets the user detailes and returns its id or -1 if it doesnt exists
         public int loginUser(String nickname, String gid,String pass)
         {
             int output=-1;
@@ -192,7 +196,7 @@ namespace Persistence
             return output;
         }
 
-
+        //creates a new user with the given parameters
         public void registerUser(String userNick, String userGid, String userPass)
         {
 
@@ -237,7 +241,7 @@ namespace Persistence
             }
         }
 
-
+        //return the last 200 messages from the server
         public List<IMessage> retriveAllMessages(String gid, String nickname)
         {
             List<IMessage> output = new List<IMessage>();
@@ -294,6 +298,7 @@ namespace Persistence
             return output;
         }
 
+        //return all the messages that were sent after the last update
         public List<IMessage> retriveNewMessages(String gid, String nickname)
         {
 
@@ -353,6 +358,7 @@ namespace Persistence
             return output;
         }
 
+        //private functions for the newmessages functions sql statment
         private String UpdateSql()
         {
             return lastUpdate.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -364,7 +370,7 @@ namespace Persistence
 
         }
 
-
+        //sends a new message to the server with the given params
         public void sendMessage(String uid,String content)
         {
             SqlConnection connection;
@@ -411,6 +417,7 @@ namespace Persistence
             }
         }
 
+        //private class for the sqlHandler that implements the IMessage interface
         private sealed class DAMessage : IMessage
         {
             public Guid Id { get; }
