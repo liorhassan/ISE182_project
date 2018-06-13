@@ -155,6 +155,7 @@ namespace BusinessLogic
             List<String> output;
             if(all)
             {
+                MessageGuid = new List<Guid>();
                 if (filterType == 0)
                 {
                     FilteredMessages = _sqlHandler.retriveAllMessages("", "");
@@ -247,7 +248,7 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date ascending
                 select m.Id;
-                MessageGuid = guid.ToList();
+                UpdateGUIDTable(guid.ToList());
                 return messages.ToList();
             }
             else
@@ -261,7 +262,7 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.Date descending
                 select m.Id;
-                MessageGuid = guid.ToList();
+                UpdateGUIDTable(guid.ToList());
                 return messages.ToList();
             }
 
@@ -281,7 +282,7 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName ascending
                 select m.Id;
-                MessageGuid = guid.ToList();
+                UpdateGUIDTable(guid.ToList());
 
                 return messages.ToList();
             }
@@ -296,7 +297,7 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby m.UserName descending
                 select m.Id;
-                MessageGuid = guid.ToList();
+                UpdateGUIDTable(guid.ToList());
 
                 return messages.ToList();
             }
@@ -317,7 +318,7 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) ascending, m.UserName ascending, m.Date ascending
                 select m.Id;
-                MessageGuid = guid.ToList();
+                UpdateGUIDTable(guid.ToList());
 
                 return messages.ToList();
 
@@ -333,7 +334,7 @@ namespace BusinessLogic
                 from m in filteredMessages
                 orderby Convert.ToInt32(m.GroupID) descending, m.UserName descending, m.Date descending
                 select m.Id;
-                MessageGuid = guid.ToList();
+                UpdateGUIDTable(guid.ToList());
 
                 return messages.ToList();
             }
@@ -360,7 +361,14 @@ namespace BusinessLogic
         {
             return _sqlHandler.isOwner(MessageGuid.ElementAt(index), _loggedinUser.ToString());
         }
-
+        private void UpdateGUIDTable(List<Guid> list)
+        {
+            foreach (Guid g in list)
+            {
+                if (MessageGuid.Count == 200) MessageGuid.RemoveAt(0);
+                MessageGuid.Add(g);
+            }
+        }
         public void EditMesage(int index, String newMessage)
         {
             _sqlHandler.editMessage(MessageGuid.ElementAt(index), newMessage);
