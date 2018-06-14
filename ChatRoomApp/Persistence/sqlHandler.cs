@@ -168,7 +168,7 @@ namespace Persistence
                 command = new SqlCommand(null, connection);
                 command.CommandText = $"select Id from {usrTblName} where Group_Id = @groupid AND Nickname = @nick AND Password = @passw;";
 
-                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 100);
+                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
                 SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 100);
                 SqlParameter passw = new SqlParameter(@"passw", SqlDbType.Text, 100);
 
@@ -181,7 +181,7 @@ namespace Persistence
 
                 // Call Prepare after setting the Commandtext and Parameters.
                 command.Prepare();
-
+                Console.WriteLine(command.CommandText);
                 data_reader = command.ExecuteReader();
                 if (data_reader.Read()) output = data_reader.GetInt32(0);
                 data_reader.Close();
