@@ -172,7 +172,7 @@ namespace Persistence
                 SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 100);
                 SqlParameter passw = new SqlParameter(@"passw", SqlDbType.Text, 100);
 
-                groupid.Value = gid;
+                groupid.Value = Int32.Parse(gid);
                 nick.Value = nickname;
                 passw.Value = pass;
                 command.Parameters.Add(groupid);
