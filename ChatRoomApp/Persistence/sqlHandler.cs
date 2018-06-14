@@ -181,7 +181,7 @@ namespace Persistence
 
                 // Call Prepare after setting the Commandtext and Parameters.
                 command.Prepare();
-                Console.WriteLine(command.CommandText);
+                Console.WriteLine(command.ToString());
                 data_reader = command.ExecuteReader();
                 if (data_reader.Read()) output = data_reader.GetInt32(0);
                 data_reader.Close();
