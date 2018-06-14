@@ -169,8 +169,8 @@ namespace Persistence
                 command.CommandText = $"select Id from {usrTblName} where Group_Id = @groupid AND Nickname = @nick AND Password = @passw;";
 
                 SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 100);
-                SqlParameter passw = new SqlParameter(@"passw", SqlDbType.Text, 100);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.VarChar, 100);
+                SqlParameter passw = new SqlParameter(@"passw", SqlDbType.VarChar, 100);
 
                 groupid.Value = Int32.Parse(gid);
                 nick.Value = nickname;
@@ -310,7 +310,7 @@ namespace Persistence
             String connetion_string = $"Data Source={url};Initial Catalog={dbName };User ID={username};Password={password}";
             connection = new SqlConnection(connetion_string);
             SqlDataReader data_reader;
-
+            Console.WriteLine("("+ gid+")");
             try
             {
                 connection.Open();
@@ -325,7 +325,7 @@ namespace Persistence
                 SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
                 SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
 
-                groupid.Value = Int32.Parse(gid);
+                groupid.Value = Convert.ToInt32(gid.Trim());
                 nick.Value = nickname;
                 command.Parameters.Add(groupid);
                 command.Parameters.Add(nick);
