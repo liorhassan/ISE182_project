@@ -38,7 +38,7 @@ namespace Persistence
                 command = new SqlCommand(null, connection);
                 command.CommandText = $"select * from {usrTblName} where Group_Id = @gid AND Nickname = @nickname;";
                 SqlParameter groupid = new SqlParameter(@"gid", SqlDbType.Int, 100);
-                SqlParameter nick = new SqlParameter(@"nickname", SqlDbType.Text, 100);
+                SqlParameter nick = new SqlParameter(@"nickname", SqlDbType.Char, 100);
 
                 nick.Value = nickname;
                 groupid.Value = gid;
@@ -169,8 +169,8 @@ namespace Persistence
                 command.CommandText = $"select Id from {usrTblName} where Group_Id = @groupid AND Nickname = @nick AND Password = @passw;";
 
                 SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 100);
-                SqlParameter passw = new SqlParameter(@"passw", SqlDbType.Text, 100);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 100);
+                SqlParameter passw = new SqlParameter(@"passw", SqlDbType.VarChar, 100);
 
                 groupid.Value = Int32.Parse(gid);
                 nick.Value = nickname;
@@ -258,14 +258,16 @@ namespace Persistence
                 connection.Open();
                 command = new SqlCommand(null, connection);
 
-                command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id";
+                DateTime now = DateTime.UtcNow;
+
+                command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id where {msgTblName}.SendTime<'{toSqlDate(now)}' ";
                 if (gid.Equals("")) command.CommandText += ";";
-                else if (nickname.Equals("")) command.CommandText += $" where {usrTblName}.Group_Id = @groupid;";
-                else command.CommandText += $" where {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
+                else if (nickname.Equals("")) command.CommandText += $" and {usrTblName}.Group_Id = @groupid;";
+                else command.CommandText += $" and {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
 
 
                 SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 20);
 
                 groupid.Value = Int32.Parse(gid);
                 nick.Value = nickname;
@@ -288,7 +290,7 @@ namespace Persistence
                 command.Dispose();
                 connection.Close();
 
-                lastUpdate = DateTime.Now.ToUniversalTime();
+                lastUpdate =now;
             }
             catch (Exception ex)
             {
@@ -316,14 +318,16 @@ namespace Persistence
                 connection.Open();
                 command = new SqlCommand(null, connection);
 
-                command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime > '{UpdateSql()}' AND {msgTblName}.SendTime<='{NextSql()}'";
+                DateTime now = DateTime.UtcNow;
+
+                command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime >= '{toSqlDate(now)}' AND {msgTblName}.SendTime<'{toSqlDate(lastUpdate)}'";
                 if (gid.Equals("")) command.CommandText += ";";
                 else if (nickname.Equals("")) command.CommandText += $" AND {usrTblName}.Group_Id = @groupid;";
                 else command.CommandText += $" AND {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
 
 
                 SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Text, 20);
+                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 20);
 
                 groupid.Value = Int32.Parse(gid);
                 nick.Value = nickname;
@@ -347,7 +351,7 @@ namespace Persistence
                 data_reader.Close();
                 command.Dispose();
                 connection.Close();
-                lastUpdate = DateTime.Now.ToUniversalTime();
+                lastUpdate = now;
             }
             catch (Exception ex)
             {
@@ -359,7 +363,7 @@ namespace Persistence
         }
 
         //private functions for the newmessages functions sql statment
-        private String UpdateSql()
+        private String LastSql()
         {
             return lastUpdate.ToString("yyyy-MM-dd HH:mm:ss.fff");
            
@@ -369,6 +373,12 @@ namespace Persistence
             return lastUpdate.AddSeconds(2).ToString("yyyy-MM-dd HH:mm:ss.fff");
 
         }
+        private String toSqlDate(DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+        }
+
 
         //sends a new message to the server with the given params
         public void sendMessage(String uid,String content)
