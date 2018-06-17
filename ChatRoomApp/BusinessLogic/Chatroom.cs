@@ -311,6 +311,8 @@ namespace BusinessLogic
         {
             return _sqlHandler.isOwner(MessageGuid.ElementAt(index), _loggedinUser.ToString());
         }
+
+        // update guidtable to 200 messages max
         private void UpdateGUIDTable(List<Guid> list)
         {
             foreach (Guid g in list)
