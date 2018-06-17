@@ -219,3 +219,39 @@
 14/06/2018 10:14:58 - The User has logged out successfully
 14/06/2018 13:32:36 - User ohad logged in successfully
 14/06/2018 13:33:09 - The User has logged out successfully
+17-Jun-18 12:24:59 - User shauli logged in successfully
+17-Jun-18 12:25:14 - The User has logged out successfully
+17-Jun-18 12:26:36 - User shauli logged in successfully
+17-Jun-18 12:26:43 - New Message was written successfully
+17-Jun-18 12:27:03 - New Message was written successfully
+17-Jun-18 12:27:25 - The User has logged out successfully
+17-Jun-18 12:32:21 - User shauli logged in successfully
+17-Jun-18 12:32:47 - New Message was written successfully
+17-Jun-18 12:34:08 - New Message was written successfully
+17-Jun-18 12:34:18 - The User has logged out successfully
+17-Jun-18 12:36:56 - User shauli logged in successfully
+17-Jun-18 12:36:58 - The User has logged out successfully
+17-Jun-18 12:38:32 - User shauli logged in successfully
+17-Jun-18 12:38:37 - The User has logged out successfully
+17-Jun-18 12:41:02 - User shauli logged in successfully
+17-Jun-18 12:41:14 - New Message was written successfully
+17-Jun-18 12:41:43 - The User has logged out successfully
+17-Jun-18 12:43:18 - User shauli logged in successfully
+17-Jun-18 12:43:27 - The User has logged out successfully
+17-Jun-18 12:45:06 - User shauli logged in successfully
+17-Jun-18 12:45:19 - The User has logged out successfully
+17-Jun-18 12:46:47 - User shauli logged in successfully
+17-Jun-18 12:46:55 - The User has logged out successfully
+17-Jun-18 12:47:26 - User shauli logged in successfully
+17-Jun-18 12:47:45 - The User has logged out successfully
+17-Jun-18 12:48:47 - User shauli logged in successfully
+17-Jun-18 12:49:14 - The User has logged out successfully
+17-Jun-18 12:56:04 - User shauli logged in successfully
+17-Jun-18 12:56:18 - The User has logged out successfully
+17-Jun-18 12:57:35 - User shauli2 in group 24 registered successfully
+17-Jun-18 12:57:53 - User shauli2 logged in successfully
+17-Jun-18 12:57:58 - New Message was written successfully
+17-Jun-18 12:58:10 - The User has logged out successfully
+17-Jun-18 13:23:55 - User asf in group 24 registered successfully
+17-Jun-18 13:24:08 - User shauli logged in successfully
+17-Jun-18 13:24:14 - The User has logged out successfully

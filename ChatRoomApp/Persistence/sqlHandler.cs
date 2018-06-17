@@ -80,11 +80,11 @@ namespace Persistence
                 command.CommandText =
                     $"UPDATE {msgTblName} SET Body = @cont , [SendTime] = @time where Guid = @guid;";
                 SqlParameter body = new SqlParameter(@"cont", SqlDbType.Text, 100);
-                SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
+                SqlParameter guid = new SqlParameter(@"guid", SqlDbType.Char, 100);
                 SqlParameter time = new SqlParameter(@"time", SqlDbType.DateTime, 100);
 
                 body.Value = cont;
-                guid.Value = mid;
+                guid.Value = mid.ToString();
                 time.Value = DateTime.Now.ToUniversalTime();
                 command.Parameters.Add(body);
                 command.Parameters.Add(guid);
@@ -127,8 +127,9 @@ namespace Persistence
                 SqlParameter guid = new SqlParameter(@"guid", SqlDbType.UniqueIdentifier, 100);
                 SqlParameter usid = new SqlParameter(@"uid", SqlDbType.Int, 100);
 
+                
                 guid.Value = mid;
-                usid.Value = uid;
+                usid.Value = Int32.Parse(uid);
                 command.Parameters.Add(guid);
                 command.Parameters.Add(usid);
 
@@ -136,7 +137,7 @@ namespace Persistence
                 command.Prepare();
 
                 data_reader = command.ExecuteReader();
-                if (data_reader.Read()) output = true;
+                if (data_reader.HasRows) output = true;
                 data_reader.Close();
                 command.Dispose();
                 connection.Close();
@@ -181,7 +182,6 @@ namespace Persistence
 
                 // Call Prepare after setting the Commandtext and Parameters.
                 command.Prepare();
-                Console.WriteLine(command.ToString());
                 data_reader = command.ExecuteReader();
                 if (data_reader.Read()) output = data_reader.GetInt32(0);
                 data_reader.Close();
@@ -261,18 +261,30 @@ namespace Persistence
                 DateTime now = DateTime.UtcNow;
 
                 command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id where {msgTblName}.SendTime<'{toSqlDate(now)}' ";
-                if (gid.Equals("")) command.CommandText += ";";
-                else if (nickname.Equals("")) command.CommandText += $" and {usrTblName}.Group_Id = @groupid;";
-                else command.CommandText += $" and {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
+                if (gid.Equals(""))
+                {
+                    command.CommandText += $"order by {msgTblName}.SendTime desc;";
+                }
+                else if (nickname.Equals(""))
+                {
+                    command.CommandText += $" and {usrTblName}.Group_Id = @groupid order by {msgTblName}.SendTime desc;";
+                    SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                    groupid.Value = Int32.Parse(gid);
+                    command.Parameters.Add(groupid);
+                }
+                else
+                {
+                    command.CommandText += $" and {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick order by {msgTblName}.SendTime desc;";
 
+                    SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                    SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 20);
 
-                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 20);
+                    groupid.Value = Int32.Parse(gid);
+                    nick.Value = nickname;
 
-                groupid.Value = Int32.Parse(gid);
-                nick.Value = nickname;
-                command.Parameters.Add(groupid);
-                command.Parameters.Add(nick);
+                    command.Parameters.Add(groupid);
+                    command.Parameters.Add(nick);
+                }
 
                 command.Prepare();
                 data_reader = command.ExecuteReader();
@@ -321,21 +333,32 @@ namespace Persistence
                 DateTime now = DateTime.UtcNow;
 
                 command.CommandText = $"select top 200 {usrTblName}.Group_Id, {usrTblName}.Nickname, {msgTblName}.SendTime, {msgTblName}.Body, {msgTblName}.Guid from {msgTblName} left join {usrTblName} on {msgTblName}.User_Id={usrTblName}.Id Where {msgTblName}.SendTime >= '{toSqlDate(now)}' AND {msgTblName}.SendTime<'{toSqlDate(lastUpdate)}'";
-                if (gid.Equals("")) command.CommandText += ";";
-                else if (nickname.Equals("")) command.CommandText += $" AND {usrTblName}.Group_Id = @groupid;";
-                else command.CommandText += $" AND {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick;";
+                if (gid.Equals(""))
+                {
+                    command.CommandText += $"order by {msgTblName}.SendTime desc;";
+                }
+                else if (nickname.Equals(""))
+                {
+                    command.CommandText += $" and {usrTblName}.Group_Id = @groupid order by {msgTblName}.SendTime desc;";
+                    SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                    groupid.Value = Int32.Parse(gid);
+                    command.Parameters.Add(groupid);
+                }
+                else
+                {
+                    command.CommandText += $" and {usrTblName}.Group_Id = @groupid AND {usrTblName}.Nickname = @nick order by {msgTblName}.SendTime desc;";
 
+                    SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
+                    SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 20);
 
-                SqlParameter groupid = new SqlParameter(@"groupid", SqlDbType.Int, 20);
-                SqlParameter nick = new SqlParameter(@"nick", SqlDbType.Char, 20);
+                    groupid.Value = Int32.Parse(gid);
+                    nick.Value = nickname;
 
-                groupid.Value = Int32.Parse(gid);
-                nick.Value = nickname;
-                command.Parameters.Add(groupid);
-                command.Parameters.Add(nick);
+                    command.Parameters.Add(groupid);
+                    command.Parameters.Add(nick);
+                }
 
                 command.Prepare();
-
                 data_reader = command.ExecuteReader();
                 while (data_reader.Read())
                 {

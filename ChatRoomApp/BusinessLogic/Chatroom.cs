@@ -22,6 +22,9 @@ namespace BusinessLogic
         private FileLogger mFileLogger;
         private sqlHandler _sqlHandler; //the sqlHandler used to get queries from the DB
         private List<Guid> MessageGuid; //stores the GUID's of the displayed messages in order
+        private String hashedRPassword; //stores the hashed register password the user typed or null if the password was invalid
+        private String hashedLPassword; //stores the hashed login password the user typed or null if the password was invalid
+
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
@@ -30,6 +33,8 @@ namespace BusinessLogic
             filterType = 0;
             userFilter = "";
             groupFilter = "";
+            hashedRPassword = null;
+            hashedLPassword = null;
             isAsc = true;
             _sqlHandler = new sqlHandler();
             this._loggedinUser = -1;
@@ -51,14 +56,13 @@ namespace BusinessLogic
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
-        public Boolean Register(String nickname, String group, string pass)
+        public Boolean Register(String nickname, String group)
         {
             if (_sqlHandler.userExists(nickname, group))
             {
                 return false;
             }
-            pass = hashing.passwordToHash(pass);
-            _sqlHandler.registerUser(nickname, group, pass);
+            _sqlHandler.registerUser(nickname, group, hashedRPassword);
             mLogger.AddLogMessage("User " + nickname + " in group " + group + " registered successfully");
             return true;
         }
@@ -66,10 +70,9 @@ namespace BusinessLogic
         // a fuction to login a user
         // finds the user and makes the loggedinUser
         // does nothing if the user doesn't exist
-        public Boolean Login(String nickname, String group, string pass)
+        public Boolean Login(String nickname, String group)
         {
-            pass = hashing.passwordToHash(pass);
-            int userID = _sqlHandler.loginUser(nickname, group, pass);
+            int userID = _sqlHandler.loginUser(nickname, group, hashedLPassword);
             if (userID!=-1)
             {
                 this._loggedinUser = userID;
@@ -93,6 +96,31 @@ namespace BusinessLogic
             return false;
         }
 
+        //updates the hashed login password
+        public void updateLPassword(String pass)
+        {
+            if (isPassValid(pass)) hashedLPassword = hashing.passwordToHash(pass);
+            else hashedLPassword = null;
+        }
+
+        //updates the hashed register password
+        public void updateRPassword(String pass)
+        {
+            if (isPassValid(pass)) hashedRPassword = hashing.passwordToHash(pass);
+            else hashedRPassword = null;
+        }
+
+        //returns whether the hashed login password is valid
+        public Boolean isRPasswordValid()
+        {
+            return hashedRPassword != null;
+        }
+
+        //returns whether the hashed register password is valid
+        public Boolean isLPasswordValid()
+        {
+            return hashedLPassword != null;
+        }
 
         //set filter and sort arguments givven by the presentation
         public void SetFilterAndSort(int sortType, int filterType, Boolean isAsc, string groupFilter, string userFilter)
@@ -323,7 +351,7 @@ namespace BusinessLogic
         }
         
         //chack validity of password
-        public Boolean isPassValid(string pass)
+        private Boolean isPassValid(string pass)
         {
             if (pass.Length < 4)
                 return false;
