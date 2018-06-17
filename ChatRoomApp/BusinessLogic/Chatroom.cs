@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunicationLayer;
 using Persistence;
 using System.Windows.Threading;
 using System.IO;
@@ -18,16 +17,14 @@ namespace BusinessLogic
         private int filterType;// 0-no filter(default), 1- filter by groupID, 2 - filter by user
         private string userFilter; //user nickname to filter by
         private string groupFilter; //groupID nickname to filter by
-        private int _loggedinUser;
-        //private Dictionary<Guid, Message> recievedMessages;
-        //private Dictionary<String, User> registeredUsers;
-        private readonly String URL = "http://ise172.ise.bgu.ac.il";
-        //private MessagesHandler messHandler;
-        //private UsersHandler usersHandler;
+        private int _loggedinUser; //the userID for the logged in user
         private Logger mLogger;
         private FileLogger mFileLogger;
-        private sqlHandler _sqlHandler;
-        private List<Guid> MessageGuid;
+        private sqlHandler _sqlHandler; //the sqlHandler used to get queries from the DB
+        private List<Guid> MessageGuid; //stores the GUID's of the displayed messages in order
+        private String hashedRPassword; //stores the hashed register password the user typed or null if the password was invalid
+        private String hashedLPassword; //stores the hashed login password the user typed or null if the password was invalid
+
         // a class for the chatroom
         // constructor assigns handlers, loggers, adds content to dictionaries from handlers
         public Chatroom()
@@ -36,25 +33,11 @@ namespace BusinessLogic
             filterType = 0;
             userFilter = "";
             groupFilter = "";
+            hashedRPassword = null;
+            hashedLPassword = null;
             isAsc = true;
-            //messHandler = new MessagesHandler();
-            //usersHandler = new UsersHandler();
             _sqlHandler = new sqlHandler();
             this._loggedinUser = -1;
-            //recievedMessages = (Dictionary<Guid, Message>)messHandler.load();
-            /**
-            if (recievedMessages == null)
-            {
-                recievedMessages = new Dictionary<Guid, Message>();
-                messHandler.save(recievedMessages);
-            }
-            registeredUsers = (Dictionary<String, User>)usersHandler.load();
-            if (registeredUsers == null)
-            {
-                registeredUsers = new Dictionary<String, User>();
-                usersHandler.save(registeredUsers);
-            }
-            **/
             this.mLogger = Logger.Instance;
             String currpath = Directory.GetCurrentDirectory();
             this.mFileLogger = new FileLogger(projectpath + "\\Data\\log.txt");
@@ -73,17 +56,13 @@ namespace BusinessLogic
         // a function that registers a user
         // doesn't do anything if a user with that nickname exists
         // creates a new user and adds to registered users
-        public Boolean Register(String nickname, String group, string pass)
+        public Boolean Register(String nickname, String group)
         {
             if (_sqlHandler.userExists(nickname, group))
             {
                 return false;
             }
-            pass = hashing.passwordToHash(pass);
-            _sqlHandler.registerUser(nickname, group, pass);
-            //User newUser = new User(nickname, group);
-            //registeredUsers.Add(key, newUser);
-            //usersHandler.save(registeredUsers);
+            _sqlHandler.registerUser(nickname, group, hashedRPassword);
             mLogger.AddLogMessage("User " + nickname + " in group " + group + " registered successfully");
             return true;
         }
@@ -91,10 +70,9 @@ namespace BusinessLogic
         // a fuction to login a user
         // finds the user and makes the loggedinUser
         // does nothing if the user doesn't exist
-        public Boolean Login(String nickname, String group, string pass)
+        public Boolean Login(String nickname, String group)
         {
-            pass = hashing.passwordToHash(pass);
-            int userID = _sqlHandler.loginUser(nickname, group, pass);
+            int userID = _sqlHandler.loginUser(nickname, group, hashedLPassword);
             if (userID!=-1)
             {
                 this._loggedinUser = userID;
@@ -118,26 +96,32 @@ namespace BusinessLogic
             return false;
         }
 
-        /**
-        // a fuction to retrieve 10 messages from the server
-        // calls the fuction from the loggedinUser
-        // adds the new messages to recievedMessages
-        // returns the number of new messages added
-        public int Retrieve10Messages()
+        //updates the hashed login password
+        public void updateLPassword(String pass)
         {
-            int c = 0;
-            foreach (IMessage m in _sqlHandler.retriveAllMessages("", ""))
-            {
-                if (!recievedMessages.ContainsKey(m.Id))
-                {
-                    recievedMessages.Add(m.Id, new Message(m));
-                    c++;
-                }
-            }
-            messHandler.save(recievedMessages);
-            return c;
+            if (isPassValid(pass)) hashedLPassword = hashing.passwordToHash(pass);
+            else hashedLPassword = null;
         }
-            **/
+
+        //updates the hashed register password
+        public void updateRPassword(String pass)
+        {
+            if (isPassValid(pass)) hashedRPassword = hashing.passwordToHash(pass);
+            else hashedRPassword = null;
+        }
+
+        //returns whether the hashed login password is valid
+        public Boolean isRPasswordValid()
+        {
+            return hashedRPassword != null;
+        }
+
+        //returns whether the hashed register password is valid
+        public Boolean isLPasswordValid()
+        {
+            return hashedLPassword != null;
+        }
+
         //set filter and sort arguments givven by the presentation
         public void SetFilterAndSort(int sortType, int filterType, Boolean isAsc, string groupFilter, string userFilter)
         {
@@ -200,41 +184,6 @@ namespace BusinessLogic
             }
             return output;
         }
-
-        /**
-        // a fuction to retrieve 20 messages from the dictionary
-        public List<Message> GetMessagesByAll()
-        {
-            var messages =
-                (from m in recievedMessages
-                 orderby m.Value.Date
-                 select m.Value);
-            return messages.ToList();
-        }
-
-
-        // a fuction to retrieve all the messages from a user
-        public List<Message> GetAllByUser()
-        {
-            var messages =
-                from m in recievedMessages
-                where m.Value.UserName == userFilter & m.Value.GroupID == groupFilter
-                orderby m.Value.Date
-                select m.Value;
-            return messages.ToList();
-        }
-
-        // a fuction to retrieve all the messages by a GID
-        public List<Message> GetAllByGroup()
-        {
-            var messages =
-                from m in recievedMessages
-                where m.Value.GroupID == groupFilter
-                orderby m.Value.Date
-                select m.Value;
-            return messages.ToList();
-        }
-        **/
 
         // a fuction to sort the messages by the timestamp
         public List<String> SortByTimestamp(List<IMessage> filteredMessages)
@@ -354,7 +303,6 @@ namespace BusinessLogic
                 return -1;
             }
           _sqlHandler.sendMessage(_loggedinUser.ToString(), msg);
-            //recievedMessages.Add(message.Id, message);
             mLogger.AddLogMessage("New Message was written successfully");
             return 1;
         }
@@ -363,6 +311,8 @@ namespace BusinessLogic
         {
             return _sqlHandler.isOwner(MessageGuid.ElementAt(index), _loggedinUser.ToString());
         }
+
+        // update guidtable to 200 messages max
         private void UpdateGUIDTable(List<Guid> list)
         {
             foreach (Guid g in list)
@@ -371,6 +321,8 @@ namespace BusinessLogic
                 MessageGuid.Add(g);
             }
         }
+
+        //function for editing a message
         public void EditMesage(int index, String newMessage)
         {
             _sqlHandler.editMessage(MessageGuid.ElementAt(index), newMessage);
@@ -393,27 +345,15 @@ namespace BusinessLogic
             mFileLogger.Terminate();
         }
 
-        public void Start()
-        {
-            mFileLogger.Init();
-        }
 
         // to implement ILogger
         public void ProcessLogMessage(string message)
         {
             return;
         }
-
-        public void RestartChatroom()
-        {
-            //Start();
-            Logout();
-        }
-
-
-
+        
         //chack validity of password
-        public Boolean isPassValid(string pass)
+        private Boolean isPassValid(string pass)
         {
             if (pass.Length < 4)
                 return false;

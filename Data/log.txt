@@ -206,88 +206,58 @@
 13-Jun-18 20:20:45 - New Message was written successfully
 13-Jun-18 20:20:50 - New Message was written successfully
 13-Jun-18 20:21:02 - The User has logged out successfully
-13/06/2018 20:23:24 - User ohad logged in successfully
-13/06/2018 20:23:31 - New Message was written successfully
-13/06/2018 20:23:41 - New Message was written successfully
-13/06/2018 20:25:23 - New Message was written successfully
-13/06/2018 20:25:24 - New Message was written successfully
-13/06/2018 20:25:26 - New Message was written successfully
-13/06/2018 20:25:27 - New Message was written successfully
-13/06/2018 20:25:29 - New Message was written successfully
-13/06/2018 20:25:31 - New Message was written successfully
-13/06/2018 20:25:32 - New Message was written successfully
-13/06/2018 20:25:34 - New Message was written successfully
-13/06/2018 20:25:36 - New Message was written successfully
-13/06/2018 20:27:42 - New Message was written successfully
-13/06/2018 20:27:44 - New Message was written successfully
-13/06/2018 20:27:47 - New Message was written successfully
-13/06/2018 20:27:50 - New Message was written successfully
-13/06/2018 20:27:52 - New Message was written successfully
-13/06/2018 20:27:54 - New Message was written successfully
-13/06/2018 20:27:56 - New Message was written successfully
-13/06/2018 20:27:58 - New Message was written successfully
-13/06/2018 20:28:00 - New Message was written successfully
-13/06/2018 20:28:03 - New Message was written successfully
-13/06/2018 20:28:04 - New Message was written successfully
-13/06/2018 20:33:17 - New Message was written successfully
-13/06/2018 20:33:18 - New Message was written successfully
-13/06/2018 20:33:20 - New Message was written successfully
-13/06/2018 20:33:21 - New Message was written successfully
-13/06/2018 20:33:22 - New Message was written successfully
-13/06/2018 20:33:23 - New Message was written successfully
-13/06/2018 20:33:24 - New Message was written successfully
-13/06/2018 20:33:25 - New Message was written successfully
-13/06/2018 20:33:28 - New Message was written successfully
-13/06/2018 20:33:29 - New Message was written successfully
-13/06/2018 20:33:31 - New Message was written successfully
-13/06/2018 20:33:32 - New Message was written successfully
-13/06/2018 20:33:34 - New Message was written successfully
-13/06/2018 20:33:35 - New Message was written successfully
-13/06/2018 20:33:36 - New Message was written successfully
-13/06/2018 20:33:38 - New Message was written successfully
-13/06/2018 20:33:40 - New Message was written successfully
-13/06/2018 20:33:42 - New Message was written successfully
-13/06/2018 20:33:44 - New Message was written successfully
-13/06/2018 20:33:45 - New Message was written successfully
-13/06/2018 20:33:47 - New Message was written successfully
-13/06/2018 20:33:51 - New Message was written successfully
-13/06/2018 20:33:53 - New Message was written successfully
-13/06/2018 20:33:55 - New Message was written successfully
-13/06/2018 20:33:57 - New Message was written successfully
-13/06/2018 20:33:59 - New Message was written successfully
-13/06/2018 20:34:00 - New Message was written successfully
-13/06/2018 20:34:03 - New Message was written successfully
-13/06/2018 20:34:19 - New Message was written successfully
-13/06/2018 20:34:20 - New Message was written successfully
-13/06/2018 20:34:22 - New Message was written successfully
-13/06/2018 20:34:23 - New Message was written successfully
-13/06/2018 20:34:25 - New Message was written successfully
-13/06/2018 20:34:27 - New Message was written successfully
-13/06/2018 20:34:29 - New Message was written successfully
-13/06/2018 20:34:32 - New Message was written successfully
-13/06/2018 20:34:34 - New Message was written successfully
-13/06/2018 20:34:36 - New Message was written successfully
-13/06/2018 20:34:39 - New Message was written successfully
-13/06/2018 20:34:45 - New Message was written successfully
-13/06/2018 20:34:47 - New Message was written successfully
-13/06/2018 20:34:50 - New Message was written successfully
-13/06/2018 20:34:54 - New Message was written successfully
-13/06/2018 20:34:58 - New Message was written successfully
-13/06/2018 20:35:02 - New Message was written successfully
-13/06/2018 20:35:05 - New Message was written successfully
-13/06/2018 20:35:07 - New Message was written successfully
-13/06/2018 20:35:11 - New Message was written successfully
-13/06/2018 20:35:14 - New Message was written successfully
-13/06/2018 20:38:25 - The User has logged out successfully
-13/06/2018 20:44:08 - User ohad logged in successfully
-13/06/2018 20:45:11 - The User has logged out successfully
-13/06/2018 20:45:23 - User ohad logged in successfully
-13/06/2018 20:45:50 - New Message was written successfully
-13/06/2018 20:45:56 - New Message was written successfully
-13/06/2018 20:46:00 - New Message was written successfully
-13/06/2018 20:46:02 - New Message was written successfully
-13/06/2018 20:46:05 - New Message was written successfully
-13/06/2018 20:46:12 - New Message was written successfully
-13/06/2018 20:46:13 - New Message was written successfully
-13/06/2018 20:46:17 - New Message was written successfully
-13/06/2018 20:46:32 - The User has logged out successfully
+14/06/2018 10:08:15 - User john in group 24 registered successfully
+14/06/2018 10:09:15 - User john logged in successfully
+14/06/2018 10:09:23 - New Message was written successfully
+14/06/2018 10:09:30 - New Message was written successfully
+14/06/2018 10:10:32 - New Message was written successfully
+14/06/2018 10:10:58 - The User has logged out successfully
+14/06/2018 10:11:24 - User usus in group 100 registered successfully
+14/06/2018 10:11:34 - User usus logged in successfully
+14/06/2018 10:11:38 - New Message was written successfully
+14/06/2018 10:11:41 - New Message was written successfully
+14/06/2018 10:14:58 - The User has logged out successfully
+14/06/2018 13:32:36 - User ohad logged in successfully
+14/06/2018 13:33:09 - The User has logged out successfully
+17-Jun-18 12:24:59 - User shauli logged in successfully
+17-Jun-18 12:25:14 - The User has logged out successfully
+17-Jun-18 12:26:36 - User shauli logged in successfully
+17-Jun-18 12:26:43 - New Message was written successfully
+17-Jun-18 12:27:03 - New Message was written successfully
+17-Jun-18 12:27:25 - The User has logged out successfully
+17-Jun-18 12:32:21 - User shauli logged in successfully
+17-Jun-18 12:32:47 - New Message was written successfully
+17-Jun-18 12:34:08 - New Message was written successfully
+17-Jun-18 12:34:18 - The User has logged out successfully
+17-Jun-18 12:36:56 - User shauli logged in successfully
+17-Jun-18 12:36:58 - The User has logged out successfully
+17-Jun-18 12:38:32 - User shauli logged in successfully
+17-Jun-18 12:38:37 - The User has logged out successfully
+17-Jun-18 12:41:02 - User shauli logged in successfully
+17-Jun-18 12:41:14 - New Message was written successfully
+17-Jun-18 12:41:43 - The User has logged out successfully
+17-Jun-18 12:43:18 - User shauli logged in successfully
+17-Jun-18 12:43:27 - The User has logged out successfully
+17-Jun-18 12:45:06 - User shauli logged in successfully
+17-Jun-18 12:45:19 - The User has logged out successfully
+17-Jun-18 12:46:47 - User shauli logged in successfully
+17-Jun-18 12:46:55 - The User has logged out successfully
+17-Jun-18 12:47:26 - User shauli logged in successfully
+17-Jun-18 12:47:45 - The User has logged out successfully
+17-Jun-18 12:48:47 - User shauli logged in successfully
+17-Jun-18 12:49:14 - The User has logged out successfully
+17-Jun-18 12:56:04 - User shauli logged in successfully
+17-Jun-18 12:56:18 - The User has logged out successfully
+17-Jun-18 12:57:35 - User shauli2 in group 24 registered successfully
+17-Jun-18 12:57:53 - User shauli2 logged in successfully
+17-Jun-18 12:57:58 - New Message was written successfully
+17-Jun-18 12:58:10 - The User has logged out successfully
+17-Jun-18 13:23:55 - User asf in group 24 registered successfully
+17-Jun-18 13:24:08 - User shauli logged in successfully
+17-Jun-18 13:24:14 - The User has logged out successfully
+17/06/2018 15:04:04 - User cool logged in successfully
+17/06/2018 15:04:15 - New Message was written successfully
+17/06/2018 15:04:22 - New Message was written successfully
+17/06/2018 15:04:30 - New Message was written successfully
+17/06/2018 15:06:25 - New Message was written successfully
+17/06/2018 15:07:11 - The User has logged out successfully

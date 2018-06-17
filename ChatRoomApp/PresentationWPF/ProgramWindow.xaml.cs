@@ -50,6 +50,7 @@ namespace PresentationWPF
             
         }
 
+        //updates the view of the view of the message box
         private void UpdateView()
         {
             List<String> msgs = chatroom.GetAllMessages(false);
@@ -118,6 +119,9 @@ namespace PresentationWPF
             Application.Current.Shutdown();
         }
 
+        //event for the edit button click
+        // lets to update if he is the owner of the message
+        // does nothing if he is not the owner
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
             int index = _main.Messages.IndexOf(_main.SelectedListItem);

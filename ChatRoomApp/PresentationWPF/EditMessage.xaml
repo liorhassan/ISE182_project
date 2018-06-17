@@ -15,7 +15,7 @@
             <ColumnDefinition Width="171*"/>
             <ColumnDefinition Width="77*"/>
         </Grid.ColumnDefinitions>
-        <TextBox MaxLength="120" Text="{Binding Edit}" HorizontalAlignment="Left" Height="32" Margin="69,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18" Grid.ColumnSpan="2"/>
+        <TextBox MaxLength="100" Text="{Binding Edit}" HorizontalAlignment="Left" Height="32" Margin="69,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399" Opacity="0.7" FontFamily="Comic Sans MS" FontSize="18" Grid.ColumnSpan="2"/>
         <Button Content="" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="215,0,0,6" RenderTransformOrigin="1.373,2.186" Click="Button_Click" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="32">
             <Button.Background>
                 <ImageBrush ImageSource="/Resources/sendButton.png"/>

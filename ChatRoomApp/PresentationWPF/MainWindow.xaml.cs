@@ -51,16 +51,19 @@ namespace PresentationWPF
         {
             String nickname = _main.NicknameL;
             String group =Int32.Parse(_main.GroupL).ToString();
-            String pass = _main.PassL;
-            if (nickname == ""|group==""|pass=="")
+            if (nickname == ""|group=="")
             {
                 MessageBox.Show("Please enter a Nickname , a GroupID and Passward");
                 return;
             }
 
+            if (!myChatRoom.isLPasswordValid())
+            {
+                MessageBox.Show("Passward invalid");
+                return;
+            }
 
-            Boolean login = myChatRoom.Login(nickname,group,pass);
-            //Boolean login = myChatRoom.Login(nickname, group);
+            Boolean login = myChatRoom.Login(nickname,group);
             if (!login)
             {
                 MessageBox.Show("User doesn't exist");
@@ -79,18 +82,17 @@ namespace PresentationWPF
         {
             String nickname = _main.NicknameR;
             String group = Int32.Parse(_main.GroupR).ToString();
-            String pass = _main.PassR;
-            if (nickname == ""|group=="" | pass=="")
+            if (nickname == ""|group=="")
             {
                 MessageBox.Show("Please enter a Nickname and a GroupID");
                 return;
             }
-            if (!myChatRoom.isPassValid(pass))
+            if (!myChatRoom.isRPasswordValid())
             {
                 MessageBox.Show("Passward invalid");
                 return;
             }
-            Boolean reg = myChatRoom.Register(nickname,group, pass);
+            Boolean reg = myChatRoom.Register(nickname,group);
             if (!reg)
             {
                 MessageBox.Show("Nickname already exists, please choose another one");
@@ -121,13 +123,13 @@ namespace PresentationWPF
         private void LPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox pb = sender as PasswordBox;
-            _main.PassL = pb.Password;
+            myChatRoom.updateLPassword(pb.Password);
         }
 
         private void RPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox pb = sender as PasswordBox;
-            _main.PassR = pb.Password;
+            myChatRoom.updateRPassword(pb.Password);
         }
 
     }

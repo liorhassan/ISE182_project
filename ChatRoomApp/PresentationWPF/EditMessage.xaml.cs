@@ -30,6 +30,7 @@ namespace PresentationWPF
             DataContext = _main;
         }
 
+        // edit message
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _main.PressEdit = true;

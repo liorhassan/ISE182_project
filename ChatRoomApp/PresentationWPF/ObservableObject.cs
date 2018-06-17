@@ -24,21 +24,6 @@ namespace PresentationWPF
             OnPropertyChanged("Messages");
         }
 
-        /*
-        private string messageContent = "";
-        public string MessageContent
-        {
-            get
-            {
-                return messageContent;
-            }
-            set
-            {
-                messageContent = value;
-                OnPropertyChanged("MessageContent");
-            }
-        }
-        */
 
         //binding for the selected index
         private string selectedmessage = "";
@@ -113,7 +98,7 @@ namespace PresentationWPF
                 OnPropertyChanged("GroupL");
             }
         }
-
+        /**
         //binding for the passward register field
         private string passR;
         public string PassR
@@ -128,7 +113,7 @@ namespace PresentationWPF
                 OnPropertyChanged("PassR");
             }
         }
-
+        
         //binding for the passward login field
         private string passL;
         public string PassL
@@ -143,7 +128,7 @@ namespace PresentationWPF
                 OnPropertyChanged("PassL");
             }
         }
-
+    **/
         //binding for the sort type combo box
         private string sortCombo="0";
         public string SortCombo
@@ -297,7 +282,6 @@ namespace PresentationWPF
                 _selectedItem = value;
             }
         }
-
         private bool pressEdit=false;
         public bool PressEdit
         {
