@@ -255,3 +255,9 @@
 17-Jun-18 13:23:55 - User asf in group 24 registered successfully
 17-Jun-18 13:24:08 - User shauli logged in successfully
 17-Jun-18 13:24:14 - The User has logged out successfully
+17/06/2018 15:04:04 - User cool logged in successfully
+17/06/2018 15:04:15 - New Message was written successfully
+17/06/2018 15:04:22 - New Message was written successfully
+17/06/2018 15:04:30 - New Message was written successfully
+17/06/2018 15:06:25 - New Message was written successfully
+17/06/2018 15:07:11 - The User has logged out successfully

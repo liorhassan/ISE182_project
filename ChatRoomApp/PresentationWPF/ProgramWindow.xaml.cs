@@ -121,6 +121,8 @@ namespace PresentationWPF
         }
 
         //event for the edit button click
+        // lets to update if he is the owner of the message
+        // does nothing if he is not the owner
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
             int index = _main.Messages.IndexOf(_main.SelectedListItem);
